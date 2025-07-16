@@ -19,11 +19,10 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "Media Access Control (MAC) Addresses in X.509 Certificates"
 category: info
 
-docname: draft-todo-yourname-protocol-latest
+docname: draft-housley-lamps-macaddress-on
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
