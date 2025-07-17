@@ -175,7 +175,6 @@ MACAddress ::= OCTET STRING (SIZE (6 | 8))
 
 END
 <CODE ENDS>
-
 # Appendix B. MAC Address otherName Examples
 
 The following is a human‑readable summary of the Subject Alternative
