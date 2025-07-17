@@ -80,7 +80,7 @@ The new name form enables certificate‑based authentication at layer 2 and fac
 
 # MACAddress otherName
 
-The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD2). The syntax consists of exactly six or eight octets. No text representation is permitted in the certificate  human‑readable forms such as "00‑24‑98‑7B‑19‑02" or "0024.987B.1902" are used only in management interfaces. When a device natively possesses a 48‑bit MAC identifier, the CA SHOULD encode it as a 6‑octet MACAddress value. When the device’s factory identifier is a 64‑bit EUI‑64 or when no canonical 48‑bit form exists, the CA MAY encode an 8‑octet value.
+The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1). The syntax consists of exactly six or eight octets. No text representation is permitted in the certificate  human‑readable forms such as "00‑24‑98‑7B‑19‑02" or "0024.987B.1902" are used only in management interfaces. When a device natively possesses a 48‑bit MAC identifier, the CA SHOULD encode it as a 6‑octet MACAddress value. When the device’s factory identifier is a 64‑bit EUI‑64 or when no canonical 48‑bit form exists, the CA MAY encode an 8‑octet value.
 
 ## Generation and Validation Rules
 
