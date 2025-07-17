@@ -70,7 +70,7 @@ bind a layer‑2 interface identifier to a public key certificate. This is neede
 
 IEEE 802.1AE [IEEE802.1AE] provides point‑to‑point link‑layer data confidentiality and integrity ("MACsec"). Deployments that use X.509 certificates for MACsec key establishment frequently need to bind a Media Access Control (MAC) address to a public key when devices lack a stable IP address or operate in media where IP addressing is not yet available. The Subject Alternative Name (SAN) extension defined in RFC 5280 [RFC5280] allows an X.509 certificate to contain multiple name forms, but no standard name form exists for MAC addresses.
 
-This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING.
+This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. 
 
 The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
 
@@ -80,7 +80,7 @@ The new name form enables certificate‑based authentication at layer 2 and fac
 
 # MACAddress otherName
 
-The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD2). The syntax consists of exactly six or eight octets. No text representation is permitted in the certificate  human‑readable forms such as "00‑24‑98‑7B‑19‑02" or "0024.987B.1902" are used only in management interfaces.
+The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD2). The syntax consists of exactly six or eight octets. No text representation is permitted in the certificate  human‑readable forms such as "00‑24‑98‑7B‑19‑02" or "0024.987B.1902" are used only in management interfaces. When a device natively possesses a 48‑bit MAC identifier, the CA SHOULD encode it as a 6‑octet MACAddress value. When the device’s factory identifier is a 64‑bit EUI‑64 or when no canonical 48‑bit form exists, the CA MAY encode an 8‑octet value.
 
 ## Generation and Validation Rules
 
