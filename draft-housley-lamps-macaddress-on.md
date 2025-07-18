@@ -136,8 +136,6 @@ IANA is requested to make the following assignment in the “SMI Security for PK
         | TBD1    | id-on-MACAddress                | THis doc   |
         +---------+---------------------------------+------------+
 
---- back
-
 # Acknowledgments
 {:numbered="false"}
 
@@ -199,3 +197,5 @@ otherName with value 00‑24‑98‑7B‑19‑02:
 An EUI‑64 example (AC‑DE‑48‑00‑11‑22‑33‑44):
 
   [0] OCTET STRING 'ACDE480011223344'H
+
+--- back
