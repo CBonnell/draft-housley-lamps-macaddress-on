@@ -70,9 +70,7 @@ bind a layer‑2 interface identifier to a public key certificate. This is neede
 
 IEEE 802.1AE [IEEE802.1AE] provides point‑to‑point link‑layer data confidentiality and integrity ("MACsec"). Deployments that use X.509 certificates for MACsec key establishment frequently need to bind a Media Access Control (MAC) address to a public key when devices lack a stable IP address or operate in media where IP addressing is not yet available. The Subject Alternative Name (SAN) extension defined in RFC 5280 [RFC5280] allows an X.509 certificate to contain multiple name forms, but no standard name form exists for MAC addresses.
 
-This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. 
-
-The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
+This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
 
 # Conventions and Definitions
 
@@ -84,9 +82,7 @@ The new name form is identified by the object identifier (OID) id‑on‑MACAddr
 
 ## Generation and Validation Rules
 
-A certificate MAY include one or more MACAddress otherName values if and only if the subject device owns (or is expected to own) the corresponding MAC address for the certificate lifetime.
-
-MAC addresses SHOULD NOT appear in more than one valid certificate issued by the same Certification Authority (CA) at the same time, unless different layer‑2 interfaces share a public key.
+A certificate MAY include one or more MACAddress otherName values if and only if the subject device owns (or is expected to own) the corresponding MAC address for the certificate lifetime. MAC addresses SHOULD NOT appear in more than one valid certificate issued by the same Certification Authority (CA) at the same time, unless different layer‑2 interfaces share a public key.
 
 Relying party that matches a presented MAC address to a certificate SHALL perform a byte‑for‑byte comparison of the OCTET STRING contents. Canonicalization, case folding, or removal of delimiter characters MUST NOT be performed.
 
@@ -96,7 +92,19 @@ Self‑signed certificates that carry a MACAddress otherName SHOULD include the 
 
 ## Name Constraints Processing
 
-The MACAddress otherName obeys the general rules for otherName constraints in RFC 5280, Section 4.2.1.10. A name constraints extension MAY impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress. Constrained subtrees are matched by comparing the entire MAC address prefixes are not supported.
+The MACAddress otherName follows the general rules for otherName constraints in RFC 5280, Section 4.2.1.10. A name constraints extension MAY impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress.
+
+If the OCTET STRING in the base field of a GeneralSubtree is shorter than the subject’s MACAddress value, a relying party MUST compare only those left‑most octets present in the base. Thus the base acts as a left‑most prefix.
+
+- If base and subject are the same length, an exact match is required.
+- If base is longer than the subject value, the names do not match.
+
+The first octet of a MAC address contains two flag bits.
+
+- I/G bit (bit 0) – 0 = unicast, 1 = multicast.  Multicast prefixes are never OUIs.
+- U/L bit (bit 1) – 0 = universal (IEEE‑assigned), 1 = local.
+
+These flags let implementations exclude multicast and local prefixes but still cannot prove that a 24‑bit value is an IEEE‑registered OUI; 36‑bit CIDs share the same first 24 bits, and enterprises MAY deploy pseudo‑OUIs. CAs MUST include only prefixes the subscriber legitimately controls (registered OUI or CID).  Before issuing a certificate that contains a MACAddress or a name constraint based on such a prefix, the CA MUST verify that control—for example, by consulting the IEEE registry or reviewing manufacturer documentation.
 
 # Security Considerations
 
