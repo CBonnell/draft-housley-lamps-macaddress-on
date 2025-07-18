@@ -143,7 +143,6 @@ TODO acknowledge.
 
 # Appendix A.  ASN.1 Module
 
-<CODE BEGINS>
 MACAddressOtherName-2025
 { iso(1) identified-organization(3) dod(6) internet(1)
 security(5) mechanisms(5) pkix(7) id-mod(0)
@@ -180,7 +179,7 @@ MACAddress ::= OCTET STRING (SIZE (6 | 8))
 -- 48-bit EUI-48 or 64-bit EUI-64
 
 END
-<CODE ENDS>
+
 # Appendix B. MAC Address otherName Examples
 
 The following is a human‑readable summary of the Subject Alternative
