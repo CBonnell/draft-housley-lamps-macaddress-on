@@ -104,7 +104,7 @@ The first octet of a MAC address contains two flag bits.
 - I/G bit (bit 0) – 0 = unicast, 1 = multicast.  Multicast prefixes are never OUIs.
 - U/L bit (bit 1) – 0 = universal (IEEE‑assigned), 1 = local.
 
-These flags let implementations exclude multicast and local prefixes but still cannot prove that a 24‑bit value is an IEEE‑registered OUI; 36‑bit CIDs share the same first 24 bits, and enterprises MAY deploy pseudo‑OUIs. CAs MUST include only prefixes the subscriber legitimately controls (registered OUI or CID).  Before issuing a certificate that contains a MACAddress or a name constraint based on such a prefix, the CA MUST verify that control—for example, by consulting the IEEE registry or reviewing manufacturer documentation.
+These flags let the implementations exclude multicast and local prefixes but still cannot prove that a 24‑bit value is an IEEE‑registered OUI. 36‑bit CIDs share the same first 24 bits and enterprises MAY deploy pseudo‑OUIs. CAs MUST include only prefixes the subscriber legitimately controls (registered OUI or CID).  Before issuing a certificate that contains a MACAddress or a name constraint based on such a prefix, the CA MUST verify that control—for example, by consulting the IEEE registry or reviewing manufacturer documentation.
 
 # Security Considerations
 
