@@ -25,29 +25,29 @@ venue:
 
 author:
 
-  -
+  - name: Russ Housley
     ins: R. Housley
-    fullname: Russ Housley
-    organization: Vigil Security, LLC
+    org: Vigil Security, LLC
+    abbrev: Vigil Security
     email: housley@vigilsec.com
     
- -
-    ins: C. Bonnell
-    fullname: Corey Bonnell
-    organization: DigiCert, Inc.
-    email: corey.bonnell@digicert.com
+ - name: Corey Bonnell
+   ins: C. Bonnell
+   org: DigiCert, Inc.
+   abbrev: DigiCert
+   email: corey.bonnell@digicert.com
     
- -
-    ins: J. Mandel
-    fullname: Joe Mandel
-    organization: AKAYLA, Inc.
-    email: joe@akayla.com
+ - name: Joe Mandel
+   ins: J. Mandel
+   organization: AKAYLA, Inc.
+   abbrev: AKAYLA
+   email: joe@akayla.com
 
- -
-    ins: T. Okubo
-    fullname: Tomofumi Okubo
-    organization: Penguin Securities Pte. Ltd.
-    email: tomofumi.okubo+ietf@gmail.com
+ - name: Tomofumi Okubo
+   ins: T. Okubo
+   org: Penguin Securities Pte. Ltd.
+   abbrev: Penguin Securities
+   email: tomofumi.okubo+ietf@gmail.com
 
 normative:
   RFC2119:
