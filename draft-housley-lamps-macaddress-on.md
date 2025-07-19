@@ -54,7 +54,6 @@ normative:
   RFC8174:
   RFC5280:
   IEEE802.1AE:
-    target: https://www.itu.int/rec/T-REC-X.680
     title: >
       IEEE Standard for Local and metropolitan area networks -
       Media Access Control (MAC) Security
@@ -65,7 +64,31 @@ normative:
     seriesinfo:
       IEEE: 802-1ae-2018
       DOI: 10.1109/IEEESTD.2018.8585421
-     
+  X680:
+    target: https://www.itu.int/rec/T-REC-X.680
+    title: >
+      Information technology --
+      Abstract Syntax Notation One (ASN.1):
+      Specification of basic notation
+    author:
+    - org: ITU-T
+    date: 2021-02
+    seriesinfo:
+      ITU-T Recommendation: X.680
+      ISO/IEC: 8824-1:2021
+  X690:
+    target: https://www.itu.int/rec/T-REC-X.690
+    title: >
+      Information technology --
+      ASN.1 encoding rules: Specification of Basic Encoding Rules (BER),
+      Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)
+    author:
+    - org: ITU-T
+    date: 2021-02
+    seriesinfo:
+      ITU-T Recommendation: X.690
+      ISO/IEC: 8825-1-2021
+
 informative:
   RFC9190:
 ...
