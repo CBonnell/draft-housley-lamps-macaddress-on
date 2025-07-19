@@ -54,7 +54,18 @@ normative:
   RFC8174:
   RFC5280:
   IEEE802.1AE:
-
+    target: https://www.itu.int/rec/T-REC-X.680
+    title: >
+      IEEE Standard for Local and metropolitan area networks -
+      Media Access Control (MAC) Security
+    author:
+      - org: Institute of Electrical and Electronics Engineers
+        abbrev: IEEE
+    date: 2018-12-21
+    seriesinfo:
+      IEEE: 802-1ae-2018
+      DOI: 10.1109/IEEESTD.2018.8585421
+     
 informative:
   RFC9190:
 ...
