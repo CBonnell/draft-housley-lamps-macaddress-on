@@ -177,25 +177,26 @@ TODO acknowledge.
 
 # Appendix A.  ASN.1 Module
 
+This Appendix contains the ASN.1 MOdule for the MAC Address; it follows the conventions established by {{RFC5912}}.
+
+~~~
 MACAddressOtherName-2025
-{ iso(1) identified-organization(3) dod(6) internet(1)
-security(5) mechanisms(5) pkix(7) id-mod(0)
-id-mod-mac-address-other-name-2025(TBD0) }
+  { iso(1) identified-organization(3) dod(6) internet(1)
+    security(5) mechanisms(5) pkix(7) id-mod(0)
+    id-mod-mac-address-other-name-2025(TBD0) }
 
 DEFINITIONS IMPLICIT TAGS ::= BEGIN
 
 IMPORTS
-OTHER-NAME
-FROM PKIX1Implicit-2009
-{ iso(1) identified-organization(3) dod(6) internet(1)
-security(5) mechanisms(5) pkix(7) id-mod(0)
-id-mod-pkix1-implicit-02(59) }
+  OTHER-NAME FROM PKIX1Implicit-2009
+    { iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) id-mod(0)
+      id-mod-pkix1-implicit-02(59) }
 
- id-pkix
-   FROM PKIX1Explicit-2009
-     { iso(1) identified-organization(3) dod(6) internet(1)
-       security(5) mechanisms(5) pkix(7) id-mod(0)
-       id-mod-pkix1-explicit-02(51) } ;
+ id-pkix FROM PKIX1Explicit-2009
+   { iso(1) identified-organization(3) dod(6) internet(1)
+     security(5) mechanisms(5) pkix(7) id-mod(0)
+     id-mod-pkix1-explicit-02(51) } ;
 
 -- id-pkix 8 is the otherName arc
 id-on  OBJECT IDENTIFIER ::= { id-pkix 8 }
@@ -203,7 +204,7 @@ id-on  OBJECT IDENTIFIER ::= { id-pkix 8 }
 -- OID for this name form
 id-on-MACAddress OBJECT IDENTIFIER ::= { id-on TBD1 }
 
--- Public contents of the otherName field
+-- Contents of the otherName field
 MACAddressOtherNames OTHER-NAME ::= { on-MACAddress, ... }
 
 on-MACAddress OTHER-NAME ::= {
@@ -213,6 +214,7 @@ MACAddress ::= OCTET STRING (SIZE (6 | 8))
 -- 48-bit EUI-48 or 64-bit EUI-64
 
 END
+~~~
 
 # Appendix B. MAC Address otherName Examples
 
