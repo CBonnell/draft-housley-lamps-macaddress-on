@@ -101,9 +101,9 @@ Table of Contents
    Media Access Control (MAC) address to a public key when devices lack
    a stable IP address or operate in media where IP addressing is not
    yet available.  The Subject Alternative Name (SAN) and Issuer
-   Alternative Names extensions defined in [RFC5280] allows an X.509
-   certificate to contain multiple name forms, but no standard name form
-   exists for MAC addresses.
+   Alternative Name (IAN) extensions defined in [RFC5280] allows an
+   X.509 certificate to contain multiple name forms, but no standard
+   name form exists for MAC addresses.
 
    This document defines a new otherName form "MACAddress".  The name
    form carries either a 48-bit IEEE 802 MAC address (EUI-48) or a
