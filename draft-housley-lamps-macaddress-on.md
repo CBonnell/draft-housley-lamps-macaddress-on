@@ -31,23 +31,23 @@ author:
     abbrev: Vigil Security
     email: housley@vigilsec.com
     
- - name: Corey Bonnell
-   ins: C. Bonnell
-   org: DigiCert, Inc.
-   abbrev: DigiCert
-   email: corey.bonnell@digicert.com
+  - name: Corey Bonnell
+    ins: C. Bonnell
+    org: DigiCert, Inc.
+    abbrev: DigiCert
+    email: corey.bonnell@digicert.com
     
- - name: Joe Mandel
-   ins: J. Mandel
-   organization: AKAYLA, Inc.
-   abbrev: AKAYLA
-   email: joe@akayla.com
+  - name: Joe Mandel
+    ins: J. Mandel
+    organization: AKAYLA, Inc.
+    abbrev: AKAYLA
+    email: joe@akayla.com
 
- - name: Tomofumi Okubo
-   ins: T. Okubo
-   org: Penguin Securities Pte. Ltd.
-   abbrev: Penguin Securities
-   email: tomofumi.okubo+ietf@gmail.com
+  - name: Tomofumi Okubo
+    ins: T. Okubo
+    org: Penguin Securities Pte. Ltd.
+    abbrev: Penguin Securities
+    email: tomofumi.okubo+ietf@gmail.com
 
 normative:
   RFC2119:
@@ -102,9 +102,9 @@ bind a layer‑2 interface identifier to a public key certificate. This is neede
 
 # Introduction
 
-IEEE 802.1AE [IEEE802.1AE] provides point‑to‑point link‑layer data confidentiality and integrity ("MACsec"). Deployments that use X.509 certificates for MACsec key establishment frequently need to bind a Media Access Control (MAC) address to a public key when devices lack a stable IP address or operate in media where IP addressing is not yet available. The Subject Alternative Name (SAN) extension defined in RFC 5280 [RFC5280] allows an X.509 certificate to contain multiple name forms, but no standard name form exists for MAC addresses.
+IEEE 802.1AE [IEEE802.1AE] provides point‑to‑point link‑layer data confidentiality and integrity ("MACsec"). Deployments that use X.509 certificates for MACsec key establishment frequently need to bind a Media Access Control (MAC) address to a public key when devices lack a stable IP address or operate in media where IP addressing is not yet available. The Subject Alternative Name (SAN) and Issuer Alternative Names extensions defined in RFC 5280 [RFC5280] allows an X.509 certificate to contain multiple name forms, but no standard name form exists for MAC addresses.
 
-This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
+This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension defined in [RFC5280]. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
 
 # Conventions and Definitions
 
@@ -112,13 +112,23 @@ This document defines a new otherName form "MACAddress". The name form carries e
 
 # MACAddress otherName
 
-The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1). The syntax consists of exactly six or eight octets. No text representation is permitted in the certificate  human‑readable forms such as "00‑24‑98‑7B‑19‑02" or "0024.987B.1902" are used only in management interfaces. When a device natively possesses a 48‑bit MAC identifier, the CA SHOULD encode it as a 6‑octet MACAddress value. When the device’s factory identifier is a 64‑bit EUI‑64 or when no canonical 48‑bit form exists, the CA MAY encode an 8‑octet value.
+The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1).
+
+## Encoding a MACAddress as an alternative name
+
+When the name form is included in a Subject Alternative Name or Issuer Alternate Name extension, the syntax consists of exactly six or eight octets. Values are encoded with the most significant octet encoded first ("big-endian" or "left-to-right" encoding). No text representation is permitted in the certificate, as human‑readable forms such as "00‑24‑98‑7B‑19‑02" or "0024.987B.1902" are used only in management interfaces. When a device natively possesses a 48‑bit MAC identifier, the CA MUST encode it using a 6‑octet OCTET STRING as the MACAddress value. When the device’s factory identifier is a 64‑bit EUI‑64 or when no canonical 48‑bit form exists, the CA MUST encode it using an 8‑octet OCTET STRING as the MACAddress value. The `macAddress48Constraint` and `macAddress64Constraint` tagged BIT STRING arms of `MACAddress` MUST NOT be used.
+
+## Encoding a MACAddress constraint
+
+When the name form is included in the Name Constraints extension, the syntax consists of a context-specific, implicitly tagged BIT STRING that specifies a N-bit bit pattern. Bit patterns representing the constraint are encoded with the most significant bit encoded first ("big-endian" or "left-to-right" encoding). Constraints on EUI-48 identifiers MUST be encoded using the `macAddress48Constraint` arm of MACAddress. Likewise, constraints on EUI-64 values MUST be encoded using the `macAddress64Constraint` arm of MACAddress. The `macAddress` OCTET STRING arm of `MACAddress` MUST NOT be used.
+
+When a constraint is included in the `permittedSubtrees` field of a Name Constraints extension, certificates containing a MACAddress name form of the specific identifier type (EUI-48 or EUI-64) that are issued by the Certificate Authority are trusted only when the upper N bits of the value are binary equal to the pattern. When a constraint is included in the `excludedSubtrees` field of a Name Constraints extension, certificates containing a MACAddress name form of the specific identifier type (EUI-48 or EUI-64) that are issued by the Certificate Authority are trusted only when the upper N bits of the value are not binary equal to the pattern.
 
 ## Generation and Validation Rules
 
 A certificate MAY include one or more MACAddress otherName values if and only if the subject device owns (or is expected to own) the corresponding MAC address for the certificate lifetime. MAC addresses SHOULD NOT appear in more than one valid certificate issued by the same Certification Authority (CA) at the same time, unless different layer‑2 interfaces share a public key.
 
-Relying party that matches a presented MAC address to a certificate SHALL perform a byte‑for‑byte comparison of the OCTET STRING contents. Canonicalization, case folding, or removal of delimiter characters MUST NOT be performed.
+A Relying party that matches a presented MAC address to a certificate SHALL perform a byte‑for‑byte comparison of the OCTET STRING contents. Canonicalization, case folding, or removal of delimiter characters MUST NOT be performed.
 
 Wildcards are not supported.
 
@@ -128,10 +138,9 @@ Self‑signed certificates that carry a MACAddress otherName SHOULD include the 
 
 The MACAddress otherName follows the general rules for otherName constraints in RFC 5280, Section 4.2.1.10. A name constraints extension MAY impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress.
 
-If the OCTET STRING in the base field of a GeneralSubtree is shorter than the subject’s MACAddress value, a relying party MUST compare only those left‑most octets present in the base. Thus the base acts as a left‑most prefix.
+A constraint that is represented as a `macAddress48Constraint` is relevant only to `macAddress` values that are encoded using 6 octets; such a constraint is ignored for `macAddress` values that are encoded using 8 octets. Likewise, a constraint that is represented as a `macAddress64Constraint` is relevant only to `macAddress` values that are encoded using 8 octets; such a constraint is ignored for `macAddress` values that are encoded using 6 octets.
 
-- If base and subject are the same length, an exact match is required.
-- If base is longer than the subject value, the names do not match.
+To determine if a constraint matches a given name value, an exclusive OR (XOR) operation of the N-bit bit pattern of the constraint and the upper N bits of the `macAddress` OCTET STRING value is performed. If the result of the XOR operation is an bit string consisting of entirely zeros, then the name matches the constraint. Conversely, if the result of the operation is an bit string with at least one bit asserted, then the name does not match the constraint.
 
 The first octet of a MAC address contains two flag bits.
 
@@ -210,8 +219,14 @@ MACAddressOtherNames OTHER-NAME ::= { on-MACAddress, ... }
 on-MACAddress OTHER-NAME ::= {
 MACAddress IDENTIFIED BY id-on-MACAddress }
 
-MACAddress ::= OCTET STRING (SIZE (6 | 8))
--- 48-bit EUI-48 or 64-bit EUI-64
+MACAddress ::= CHOICE {
+  -- 48-bit EUI-48 or 64-bit EUI-64
+  macAddress OCTET STRING (SIZE (6 | 8)),
+  -- constraint on the upper bits of a 48-bit EUI-48
+  macAddress48Constraint [0] IMPLICIT BIT STRING (SIZE(1, 48)),
+  -- constraint on the upper bits of a 64-bit EUI-64
+  macAddress64Constraint [1] IMPLICIT BIT STRING (SIZE(1, 64))
+}
 
 END
 ~~~
