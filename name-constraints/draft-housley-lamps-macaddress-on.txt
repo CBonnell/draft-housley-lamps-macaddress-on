@@ -212,10 +212,10 @@ Table of Contents
    certificate-consuming application performs an exclusive OR (XOR)
    operation of the N-bit bit pattern of the constraint and the upper N
    bits of the macAddress OCTET STRING value.  If the result of the XOR
-   operation is an bit string consisting of entirely zeros, then the
-   name matches the constraint.  Conversely, if the result of the
-   operation is an bit string with at least one bit asserted, then the
-   name does not match the constraint.
+   operation is n bit string consisting of entirely zeros, then the name
+   matches the constraint.  Conversely, if the result of the operation
+   is n bit string with at least one bit asserted, then the name does
+   not match the constraint.
 
    The first octet of a MAC address contains two flag bits.
 
