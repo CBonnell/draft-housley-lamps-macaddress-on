@@ -217,9 +217,9 @@ MACAddress ::= CHOICE {
   -- 48-bit EUI-48 or 64-bit EUI-64
   macAddress OCTET STRING (SIZE (6 | 8)),
   -- constraint on the upper bits of a 48-bit EUI-48
-  macAddress48Constraint [0] BIT STRING (SIZE(1..48)),
+  macAddress48Constraint [0] BIT STRING (SIZE (1..48)),
   -- constraint on the upper bits of a 64-bit EUI-64
-  macAddress64Constraint [1] BIT STRING (SIZE(1..64))
+  macAddress64Constraint [1] BIT STRING (SIZE (1..64))
 }
 
 END
