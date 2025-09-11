@@ -87,9 +87,6 @@ normative:
     seriesinfo:
       ITU-T Recommendation: X.690
       ISO/IEC: 8825-1-2021
-
-informative:
-  RFC9190:
 ...
 
 --- abstract
@@ -101,7 +98,7 @@ bind a layer‑2 interface identifier to a public key certificate. This is neede
 
 # Introduction
 
-IEEE 802.1AE [IEEE802.1AE] provides point‑to‑point link‑layer data confidentiality and integrity ("MACsec"). Deployments that use X.509 certificates for MACsec key establishment frequently need to bind a Media Access Control (MAC) address to a public key when devices lack a stable IP address or operate in media where IP addressing is not yet available. The Subject Alternative Name (SAN) and Issuer Alternative Names extensions defined in RFC 5280 [RFC5280] allows an X.509 certificate to contain multiple name forms, but no standard name form exists for MAC addresses.
+IEEE 802.1AE [IEEE802.1AE] provides point‑to‑point link‑layer data confidentiality and integrity ("MACsec"). Deployments that use X.509 certificates for MACsec key establishment frequently need to bind a Media Access Control (MAC) address to a public key when devices lack a stable IP address or operate in media where IP addressing is not yet available. The Subject Alternative Name (SAN) and Issuer Alternative Names extensions defined in [RFC5280] allows an X.509 certificate to contain multiple name forms, but no standard name form exists for MAC addresses.
 
 This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension defined in [RFC5280]. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
 
@@ -111,7 +108,9 @@ This document defines a new otherName form "MACAddress". The name form carries e
 
 # MACAddress otherName
 
-The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1).
+The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1). The name form has variants to convey a EUI-48 as an OCTET STRING comprising of 6 octets, or a EUI-64 as an OCTET STRING comprosing of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as N-bit bit patterns, where the bit pattern establishes a constraint on the upper N bits of a EUI-48 or EUI-64 value.
+
+The following sub-sections describe how to encode EUI-48 and EUI-64 values and their corresponding constraints.
 
 ## Encoding a MACAddress as an alternative name
 
@@ -188,7 +187,8 @@ MACAddressOtherName-2025
     security(5) mechanisms(5) pkix(7) id-mod(0)
     id-mod-mac-address-other-name-2025(TBD0) }
 
-DEFINITIONS IMPLICIT TAGS ::= BEGIN
+DEFINITIONS IMPLICIT TAGS ::=
+BEGIN
 
 IMPORTS
   OTHER-NAME FROM PKIX1Implicit-2009
