@@ -138,7 +138,7 @@ The MACAddress otherName follows the general rules for otherName constraints in 
 
 A constraint that is represented as a `macAddress48Constraint` is relevant only to `macAddress` values that are encoded using 6 octets; such a constraint is ignored for `macAddress` values that are encoded using 8 octets. Likewise, a constraint that is represented as a `macAddress64Constraint` is relevant only to `macAddress` values that are encoded using 8 octets; such a constraint is ignored for `macAddress` values that are encoded using 6 octets.
 
-To determine if a constraint matches a given name value, the certificate-consuming application performs an exclusive OR (XOR) operation of the N-bit bit pattern of the constraint and the upper N bits of the `macAddress` OCTET STRING value. If the result of the XOR operation is an bit string consisting of entirely zeros, then the name matches the constraint. Conversely, if the result of the operation is an bit string with at least one bit asserted, then the name does not match the constraint.
+To determine if a constraint matches a given name value, the certificate-consuming application performs an exclusive OR (XOR) operation of the N-bit bit pattern of the constraint and the upper N bits of the `macAddress` OCTET STRING value. If the result of the XOR operation is n bit string consisting of entirely zeros, then the name matches the constraint. Conversely, if the result of the operation is n bit string with at least one bit asserted, then the name does not match the constraint.
 
 The first octet of a MAC address contains two flag bits.
 
