@@ -166,13 +166,13 @@ Table of Contents
    When a constraint is included in the permittedSubtrees field of a
    Name Constraints extension, certificates containing a MACAddress name
    form of the specific identifier type (EUI-48 or EUI-64) that are
-   issued by the Certificate Authority are trusted only when the upper N
-   bits of the value are binary equal to the pattern.  When a constraint
-   is included in the excludedSubtrees field of a Name Constraints
-   extension, certificates containing a MACAddress name form of the
-   specific identifier type (EUI-48 or EUI-64) that are issued by the
-   Certificate Authority are trusted only when the upper N bits of the
-   value are not binary equal to the pattern.
+   issued by the Certification Authority are trusted only when the upper
+   N bits of the value are binary equal to the pattern.  When a
+   constraint is included in the excludedSubtrees field of a Name
+   Constraints extension, certificates containing a MACAddress name form
+   of the specific identifier type (EUI-48 or EUI-64) that are issued by
+   the Certification Authority are trusted only when the upper N bits of
+   the value are not binary equal to the pattern.
 
 3.3.  Generation and Validation Rules
 
@@ -212,9 +212,9 @@ Table of Contents
    certificate-consuming application performs an exclusive OR (XOR)
    operation of the N-bit bit pattern of the constraint and the upper N
    bits of the macAddress OCTET STRING value.  If the result of the XOR
-   operation is n bit string consisting of entirely zeros, then the name
+   operation is a bit string consisting of entirely zeros, then the name
    matches the constraint.  Conversely, if the result of the operation
-   is n bit string with at least one bit asserted, then the name does
+   is a bit string with at least one bit asserted, then the name does
    not match the constraint.
 
    The first octet of a MAC address contains two flag bits.
