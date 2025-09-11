@@ -179,7 +179,7 @@ IANA is requested to make the following assignment in the “SMI Security for PK
 
 # ASN.1 Module
 
-This Appendix contains the ASN.1 MOdule for the MAC Address; it follows the conventions established by {{RFC5912}}.
+This Appendix contains the ASN.1 Module for the MAC Address; it follows the conventions established by {{RFC5912}}.
 
 ~~~
 MACAddressOtherName-2025
