@@ -30,13 +30,13 @@ author:
     org: Vigil Security, LLC
     abbrev: Vigil Security
     email: housley@vigilsec.com
-    
+
   - name: Corey Bonnell
     ins: C. Bonnell
     org: DigiCert, Inc.
     abbrev: DigiCert
     email: corey.bonnell@digicert.com
-    
+
   - name: Joe Mandel
     ins: J. Mandel
     organization: AKAYLA, Inc.
