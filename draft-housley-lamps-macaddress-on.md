@@ -108,7 +108,7 @@ This document defines a new otherName form "MACAddress". The name form carries e
 
 # MACAddress otherName
 
-The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1). The name form has variants to convey a EUI-48 as an OCTET STRING comprising of 6 octets, or a EUI-64 as an OCTET STRING comprosing of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as N-bit bit patterns, where the bit pattern establishes a constraint on the upper N bits of a EUI-48 or EUI-64 value.
+The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1). The name form has variants to convey a EUI-48 as an OCTET STRING comprising of 6 octets, or a EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as N-bit bit patterns, where the bit pattern establishes a constraint on the upper N bits of a EUI-48 or EUI-64 value.
 
 The following sub-sections describe how to encode EUI-48 and EUI-64 values and their corresponding constraints.
 
