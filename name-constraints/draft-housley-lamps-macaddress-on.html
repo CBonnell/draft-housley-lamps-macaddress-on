@@ -1258,7 +1258,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <h3 id="name-encoding-a-macaddress-const">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-encoding-a-macaddress-const" class="section-name selfRef">Encoding a MACAddress constraint</a>
         </h3>
-<p id="section-3.2-1">When the name form is included in the Name Constraints extension, the syntax consists of a context-specific, implicitly tagged BIT STRING that specifies a N-bit bit pattern. Bit patterns representing the constraint are encoded with the most significant bit encoded first ("big-endian" or "left-to-right" encoding). Constraints on EUI-48 identifiers <span class="bcp14">MUST</span> be encoded using the <code>macAddress48Constraint</code> arm of MACAddress. Likewise, constraints on EUI-64 values <span class="bcp14">MUST</span> be encoded using the <code>macAddress64Constraint</code> arm of MACAddress. The <code>macAddress</code> OCTET STRING arm of <code>MACAddress</code> <span class="bcp14">MUST NOT</span> be used.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">When the name form is included in the Name Constraints extension, the syntax consists of a context-specific, implicitly tagged BIT STRING that specifies a N-bit bit pattern. Bit patterns representing the constraint are encoded with the most significant bit encoded first ("big-endian" or "left-to-right" encoding). Constraints on EUI-48 values <span class="bcp14">MUST</span> be encoded using the <code>macAddress48Constraint</code> arm of MACAddress. Likewise, constraints on EUI-64 values <span class="bcp14">MUST</span> be encoded using the <code>macAddress64Constraint</code> arm of MACAddress. The <code>macAddress</code> OCTET STRING arm of <code>MACAddress</code> <span class="bcp14">MUST NOT</span> be used.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">When a constraint is included in the <code>permittedSubtrees</code> field of a Name Constraints extension, certificates containing a MACAddress name form of the specific identifier type (EUI-48 or EUI-64) that are issued by the Certification Authority are trusted only when the upper N bits of the value are binary equal to the pattern. When a constraint is included in the <code>excludedSubtrees</code> field of a Name Constraints extension, certificates containing a MACAddress name form of the specific identifier type (EUI-48 or EUI-64) that are issued by the Certification Authority are trusted only when the upper N bits of the value are not binary equal to the pattern.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1383,9 +1383,9 @@ MACAddress ::= CHOICE {
   -- 48-bit EUI-48 or 64-bit EUI-64
   macAddress OCTET STRING (SIZE (6 | 8)),
   -- constraint on the upper bits of a 48-bit EUI-48
-  macAddress48Constraint [0] IMPLICIT BIT STRING (SIZE(1, 48)),
+  macAddress48Constraint [0] BIT STRING (SIZE(1..48)),
   -- constraint on the upper bits of a 64-bit EUI-64
-  macAddress64Constraint [1] IMPLICIT BIT STRING (SIZE(1, 64))
+  macAddress64Constraint [1] BIT STRING (SIZE(1..64))
 }
 
 END

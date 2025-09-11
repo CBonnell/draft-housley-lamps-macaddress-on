@@ -158,7 +158,7 @@ Table of Contents
    that specifies a N-bit bit pattern.  Bit patterns representing the
    constraint are encoded with the most significant bit encoded first
    ("big-endian" or "left-to-right" encoding).  Constraints on EUI-48
-   identifiers MUST be encoded using the macAddress48Constraint arm of
+   values MUST be encoded using the macAddress48Constraint arm of
    MACAddress.  Likewise, constraints on EUI-64 values MUST be encoded
    using the macAddress64Constraint arm of MACAddress.  The macAddress
    OCTET STRING arm of MACAddress MUST NOT be used.
@@ -317,9 +317,9 @@ Table of Contents
      -- 48-bit EUI-48 or 64-bit EUI-64
      macAddress OCTET STRING (SIZE (6 | 8)),
      -- constraint on the upper bits of a 48-bit EUI-48
-     macAddress48Constraint [0] IMPLICIT BIT STRING (SIZE(1, 48)),
+     macAddress48Constraint [0] BIT STRING (SIZE(1..48)),
      -- constraint on the upper bits of a 64-bit EUI-64
-     macAddress64Constraint [1] IMPLICIT BIT STRING (SIZE(1, 64))
+     macAddress64Constraint [1] BIT STRING (SIZE(1..64))
    }
 
    END
