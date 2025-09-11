@@ -50,8 +50,6 @@ author:
     email: tomofumi.okubo+ietf@gmail.com
 
 normative:
-  RFC2119:
-  RFC8174:
   RFC5280:
   RFC5912:
   IEEE802.1AE:
@@ -160,7 +158,7 @@ Unlike IP addresses, MAC addresses are not typically routed across layer 3 boun
 
 ## Privacy Considerations
 
-A MAC address can uniquely identify a physical device and by extension, its user.  Certificates that embed unchanging MAC addresses facilitate long‑term device tracking. Deployments that use the MACAddress name SHOULD consider rotating addresses, using temporary certificates, or employing MAC Address Randomization where feasible.
+A MAC address can uniquely identify a physical device and by extension, its user. Certificates that embed unchanging MAC addresses facilitate long‑term device tracking. Deployments that use the MACAddress name SHOULD consider rotating addresses, using temporary certificates, or employing MAC Address Randomization where feasible.
 
 # IANA Considerations
 
@@ -180,12 +178,7 @@ IANA is requested to make the following assignment in the “SMI Security for PK
         | TBD1    | id-on-MACAddress                | THis doc   |
         +---------+---------------------------------+------------+
 
-# Acknowledgments
-{:numbered="false"}
-
-TODO acknowledge.
-
-# Appendix A.  ASN.1 Module
+# ASN.1 Module
 
 This Appendix contains the ASN.1 MOdule for the MAC Address; it follows the conventions established by {{RFC5912}}.
 
@@ -232,7 +225,7 @@ MACAddress ::= CHOICE {
 END
 ~~~
 
-# Appendix B. MAC Address otherName Examples
+# MAC Address otherName Examples
 
 The following is a human‑readable summary of the Subject Alternative
 Name extension from a certificate containing a single MACAddress
@@ -254,3 +247,8 @@ An EUI‑64 example (AC‑DE‑48‑00‑11‑22‑33‑44):
 ~~~
 
 --- back
+
+# Acknowledgments
+{:numbered="false"}
+
+TODO acknowledge.
