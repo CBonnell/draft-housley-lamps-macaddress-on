@@ -53,6 +53,7 @@ normative:
   RFC2119:
   RFC8174:
   RFC5280:
+  RFC5912:
   IEEE802.1AE:
     title: >
       IEEE Standard for Local and metropolitan area networks -
@@ -237,15 +238,19 @@ The following is a human‑readable summary of the Subject Alternative
 Name extension from a certificate containing a single MACAddress
 otherName with value 00‑24‑98‑7B‑19‑02:
 
+~~~
   SEQUENCE {
     otherName [0] {
       OBJECT IDENTIFIER id-on-MACAddress (TBD)
       [0] OCTET STRING '0024987B1902'H
     }
   }
+~~~
 
 An EUI‑64 example (AC‑DE‑48‑00‑11‑22‑33‑44):
 
+~~~
   [0] OCTET STRING 'ACDE480011223344'H
+~~~
 
 --- back
