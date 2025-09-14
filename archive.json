@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-11T01:47:21.850348+00:00",
+  "timestamp": "2025-09-14T01:51:32.437328+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -50,5 +50,103 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOPNu74s6oCcyy",
+      "title": "Add text for new syntax and NC handling, minor fixes",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/1",
+      "state": "MERGED",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-11T13:28:21Z",
+      "updatedAt": "2025-09-12T20:33:41Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "cf4982595e737fc515cd42e33ec7e16d6b05ee17",
+      "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "headRefName": "name-constraints",
+      "headRefOid": "18c4de057ce84d997d8d12147f292a66928ad179",
+      "closedAt": "2025-09-12T20:33:36Z",
+      "mergedAt": "2025-09-12T20:33:36Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "727d2f6d9b11d0ef9db63132d3b8441803a7ebf1"
+      },
+      "comments": [
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The whole module is IMPLICIT, so we can drop IMPLICIT in the MACAddress definition.  However, I just looked at the code needed in pyasn1, and it may be safer to keep the IMPLICIT to make sure the right thing happens.\r\n\r\n",
+          "createdAt": "2025-09-11T18:14:11Z",
+          "updatedAt": "2025-09-11T18:30:50Z"
+        },
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The SIZE syntax is wrong.  It should be:\r\n\r\n~~~\r\nMACAddress ::= CHOICE {\r\n  -- 48-bit EUI-48 or 64-bit EUI-64\r\n  macAddress OCTET STRING (SIZE (6 | 8)),\r\n  -- constraint on the upper bits of a 48-bit EUI-48\r\n  macAddress48Constraint [0] IMPLICIT BIT STRING (SIZE(1..48)),\r\n  -- constraint on the upper bits of a 64-bit EUI-64\r\n  macAddress64Constraint [1] IMPLICIT BIT STRING (SIZE(1..64)) }\r\n~~~",
+          "createdAt": "2025-09-11T18:19:52Z",
+          "updatedAt": "2025-09-11T18:31:16Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPNu74s6_cKks",
+          "commit": {
+            "abbreviatedOid": "35fa9a2"
+          },
+          "author": "tomofumiokubo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-11T14:06:03Z",
+          "updatedAt": "2025-09-11T14:06:03Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s6_cz6b",
+          "commit": {
+            "abbreviatedOid": "35fa9a2"
+          },
+          "author": "mandelj7",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-11T14:31:30Z",
+          "updatedAt": "2025-09-11T14:31:31Z",
+          "comments": [
+            {
+              "originalPosition": 88,
+              "body": "s/Certificate Authority/Certification Authority ",
+              "createdAt": "2025-09-11T14:31:30Z",
+              "updatedAt": "2025-09-11T14:31:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s6_dK8u",
+          "commit": {
+            "abbreviatedOid": "35fa9a2"
+          },
+          "author": "mandelj7",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-11T14:48:02Z",
+          "updatedAt": "2025-09-11T14:48:02Z",
+          "comments": [
+            {
+              "originalPosition": 108,
+              "body": "Should there be an \"a\" before bit string:  \"If the result of the XOR operation is a n bit string consisting of entirely zeros...\"\r\nSame for the next sentence: \"Conversely, if the result of the operation is a n bit string with at least one bit asserted,...\"",
+              "createdAt": "2025-09-11T14:48:02Z",
+              "updatedAt": "2025-09-11T14:48:02Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
