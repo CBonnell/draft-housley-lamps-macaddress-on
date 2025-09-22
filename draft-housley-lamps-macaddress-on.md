@@ -91,16 +91,13 @@ normative:
 
 --- abstract
 
-This document defines a new otherName for inclusion in the X.509 Subject Alternative Name (SAN) extension to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to
-bind a layer‑2 interface identifier to a public key certificate. This is needed for secure onboarding and key establishment protocols that operate below the network layer, such as IEEE 802.1AE (MACsec).
+This document defines a new otherName for inclusion in the X.509 Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to bind a layer‑2 interface identifier to a public key certificate. Additionally, this document defines how constraints on this name form can be encoded and processed in the X.509 Name Constraints extension.
 
 --- middle
 
 # Introduction
 
-IEEE 802.1AE [IEEE802.1AE] provides point‑to‑point link‑layer data confidentiality and integrity ("MACsec"). Deployments that use X.509 certificates for MACsec key establishment frequently need to bind a Media Access Control (MAC) address to a public key when devices lack a stable IP address or operate in media where IP addressing is not yet available. The Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions defined in [RFC5280] allows an X.509 certificate to contain multiple name forms, but no standard name form exists for MAC addresses.
-
-This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension defined in [RFC5280]. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
+Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in [RFC5280]. This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension defined in [RFC5280]. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
 
 # Conventions and Definitions
 
@@ -161,21 +158,21 @@ A MAC address can uniquely identify a physical device and by extension, its user
 
 # IANA Considerations
 
-IANA is requested to make the following assignments in the “SMI Security for PKIX Module Identifier” (1.3.6.1.5.5.7.0) registry
+IANA is requested to make the following assignments in the “SMI Security for PKIX Module Identifier” (1.3.6.1.5.5.7.0) registry:
 
-        +=========+====================================+============+
-        | Decimal | Description                        | References |
-        +=========+====================================+============+
-        | TBD0    | id-mod-mac-address-other-name-2025 | This doc   |
-        +---------+------------------------------------+------------+
+        +=========+====================================+===============+
+        | Decimal | Description                        | References    |
+        +=========+====================================+===============+
+        | TBD0    | id-mod-mac-address-other-name-2025 | This document |
+        +---------+------------------------------------+---------------+
 
-IANA is requested to make the following assignment in the “SMI Security for PKIX Other Name Forms” (1.3.6.1.5.5.7.8) registry
+IANA is requested to make the following assignment in the “SMI Security for PKIX Other Name Forms” (1.3.6.1.5.5.7.8) registry:
 
-        +=========+=================================+============+
-        | Decimal | Description                     | References |
-        +=========+=================================+============+
-        | TBD1    | id-on-MACAddress                | THis doc   |
-        +---------+---------------------------------+------------+
+        +=========+=================================+===============+
+        | Decimal | Description                     | References    |
+        +=========+=================================+===============+
+        | TBD1    | id-on-MACAddress                | This document |
+        +---------+---------------------------------+---------------+
 
 # ASN.1 Module
 
