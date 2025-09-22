@@ -10,17 +10,16 @@
 <meta content="Joe Mandel" name="author">
 <meta content="Tomofumi Okubo" name="author">
 <meta content="
-       This document defines a new otherName for inclusion in the X.509 Subject Alternative Name (SAN) extension to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to
-bind a layer‑2 interface identifier to a public key certificate. This is needed for secure onboarding and key establishment protocols that operate below the network layer, such as IEEE 802.1AE (MACsec). 
+       This document defines a new otherName for inclusion in the X.509 Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to bind a layer‑2 interface identifier to a public key certificate. Additionally, this document defines how constraints on this name form can be encoded and processed in the X.509 Name Constraints extension. 
     " name="description">
-<meta content="xml2rfc 3.30.1" name="generator">
+<meta content="xml2rfc 3.30.2" name="generator">
 <meta content="MACsec" name="keyword">
 <meta content="802.1AE" name="keyword">
 <meta content="X.509" name="keyword">
 <meta content="SubjectAltName" name="keyword">
 <meta content="draft-housley-lamps-macaddress-on-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.1
+  xml2rfc 3.30.2
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
@@ -1055,7 +1054,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Housley, et al.</td>
-<td class="center">Expires 16 March 2026</td>
+<td class="center">Expires 26 March 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1068,12 +1067,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-housley-lamps-macaddress-on-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-09-12" class="published">12 September 2025</time>
+<time datetime="2025-09-22" class="published">22 September 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-03-16">16 March 2026</time></dd>
+<dd class="expires"><time datetime="2026-03-26">26 March 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1098,8 +1097,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Media Access Control (MAC) Addresses in X.509 Certificates</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document defines a new otherName for inclusion in the X.509 Subject Alternative Name (SAN) extension to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to
-bind a layer‑2 interface identifier to a public key certificate. This is needed for secure onboarding and key establishment protocols that operate below the network layer, such as IEEE 802.1AE (MACsec).<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document defines a new otherName for inclusion in the X.509 Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to bind a layer‑2 interface identifier to a public key certificate. Additionally, this document defines how constraints on this name form can be encoded and processed in the X.509 Name Constraints extension.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1136,7 +1134,7 @@ bind a layer‑2 interface identifier to a public key certificate. This is neede
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 16 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1223,8 +1221,7 @@ bind a layer‑2 interface identifier to a public key certificate. This is neede
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">IEEE 802.1AE <span>[<a href="#IEEE802.1AE" class="cite xref">IEEE802.1AE</a>]</span> provides point‑to‑point link‑layer data confidentiality and integrity ("MACsec"). Deployments that use X.509 certificates for MACsec key establishment frequently need to bind a Media Access Control (MAC) address to a public key when devices lack a stable IP address or operate in media where IP addressing is not yet available. The Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> allows an X.509 certificate to contain multiple name forms, but no standard name form exists for MAC addresses.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-1">Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.<a href="#section-1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1318,24 +1315,24 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-iana-considerations">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-5-1">IANA is requested to make the following assignments in the “SMI Security for PKIX Module Identifier” (1.3.6.1.5.5.7.0) registry<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">IANA is requested to make the following assignments in the “SMI Security for PKIX Module Identifier” (1.3.6.1.5.5.7.0) registry:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-2">
 <pre>
-    +=========+====================================+============+
-    | Decimal | Description                        | References |
-    +=========+====================================+============+
-    | TBD0    | id-mod-mac-address-other-name-2025 | This doc   |
-    +---------+------------------------------------+------------+
+    +=========+====================================+===============+
+    | Decimal | Description                        | References    |
+    +=========+====================================+===============+
+    | TBD0    | id-mod-mac-address-other-name-2025 | This document |
+    +---------+------------------------------------+---------------+
 </pre><a href="#section-5-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5-3">IANA is requested to make the following assignment in the “SMI Security for PKIX Other Name Forms” (1.3.6.1.5.5.7.8) registry<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-3">IANA is requested to make the following assignment in the “SMI Security for PKIX Other Name Forms” (1.3.6.1.5.5.7.8) registry:<a href="#section-5-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-4">
 <pre>
-    +=========+=================================+============+
-    | Decimal | Description                     | References |
-    +=========+=================================+============+
-    | TBD1    | id-on-MACAddress                | THis doc   |
-    +---------+---------------------------------+------------+
+    +=========+=================================+===============+
+    | Decimal | Description                     | References    |
+    +=========+=================================+===============+
+    | TBD1    | id-on-MACAddress                | This document |
+    +---------+---------------------------------+---------------+
 </pre><a href="#section-5-4" class="pilcrow">¶</a>
 </div>
 </section>
