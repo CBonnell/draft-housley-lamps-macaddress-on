@@ -415,11 +415,11 @@ Table of Contents
 
 Acknowledgments
 
-   The authors would like to thank the participants on the LAMPS Working
-   Group mailing list for their insightful feedback and comments.  In
-   particular, the authors extend sincere appreciation to John Mattsson
-   and Michael St. Johns for their reviews and suggestions, which
-   greatly improved the quality of this document.
+   We thank the participants on the LAMPS Working Group mailing list for
+   their insightful feedback and comments.  In particular, the authors
+   extend sincere appreciation to John Mattsson and Michael St. Johns
+   for their reviews and suggestions, which greatly improved the quality
+   of this document.
 
 Authors' Addresses
 
