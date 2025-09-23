@@ -171,7 +171,7 @@ Table of Contents
    ("big-endian" or "left-to-right" encoding).
 
    If a bit is not asserted in the mask bit pattern, then the CA MUST
-   NOT assert corresponding bit in the value bit pattern.  This rule
+   NOT assert the corresponding bit in the value bit pattern.  This rule
    ensures that a distinguished encoding is used for a given mask bit
    pattern and value bit pattern.
 
