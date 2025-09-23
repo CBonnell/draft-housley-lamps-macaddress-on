@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-21T01:54:44.087753+00:00",
+  "timestamp": "2025-09-23T01:45:04.706002+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -153,24 +153,26 @@
       "id": "PR_kwDOPNu74s6pXNjH",
       "title": "Clean up abstract + intro, some typo fixes",
       "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/2",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-18T19:21:40Z",
-      "updatedAt": "2025-09-19T17:52:20Z",
+      "updatedAt": "2025-09-22T15:12:25Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "727d2f6d9b11d0ef9db63132d3b8441803a7ebf1",
       "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "headRefName": "clean-up-abstract-intro",
       "headRefOid": "89297046a735c8c1c61e75f053c6dfd94ded81f8",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-22T15:12:21Z",
+      "mergedAt": "2025-09-22T15:12:21Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "89287b0d4dec364d3dc591facd6e76f67a18c8d5"
+      },
       "comments": [
         {
           "author": "russhousley",
