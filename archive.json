@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-23T01:45:04.706002+00:00",
+  "timestamp": "2025-09-25T01:47:16.170881+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -210,6 +210,40 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOPNu74s6qE-xN",
+      "title": "Rework constraint encoding",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/3",
+      "state": "OPEN",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-23T13:49:03Z",
+      "updatedAt": "2025-09-23T20:06:27Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "89287b0d4dec364d3dc591facd6e76f67a18c8d5",
+      "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "headRefName": "bit-twiddling",
+      "headRefOid": "ef8a6b6130a6c1fa047dc5c266489722b144499f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We need to add Mike StJohns to the acknowledgments.",
+          "createdAt": "2025-09-23T14:09:17Z",
+          "updatedAt": "2025-09-23T14:09:17Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
