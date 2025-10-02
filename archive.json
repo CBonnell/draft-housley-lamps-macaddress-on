@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-30T01:44:17.479015+00:00",
+  "timestamp": "2025-10-02T01:44:39.827137+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -216,24 +216,26 @@
       "id": "PR_kwDOPNu74s6qE-xN",
       "title": "Rework constraint encoding",
       "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/3",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-23T13:49:03Z",
-      "updatedAt": "2025-09-23T20:06:27Z",
+      "updatedAt": "2025-09-30T23:59:19Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "89287b0d4dec364d3dc591facd6e76f67a18c8d5",
       "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "headRefName": "bit-twiddling",
       "headRefOid": "ef8a6b6130a6c1fa047dc5c266489722b144499f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-30T16:53:39Z",
+      "mergedAt": "2025-09-30T16:53:39Z",
+      "mergedBy": "russhousley",
+      "mergeCommit": {
+        "oid": "58c9deee9fd835bceb8c1c3fe36881a4ef2d20c7"
+      },
       "comments": [
         {
           "author": "russhousley",
@@ -243,7 +245,34 @@
           "updatedAt": "2025-09-23T14:09:17Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPNu74s7D2JAb",
+          "commit": {
+            "abbreviatedOid": "ef8a6b6"
+          },
+          "author": "mandelj7",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-30T16:06:09Z",
+          "updatedAt": "2025-09-30T16:06:09Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7D7NOY",
+          "commit": {
+            "abbreviatedOid": "ef8a6b6"
+          },
+          "author": "tomofumiokubo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-30T23:59:19Z",
+          "updatedAt": "2025-09-30T23:59:19Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
