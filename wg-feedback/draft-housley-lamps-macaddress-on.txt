@@ -5,12 +5,12 @@
 Limited Additional Mechanisms for PKIX and SMIME              R. Housley
 Internet-Draft                                            Vigil Security
 Intended status: Informational                                C. Bonnell
-Expires: 15 March 2026                                          DigiCert
+Expires: 15 April 2026                                          DigiCert
                                                                J. Mandel
                                                                   AKAYLA
                                                                 T. Okubo
                                                       Penguin Securities
-                                                       11 September 2025
+                                                         12 October 2025
 
 
        Media Access Control (MAC) Addresses in X.509 Certificates
@@ -19,11 +19,12 @@ Expires: 15 March 2026                                          DigiCert
 Abstract
 
    This document defines a new otherName for inclusion in the X.509
-   Subject Alternative Name (SAN) extension to carry an IEEE Media
-   Access Control (MAC) address.  The new name form makes it possible to
-   bind a layer-2 interface identifier to a public key certificate.
-   This is needed for secure onboarding and key establishment protocols
-   that operate below the network layer, such as IEEE 802.1AE (MACsec).
+   Subject Alternative Name (SAN) and Issuer Alternative Name (IAN)
+   extensions to carry an IEEE Media Access Control (MAC) address.  The
+   new name form makes it possible to bind a layer-2 interface
+   identifier to a public key certificate.  Additionally, this document
+   defines how constraints on this name form can be encoded and
+   processed in the X.509 Name Constraints extension.
 
 About This Document
 
@@ -59,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 March 2026.
+   This Internet-Draft will expire on 15 April 2026.
 
 Copyright Notice
 
@@ -89,22 +90,18 @@ Table of Contents
    5.  IANA Considerations
    6.  ASN.1 Module
    7.  MAC Address otherName Examples
+     7.1.  EUI-48 identifier
+     7.2.  EUI-64 identifier
+     7.3.  EUI-48 constraint for universal, unicast addresses
    8.  Normative References
    Acknowledgments
    Authors' Addresses
 
 1.  Introduction
 
-   IEEE 802.1AE [IEEE802.1AE] provides point-to-point link-layer data
-   confidentiality and integrity ("MACsec").  Deployments that use X.509
-   certificates for MACsec key establishment frequently need to bind a
-   Media Access Control (MAC) address to a public key when devices lack
-   a stable IP address or operate in media where IP addressing is not
-   yet available.  The Subject Alternative Name (SAN) and Issuer
-   Alternative Name (IAN) extensions defined in [RFC5280] allows an
-   X.509 certificate to contain multiple name forms, but no standard
-   name form exists for MAC addresses.
-
+   Deployments that use X.509 certificates to identify a device by a
+   Media Access Control (MAC) address need a standard way to encode it
+   in the Subject Alternative Name (SAN) extension defined in [RFC5280].
    This document defines a new otherName form "MACAddress".  The name
    form carries either a 48-bit IEEE 802 MAC address (EUI-48) or a
    64-bit extended identifier (EUI-64) in an OCTET STRING.
@@ -128,9 +125,12 @@ Table of Contents
    id-on-MACAddress (TBD1).  The name form has variants to convey a
    EUI-48 as an OCTET STRING comprising of 6 octets, or a EUI-64 as an
    OCTET STRING comprising of 8 octets.  Constraints on EUI-48 and
-   EUI-64 values are conveyed as N-bit bit patterns, where the bit
-   pattern establishes a constraint on the upper N bits of a EUI-48 or
-   EUI-64 value.
+   EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice
+   the octet length of the identifiers.  The first set of N octets
+   (where N is the length of the address octets) define the bit mask of
+   the constraint, and the second set of N octets defines the bit
+   pattern that the address must match for the asserted bits in the
+   mask.
 
    The following sub-sections describe how to encode EUI-48 and EUI-64
    values and their corresponding constraints.
@@ -147,32 +147,47 @@ Table of Contents
    MAC identifier, the CA MUST encode it using a 6-octet OCTET STRING as
    the MACAddress value.  When the device’s factory identifier is a
    64-bit EUI-64 or when no canonical 48-bit form exists, the CA MUST
-   encode it using an 8-octet OCTET STRING as the MACAddress value.  The
-   macAddress48Constraint and macAddress64Constraint tagged BIT STRING
-   arms of MACAddress MUST NOT be used.
+   encode it using an 8-octet OCTET STRING as the MACAddress value.
 
 3.2.  Encoding a MACAddress constraint
 
    When the name form is included in the Name Constraints extension, the
-   syntax consists of a context-specific, implicitly tagged BIT STRING
-   that specifies a N-bit bit pattern.  Bit patterns representing the
-   constraint are encoded with the most significant bit encoded first
-   ("big-endian" or "left-to-right" encoding).  Constraints on EUI-48
-   values MUST be encoded using the macAddress48Constraint arm of
-   MACAddress.  Likewise, constraints on EUI-64 values MUST be encoded
-   using the macAddress64Constraint arm of MACAddress.  The macAddress
-   OCTET STRING arm of MACAddress MUST NOT be used.
+   syntax consists of an OCTET STRING that is twice as long as the OCTET
+   STRING representation of the address type being constrained.  Within
+   the OCTET STRING, two elements are encoded:
+
+   1.  The first set of N octets (where N is 6 for an EUI-48 constraint
+       or 8 for an EUI-64 constraint) contains the "value bit pattern".
+       This bit pattern encodes the bits that the masked address must
+       contain to be considered a match.
+
+   2.  The second set of N octets encodes the "mask bit pattern" of the
+       constraint.  Each bit that is asserted in the mask bit pattern
+       indicates that the bit in the same position in the address is
+       constrained by the first set of N octets.
+
+   The bit patterns encoded in both the value bit pattern and mask bit
+   pattern are encoded with the most significant bit encoded first
+   ("big-endian" or "left-to-right" encoding).
+
+   If a bit is not asserted in the mask bit pattern, then the CA MUST
+   NOT assert the corresponding bit in the value bit pattern.  This rule
+   ensures that a canonical encoding is used for a given mask bit
+   pattern and value bit pattern.
 
    When a constraint is included in the permittedSubtrees field of a
    Name Constraints extension, certificates containing a MACAddress name
    form of the specific identifier type (EUI-48 or EUI-64) that are
-   issued by the Certification Authority are trusted only when the upper
-   N bits of the value are binary equal to the pattern.  When a
-   constraint is included in the excludedSubtrees field of a Name
+   issued by the Certification Authority are trusted only when the
+   masked bits (masked according to the "mask bit pattern") of the value
+   are binary equal to the "value bit pattern".
+
+   When a constraint is included in the excludedSubtrees field of a Name
    Constraints extension, certificates containing a MACAddress name form
    of the specific identifier type (EUI-48 or EUI-64) that are issued by
-   the Certification Authority are trusted only when the upper N bits of
-   the value are not binary equal to the pattern.
+   the Certification Authority are trusted only when the masked bits
+   (masked according to the "mask bit pattern") of the value are not
+   binary equal to the pattern.
 
 3.3.  Generation and Validation Rules
 
@@ -200,39 +215,39 @@ Table of Contents
    extension MAY impose permittedSubtrees and excludedSubtrees on
    id-on-MACAddress.
 
-   A constraint that is represented as a macAddress48Constraint is
-   relevant only to macAddress values that are encoded using 6 octets;
-   such a constraint is ignored for macAddress values that are encoded
-   using 8 octets.  Likewise, a constraint that is represented as a
-   macAddress64Constraint is relevant only to macAddress values that are
-   encoded using 8 octets; such a constraint is ignored for macAddress
-   values that are encoded using 6 octets.
+   A constraint that is represented as an OCTET STRING of exactly 12
+   octets is relevant only to macAddress values that are encoded using 6
+   octets; such a constraint is ignored for macAddress values that are
+   encoded using 8 octets.  Likewise, a constraint that is represented
+   as an OCTET STRING of exactly 16 octets is relevant only to
+   macAddress values that are encoded using 8 octets; such a constraint
+   is ignored for macAddress values that are encoded using 6 octets.
 
    To determine if a constraint matches a given name value, the
-   certificate-consuming application performs an exclusive OR (XOR)
-   operation of the N-bit bit pattern of the constraint and the upper N
-   bits of the macAddress OCTET STRING value.  If the result of the XOR
-   operation is a bit string consisting of entirely zeros, then the name
-   matches the constraint.  Conversely, if the result of the operation
-   is a bit string with at least one bit asserted, then the name does
-   not match the constraint.
+   certificate-consuming application performs the following algorithm:
 
-   The first octet of a MAC address contains two flag bits.
+   1.  Extract the value bit pattern from the upper (big-endian) N
+       octets of the constraint value, where N is "6" for EUI-48
+       identifiers and "8" for EUI-64 identifiers.
 
-   *  I/G bit (bit 0) – 0 = unicast, 1 = multicast.  Multicast prefixes
-      are never OUIs.
+   2.  Extract the mask bit pattern from the lower (big-endian) N octets
+       of the constraint value, where N is "6" for EUI-48 identifiers
+       and "8" for EUI-64 identifiers.
 
-   *  U/L bit (bit 1) – 0 = universal (IEEE-assigned), 1 = local.
+   3.  Perform an exclusive OR (XOR) operation with the value bit string
+       extracted in step 1 and the octets of the name value.
 
-   These flags let the implementations exclude multicast and local
-   prefixes but still cannot prove that a 24-bit value is an
-   IEEE-registered OUI. 36-bit CIDs share the same first 24 bits and
-   enterprises MAY deploy pseudo-OUIs.  CAs MUST include only prefixes
-   the subscriber legitimately controls (registered OUI or CID).  Before
-   issuing a certificate that contains a MACAddress or a name constraint
-   based on such a prefix, the CA MUST verify that control—for example,
-   by consulting the IEEE registry or reviewing manufacturer
-   documentation.
+   4.  Perform a bitwise AND operation with the bit string calculated in
+       step 3 and the mask bit pattern.
+
+   5.  If the result of step 4 is a bit string consisting of entirely
+       zeros, then the name matches the constraint.  Conversely, if the
+       result of the operation is a bit string with at least one bit
+       asserted, then the name does not match the constraint.
+
+   Implementations are not required to implement this algorithm, but
+   MUST calculate an identical result to this algorithm for a given set
+   of inputs.
 
 4.  Security Considerations
 
@@ -260,22 +275,22 @@ Table of Contents
 5.  IANA Considerations
 
    IANA is requested to make the following assignments in the “SMI
-   Security for PKIX Module Identifier” (1.3.6.1.5.5.7.0) registry
+   Security for PKIX Module Identifier” (1.3.6.1.5.5.7.0) registry:
 
-       +=========+====================================+============+
-       | Decimal | Description                        | References |
-       +=========+====================================+============+
-       | TBD0    | id-mod-mac-address-other-name-2025 | This doc   |
-       +---------+------------------------------------+------------+
+       +=========+====================================+===============+
+       | Decimal | Description                        | References    |
+       +=========+====================================+===============+
+       | TBD0    | id-mod-mac-address-other-name-2025 | This document |
+       +---------+------------------------------------+---------------+
 
    IANA is requested to make the following assignment in the “SMI
-   Security for PKIX Other Name Forms” (1.3.6.1.5.5.7.8) registry
+   Security for PKIX Other Name Forms” (1.3.6.1.5.5.7.8) registry:
 
-       +=========+=================================+============+
-       | Decimal | Description                     | References |
-       +=========+=================================+============+
-       | TBD1    | id-on-MACAddress                | THis doc   |
-       +---------+---------------------------------+------------+
+       +=========+=================================+===============+
+       | Decimal | Description                     | References    |
+       +=========+=================================+===============+
+       | TBD1    | id-on-MACAddress                | This document |
+       +---------+---------------------------------+---------------+
 
 6.  ASN.1 Module
 
@@ -313,18 +328,13 @@ Table of Contents
    on-MACAddress OTHER-NAME ::= {
    MACAddress IDENTIFIED BY id-on-MACAddress }
 
-   MACAddress ::= CHOICE {
-     -- 48-bit EUI-48 or 64-bit EUI-64
-     macAddress OCTET STRING (SIZE (6 | 8)),
-     -- constraint on the upper bits of a 48-bit EUI-48
-     macAddress48Constraint [0] BIT STRING (SIZE (1..48)),
-     -- constraint on the upper bits of a 64-bit EUI-64
-     macAddress64Constraint [1] BIT STRING (SIZE (1..64))
-   }
+   MACAddress ::= OCTET STRING (SIZE (6 | 8 | 12 | 16))
 
    END
 
 7.  MAC Address otherName Examples
+
+7.1.  EUI-48 identifier
 
    The following is a human-readable summary of the Subject Alternative
    Name extension from a certificate containing a single MACAddress
@@ -337,17 +347,38 @@ Table of Contents
        }
      }
 
+7.2.  EUI-64 identifier
+
    An EUI-64 example (AC-DE-48-00-11-22-33-44):
 
      [0] OCTET STRING 'ACDE480011223344'H
 
-8.  Normative References
+7.3.  EUI-48 constraint for universal, unicast addresses
 
-   [IEEE802.1AE]
-              IEEE, "IEEE Standard for Local and metropolitan area
-              networks - Media Access Control (MAC) Security", IEEE 802-
-              1ae-2018, DOI 10.1109/IEEESTD.2018.8585421, 21 December
-              2018, <https://doi.org/10.1109/IEEESTD.2018.8585421>.
+   The first octet of a MAC address contains two flag bits.
+
+   *  I/G bit (bit 0) – 0 = unicast, 1 = multicast.  Multicast prefixes
+      are never OUIs.
+
+   *  U/L bit (bit 1) – 0 = universal (IEEE-assigned), 1 = local.
+
+   These flags let the implementations exclude multicast and local
+   addresses but still cannot prove that a 24-bit value is an
+   IEEE-registered OUI. 36-bit CIDs share the same first 24 bits and
+   enterprises MAY deploy pseudo-OUIs.  CAs MUST include only addresses
+   the subscriber legitimately controls (registered OUI or CID).  Before
+   issuing a certificate that contains a MACAddress or a name constraint
+   based on such a permitted set of addresses, the CA MUST verify that
+   control: for example, by consulting the IEEE registry or reviewing
+   manufacturer documentation.
+
+   The following constraint definition constrains EUI-48 values to only
+   those are universal and unicast; locally assigned or multicast values
+   will not match the constraint.
+
+     [0] OCTET STRING '020000000000030000000000'H
+
+8.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -369,20 +400,13 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-   [X680]     ITU-T, "Information technology -- Abstract Syntax Notation
-              One (ASN.1): Specification of basic notation", ITU-T
-              Recommendation X.680, ISO/IEC 8824-1:2021, February 2021,
-              <https://www.itu.int/rec/T-REC-X.680>.
-
-   [X690]     ITU-T, "Information technology -- ASN.1 encoding rules:
-              Specification of Basic Encoding Rules (BER), Canonical
-              Encoding Rules (CER) and Distinguished Encoding Rules
-              (DER)", ITU-T Recommendation X.690, ISO/IEC 8825-1-2021,
-              February 2021, <https://www.itu.int/rec/T-REC-X.690>.
-
 Acknowledgments
 
-   TODO acknowledge.
+   We thank the participants on the LAMPS Working Group mailing list for
+   their insightful feedback and comments.  In particular, the authors
+   extend sincere appreciation to David von Oheimb, John Mattsson,
+   Michael StJohns for their reviews and suggestions, which greatly
+   improved the quality of this document.
 
 Authors' Addresses
 
