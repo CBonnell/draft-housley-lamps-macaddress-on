@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-12T01:50:35.639265+00:00",
+  "timestamp": "2025-10-14T01:47:11.460638+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -286,7 +286,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-10-12T01:05:51Z",
-      "updatedAt": "2025-10-12T01:06:30Z",
+      "updatedAt": "2025-10-13T21:01:13Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "58c9deee9fd835bceb8c1c3fe36881a4ef2d20c7",
@@ -297,8 +297,183 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "body": "Well, Russ just pointed to this PR in response to what I just wrote on the LAMPS list, \r\nbut this PR so far does not actually address my points. In particular not (yet) this,\r\nwhich is a about clarifying the semantics of all-zero masks and making them more expressive/useful:\r\n\r\n>> Section 3.2:\r\n>>\r\n>> It may be worth noting that an all-zero\u00a0mask effectively means no constraint,\r\n>> at least when using the constraint in positive context, a permittedSubtrees field.\r\n>> AFAICS, by\u00a0default this would hold also when using this mask in an excludedSubtrees field.\r\n>>\r\n>> Yet one could also define that\r\n>> an all-zero mask in negative context means to exclude the given variant (either 6 or 8 octets) of MAC addresses.\r\n>> This way, it\u00a0could be expressed that only the other variant (i.e., having 8 or\u00a06 octets, respectively) is permitted.\r\n>\r\n\r\n[...] all-zero masks do already work, in a certain sense.\r\n\r\n* In positive contexts, they lead to \"pass all\" MAC addresses\u00a0of either 6 or 8 bytes length, depending on the length of the constraint. In other words, they mean the same as omitting them (i.e., no constraint given).\r\nMy point here is that this may be not entirely obvious to readers, so I suggest pointing this out **explicitly** in the spec.\r\n*  In negative contexts, with the\u00a0semantics defined so far, AFAICS, all-zero masks also lead to \"**pass all**\"\r\n    (or am I wrong on that? If so, please explain, also in the draft text).\r\n    This may be not what is desired from a specification point of view, and they could easily be misunderstood by users.\r\n    Therefore, also to enhance expressiveness of these constraints,\r\n    I suggest explicitly defining for negative contexts a different(!) semantics, namely:\r\n    an all-zero mask in\u00a0negative context means **rejection** of all MAC addresses of either 6 or 8 bytes length, depending on the length of the constraint.\r\n    This way, things would become very clear, and would add support for allowing **only** 8-byte or 6-byte MAC addresses, respectively. Could it be of interest to be able to express and use this type of constraint?",
+          "createdAt": "2025-10-13T18:02:53Z",
+          "updatedAt": "2025-10-13T18:02:53Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPNu74s7GnWtJ",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks good.  Thanks.",
+          "createdAt": "2025-10-13T16:03:47Z",
+          "updatedAt": "2025-10-13T16:03:47Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7GnZnV",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "tomofumiokubo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM!",
+          "createdAt": "2025-10-13T16:07:22Z",
+          "updatedAt": "2025-10-13T16:07:22Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7GoxDk",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-13T18:05:03Z",
+          "updatedAt": "2025-10-13T18:05:04Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "I think it makes more sense here to say that the recommendation is to use one or two \"permittedSubtrees\" and completely omit \"excludedSubtrees\".  Basically, you don't need both if you have the value/mask structure.  And you only need two permittedSubtrees if you're permitting both 6 and 8 byte names.",
+              "createdAt": "2025-10-13T18:05:04Z",
+              "updatedAt": "2025-10-13T18:05:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7GoyJo",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-13T18:06:34Z",
+          "updatedAt": "2025-10-13T18:06:34Z",
+          "comments": [
+            {
+              "originalPosition": 55,
+              "body": "\"valid and canonical\"?",
+              "createdAt": "2025-10-13T18:06:34Z",
+              "updatedAt": "2025-10-13T18:06:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7Go04E",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-13T18:11:31Z",
+          "updatedAt": "2025-10-13T18:11:32Z",
+          "comments": [
+            {
+              "originalPosition": 97,
+              "body": "\"The first octet of a MAC address contains two flag bits.  Note that IEEE bit numbering has bit '0' as the least significant bit of the octet\"",
+              "createdAt": "2025-10-13T18:11:32Z",
+              "updatedAt": "2025-10-13T18:11:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7Go9bq",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-13T18:25:19Z",
+          "updatedAt": "2025-10-13T18:25:19Z",
+          "comments": [
+            {
+              "originalPosition": 55,
+              "body": "AFAICS, \"canonical\" is sufficient here, and this is to the point: the rule is about uniqueness of the value part.\r\nSince the values of the bits not covered by the mask do not matter for the constraint, any bit values can be considered valid there.\r\n",
+              "createdAt": "2025-10-13T18:25:19Z",
+              "updatedAt": "2025-10-13T18:35:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7GqHOs",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-13T20:12:36Z",
+          "updatedAt": "2025-10-13T20:12:36Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "I suggest deleting these lines.  This construct is needed when you define a new CLASS and is use to relate the CLASS definition to the actual ASN1 structure.  otherName as an object is already defined as \"otherName INSTANCE OF OTHER-NAME\" and that takes care of the cross mapping.\n\nThis set structure would only be needed if you were defining OTHER-NAME for the first time, or you were defining a structure that would be pulling things from a set of MACAddress.  Note that any OTHER-NAME in this set would have to have a different OID meaning not a MACAddress..... ",
+              "createdAt": "2025-10-13T20:12:36Z",
+              "updatedAt": "2025-10-13T20:12:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7GqM_b",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-13T20:24:21Z",
+          "updatedAt": "2025-10-13T20:24:21Z",
+          "comments": [
+            {
+              "originalPosition": 55,
+              "body": "I can live with it.  If you use the \"mask AND happens after 'name XOR value', this works EVEN if an implementer ignores the MUST NOT.   It doesn't actually work properly (again if the implementer ignores MN) if you use the calculation you proposed earlier:\n\n   3. Perform a bitwise AND operation of the mask bit pattern\n       with the octets of the name value.\n\n   4. If and only if the result of step 3 equals the value bit pattern,\n       the name matches the constraint.\n\nE.g. [ff 00 00 03 00 00 ff 00 00 00 00 00] does not match [ff 00 00 00 00 02] using your scheme.\n\n[ff 00 00 00 00 00] & [ff 00 00 00 00 02] => [ff 00 00 00 00 00] ^= [ff 00 00 03 00 00].\n\nSo its both about canonicalization and getting a value that's valid in all situations.\n\nBut as I said - I can live with it.",
+              "createdAt": "2025-10-13T20:24:21Z",
+              "updatedAt": "2025-10-13T20:24:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7Gqgdy",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-13T21:01:13Z",
+          "updatedAt": "2025-10-13T21:01:13Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "Instead:\n\nA constraint that is represented as an OCTET STRING of exactly 12 octets is treated as a non-match for all macAddress values that are encoded using 8 octets. Likewise, a constraint that is represented as an OCTET STRING of exactly 16 octets is to macAddress values is treated as a non-match for all macAddress values that are encoded using 6 octets.  NameConstraints that want to affect both types of macAddress MUST provide individual constraints for each type.\n\nIf I only provide a EUI48 constraint, the current text seems to imply that there are no constraints on EUI64 addresses.  I don't think that is what you intended or what makes sense here.",
+              "createdAt": "2025-10-13T21:01:13Z",
+              "updatedAt": "2025-10-13T21:01:13Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
