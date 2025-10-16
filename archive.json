@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-14T01:47:11.460638+00:00",
+  "timestamp": "2025-10-16T01:48:58.337816+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -286,7 +286,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-10-12T01:05:51Z",
-      "updatedAt": "2025-10-13T21:01:13Z",
+      "updatedAt": "2025-10-15T08:34:12Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "58c9deee9fd835bceb8c1c3fe36881a4ef2d20c7",
@@ -301,9 +301,9 @@
         {
           "author": "DDvO",
           "authorAssociation": "NONE",
-          "body": "Well, Russ just pointed to this PR in response to what I just wrote on the LAMPS list, \r\nbut this PR so far does not actually address my points. In particular not (yet) this,\r\nwhich is a about clarifying the semantics of all-zero masks and making them more expressive/useful:\r\n\r\n>> Section 3.2:\r\n>>\r\n>> It may be worth noting that an all-zero\u00a0mask effectively means no constraint,\r\n>> at least when using the constraint in positive context, a permittedSubtrees field.\r\n>> AFAICS, by\u00a0default this would hold also when using this mask in an excludedSubtrees field.\r\n>>\r\n>> Yet one could also define that\r\n>> an all-zero mask in negative context means to exclude the given variant (either 6 or 8 octets) of MAC addresses.\r\n>> This way, it\u00a0could be expressed that only the other variant (i.e., having 8 or\u00a06 octets, respectively) is permitted.\r\n>\r\n\r\n[...] all-zero masks do already work, in a certain sense.\r\n\r\n* In positive contexts, they lead to \"pass all\" MAC addresses\u00a0of either 6 or 8 bytes length, depending on the length of the constraint. In other words, they mean the same as omitting them (i.e., no constraint given).\r\nMy point here is that this may be not entirely obvious to readers, so I suggest pointing this out **explicitly** in the spec.\r\n*  In negative contexts, with the\u00a0semantics defined so far, AFAICS, all-zero masks also lead to \"**pass all**\"\r\n    (or am I wrong on that? If so, please explain, also in the draft text).\r\n    This may be not what is desired from a specification point of view, and they could easily be misunderstood by users.\r\n    Therefore, also to enhance expressiveness of these constraints,\r\n    I suggest explicitly defining for negative contexts a different(!) semantics, namely:\r\n    an all-zero mask in\u00a0negative context means **rejection** of all MAC addresses of either 6 or 8 bytes length, depending on the length of the constraint.\r\n    This way, things would become very clear, and would add support for allowing **only** 8-byte or 6-byte MAC addresses, respectively. Could it be of interest to be able to express and use this type of constraint?",
+          "body": "Well, Russ just pointed to this PR in response to what I just wrote on the LAMPS list, \r\nbut this PR so far does not actually address my points. In particular not (yet) this,\r\nwhich is a about clarifying the semantics of all-zero masks and making them more expressive/useful:\r\n\r\n>> Section 3.2:\r\n>>\r\n>> It may be worth noting that an all-zero\u00a0mask effectively means no constraint,\r\n>> at least when using the constraint in positive context, a permittedSubtrees field.\r\n>> AFAICS, by\u00a0default this would hold also when using this mask in an excludedSubtrees field.\r\n>>\r\n>> Yet one could also define that\r\n>> an all-zero mask in negative context means to exclude the given variant (either 6 or 8 octets) of MAC addresses.\r\n>> This way, it\u00a0could be expressed that only the other variant (i.e., having 8 or\u00a06 octets, respectively) is permitted.\r\n>\r\n\r\n[...] all-zero masks do already work, in a certain sense.\r\n\r\n* In positive contexts, they lead to \"pass all\" MAC addresses\u00a0of either 6 or 8 bytes length, depending on the length of the constraint. In other words, they mean the same as omitting them (i.e., no constraint given).\r\nMy point here is that this may be not entirely obvious to readers, so I suggest pointing this out **explicitly** in the spec.\r\n*  ~In negative contexts, with the\u00a0semantics defined so far, AFAICS, all-zero masks also lead to \"**pass all**\"\r\n    (or am I wrong on that? If so, please explain, also in the draft text).\r\n    This may be not what is desired from a specification point of view, and they could easily be misunderstood by users.\r\n    Therefore, also to enhance expressiveness of these constraints,\r\n    I suggest explicitly defining for negative contexts a different(!) semantics, namely:\r\n    an all-zero mask in\u00a0negative context means **rejection** of all MAC addresses of either 6 or 8 bytes length, depending on the length of the constraint.\r\n    This way, things would become very clear, and would add support for allowing **only** 8-byte or 6-byte MAC addresses, respectively. Could it be of interest to be able to express and use this type of constraint?~",
           "createdAt": "2025-10-13T18:02:53Z",
-          "updatedAt": "2025-10-13T18:02:53Z"
+          "updatedAt": "2025-10-15T05:40:27Z"
         }
       ],
       "reviews": [
@@ -470,6 +470,146 @@
               "body": "Instead:\n\nA constraint that is represented as an OCTET STRING of exactly 12 octets is treated as a non-match for all macAddress values that are encoded using 8 octets. Likewise, a constraint that is represented as an OCTET STRING of exactly 16 octets is to macAddress values is treated as a non-match for all macAddress values that are encoded using 6 octets.  NameConstraints that want to affect both types of macAddress MUST provide individual constraints for each type.\n\nIf I only provide a EUI48 constraint, the current text seems to imply that there are no constraints on EUI64 addresses.  I don't think that is what you intended or what makes sense here.",
               "createdAt": "2025-10-13T21:01:13Z",
               "updatedAt": "2025-10-13T21:01:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7GuU5D",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T06:09:17Z",
+          "updatedAt": "2025-10-14T06:09:17Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "I can imagine that it's good to recommend using one or two constraints in the permittedSubtrees and avoid using them in excludedSubtrees.\r\n\r\nYet I do not believe that the constraints in excludedSubtrees are in general not needed.\r\nFor example, there may be the (rare) case the one wants to express that for a certain portion of the MAC address bits, a certain pattern is required (for which positive constraints are needed) while for some other portion of the MAC address bits, a certain pattern is forbidden - to express this, negative constraints are needed in addition.",
+              "createdAt": "2025-10-14T06:09:17Z",
+              "updatedAt": "2025-10-14T06:10:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7GuV7f",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T06:11:18Z",
+          "updatedAt": "2025-10-14T06:11:18Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "(Oops, I was typing and sending too fast, my original comment here contained a serious mistake, now corrected by editing it.)",
+              "createdAt": "2025-10-14T06:11:18Z",
+              "updatedAt": "2025-10-14T06:11:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7G7CPa",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T20:30:36Z",
+          "updatedAt": "2025-10-14T20:30:36Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "Hi David - \n\nDoesn't actually work.  A given excludedSubtree is not mated to any specific permittedSubtree.  The name acceptance logic is something like:\n\nif (excludedSubtrees exist) {\n  if (any excludedSubtrees match the name) THEN {\n     reject;\n  } \n}\nif (includedSubtrees exist) {\n   if (any includedSubtrees match the name) then {\n     accept;\n   } \n  reject;\n}\naccept;\n\nMike",
+              "createdAt": "2025-10-14T20:30:36Z",
+              "updatedAt": "2025-10-14T20:30:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7G7NGZ",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T20:41:11Z",
+          "updatedAt": "2025-10-14T20:41:11Z",
+          "comments": [
+            {
+              "originalPosition": 57,
+              "body": "I think this para and the next need to be removed.   This mostly describes how NameConstraint processing works in general.  And its probably wrong as well.  If a name matches ANY excludedSubtree entry the certificate is invalid, regardless of whether or not it also exists in an permittedSubtree entry.  \n\nIn any event  -> s/trusted/considered valid/ if you do keep it and move to the nameconstraint processing section instead.  Also, uses \"matches the constraint\" to replace from \"... the masked bits (masked ....\" to the end of the sentence in both paragraphs.",
+              "createdAt": "2025-10-14T20:41:11Z",
+              "updatedAt": "2025-10-14T20:44:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7HARmW",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-15T07:11:20Z",
+          "updatedAt": "2025-10-15T07:11:21Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "Thank you for explaining the overall constraint exclusion/matching semantics.\r\nNot the most intuitive thing to me, but it is as it is.\r\n\r\nNow I see that, strictly speaking, having only positive or only negative constrains would be sufficient here \r\nbecause the range of all possible MAC addresses is finite, such that (at least in theory) they can all be enumerated.\r\n\r\nStill, there are cases where a combination of MACAddress constraints in excludedSubtrees and includedSubtrees can be useful, namely when the portion of bits in the negative constraints is different from the portion of bits in positive constrains and these portions do not overlap for a somewhat larger number of bit positions.\r\n\r\nMaking my above example fully concrete, here is a simple one:\r\n* excluded: MAC addresses where the last octet is 0x00\r\n* included: MAC addresses where the but-last octet is 0xff\r\n\r\nThis allows 0x..00ff01, 0x..00ff02, ..., 0x..00ffff, 0x..01ff01, ...\r\nbut forbids 0x..000000, 0x..000100, ..., 0x..00ff00, 0x..01ff00, ...\r\n\r\nThis can be expressed concisely by combining one positive and one negative constraint,\r\nbut when using only positive constrains or only negative ones, 256 constraints would be required, which makes it more or less non-practical. (Things would get even worse with larger portions of bits).\r\n\r\n",
+              "createdAt": "2025-10-15T07:11:20Z",
+              "updatedAt": "2025-10-15T07:11:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7HBD6a",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-15T08:02:24Z",
+          "updatedAt": "2025-10-15T08:02:25Z",
+          "comments": [
+            {
+              "originalPosition": 57,
+              "body": "I meanwhile see and agree that there is some overlap with the general NameConstraint semantics and machinery.\r\nSo no need to describe here the specific effects in positive (permittedSubtrees) and negative (excludedSubtree) contexts.\r\nBeyond this, I also confirm that in the way it is described in v01, where the positive and negative contexts are described as if they were independent, the text is partly inconsistent with the overall procedure implied by RFC 5280 and summarized in https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/4#discussion_r2430375654.\r\nSo part of it must be either corrected or left out, where I agree to prefer the latter.\r\n\r\nYet what still needs to be specified here what is common between the two (permittedSubtrees and excludedSubtree) application contexts, e.g.:\r\n\r\n_A MACAddress name of a specific identifier type (i.e., either EUI-48 or EUI-64) matches a constraint on the same identifier type (EUI-48 or EUI-64) when the masked bits (according to the bits set in the \"mask bit pattern\") of the address value are binary equal to the \"value bit pattern\" (at the same bit positions). It does not match any constraint on the other identifier type (i.e., EUI-64 or EUI-48, respectively)._",
+              "createdAt": "2025-10-15T08:02:25Z",
+              "updatedAt": "2025-10-15T09:06:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7HBm7x",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-15T08:34:12Z",
+          "updatedAt": "2025-10-15T08:34:12Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "I meanwhile believe to understand the intended meaning and thus agree here.\r\n\r\nFor a text suggestion covering this and other aspects in a succinct way, see the last paragraph of https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/4#discussion_r2431525489.",
+              "createdAt": "2025-10-15T08:34:12Z",
+              "updatedAt": "2025-10-15T08:34:13Z"
             }
           ]
         }
