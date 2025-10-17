@@ -1054,7 +1054,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Housley, et al.</td>
-<td class="center">Expires 15 April 2026</td>
+<td class="center">Expires 20 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1067,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-housley-lamps-macaddress-on-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-12" class="published">12 October 2025</time>
+<time datetime="2025-10-17" class="published">17 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-15">15 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-20">20 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1134,7 +1134,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 15 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 20 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1251,7 +1251,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-macaddress-othername">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-macaddress-othername" class="section-name selfRef">MACAddress otherName</a>
       </h2>
-<p id="section-3-1">The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1). The name form has variants to convey a EUI-48 as an OCTET STRING comprising of 6 octets, or a EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit mask of the constraint, and the second set of N octets defines the bit pattern that the address must match for the asserted bits in the mask.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1). The name form has variants to convey a EUI-48 as an OCTET STRING comprising of 6 octets, or a EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">The following sub-sections describe how to encode EUI-48 and EUI-64 values and their corresponding constraints.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="encoding-a-macaddress-as-an-alternative-name">
 <section id="section-3.1">
@@ -1277,8 +1277,6 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         </ol>
 <p id="section-3.2-3">The bit patterns encoded in both the value bit pattern and mask bit pattern are encoded with the most significant bit encoded first ("big-endian" or "left-to-right" encoding).<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">If a bit is not asserted in the mask bit pattern, then the CA <span class="bcp14">MUST NOT</span> assert the corresponding bit in the value bit pattern. This rule ensures that a canonical encoding is used for a given mask bit pattern and value bit pattern.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
-<p id="section-3.2-5">When a constraint is included in the <code>permittedSubtrees</code> field of a Name Constraints extension, certificates containing a MACAddress name form of the specific identifier type (EUI-48 or EUI-64) that are issued by the Certification Authority are trusted only when the masked bits (masked according to the "mask bit pattern") of the value are binary equal to the "value bit pattern".<a href="#section-3.2-5" class="pilcrow">¶</a></p>
-<p id="section-3.2-6">When a constraint is included in the <code>excludedSubtrees</code> field of a Name Constraints extension, certificates containing a MACAddress name form of the specific identifier type (EUI-48 or EUI-64) that are issued by the Certification Authority are trusted only when the masked bits (masked according to the "mask bit pattern") of the value are not binary equal to the pattern.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="generation-and-validation-rules">
@@ -1298,26 +1296,31 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-name-constraints-processing" class="section-name selfRef">Name Constraints Processing</a>
         </h3>
 <p id="section-3.4-1">The MACAddress otherName follows the general rules for otherName constraints in RFC 5280, Section 4.2.1.10. A name constraints extension <span class="bcp14">MAY</span> impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.4-2">A constraint that is represented as an OCTET STRING of exactly 12 octets is relevant only to <code>macAddress</code> values that are encoded using 6 octets; such a constraint is ignored for <code>macAddress</code> values that are encoded using 8 octets. Likewise, a constraint that is represented as an OCTET STRING of exactly 16 octets is relevant only to <code>macAddress</code> values that are encoded using 8 octets; such a constraint is ignored for <code>macAddress</code> values that are encoded using 6 octets.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
-<p id="section-3.4-3">To determine if a constraint matches a given name value, the certificate-consuming application performs the following algorithm:<a href="#section-3.4-3" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-3.4-4">
-<li id="section-3.4-4.1">
-            <p id="section-3.4-4.1.1">Extract the value bit pattern from the upper (big-endian) N octets of the constraint value, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.<a href="#section-3.4-4.1.1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">To determine if a constraint matches a given name value, the certificate-consuming application performs the following algorithm:<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.4-3">
+<li id="section-3.4-3.1">
+            <p id="section-3.4-3.1.1">If the name value is 6 octets (representing an EUI-48 value) and the constraint value is 16 octets (representing an EUI-64 constraint), then the name does not match the constraint.<a href="#section-3.4-3.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.4-4.2">
-            <p id="section-3.4-4.2.1">Extract the mask bit pattern from the lower (big-endian) N octets of the constraint value, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.<a href="#section-3.4-4.2.1" class="pilcrow">¶</a></p>
+          <li id="section-3.4-3.2">
+            <p id="section-3.4-3.2.1">If the name value is 8 octets (representing an EUI-64 value) and the constraint value is 12 octets (representing an EUI-48 constraint), then the name does not match the constraint.<a href="#section-3.4-3.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.4-4.3">
-            <p id="section-3.4-4.3.1">Perform an exclusive OR (XOR) operation with the value bit string extracted in step 1 and the octets of the name value.<a href="#section-3.4-4.3.1" class="pilcrow">¶</a></p>
+          <li id="section-3.4-3.3">
+            <p id="section-3.4-3.3.1">Extract the value bit pattern from the upper (big-endian) N octets of the constraint value, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.<a href="#section-3.4-3.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.4-4.4">
-            <p id="section-3.4-4.4.1">Perform a bitwise AND operation with the bit string calculated in step 3 and the mask bit pattern.<a href="#section-3.4-4.4.1" class="pilcrow">¶</a></p>
+          <li id="section-3.4-3.4">
+            <p id="section-3.4-3.4.1">Extract the mask bit pattern from the lower (big-endian) N octets of the constraint value, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.<a href="#section-3.4-3.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.4-4.5">
-            <p id="section-3.4-4.5.1">If the result of step 4 is a bit string consisting of entirely zeros, then the name matches the constraint. Conversely, if the result of the operation is a bit string with at least one bit asserted, then the name does not match the constraint.<a href="#section-3.4-4.5.1" class="pilcrow">¶</a></p>
+          <li id="section-3.4-3.5">
+            <p id="section-3.4-3.5.1">Perform an exclusive OR (XOR) operation with the value bit string extracted in step 3 and the octets of the name value.<a href="#section-3.4-3.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-3.4-3.6">
+            <p id="section-3.4-3.6.1">Perform a bitwise AND operation with the bit string calculated in step 5 and the mask bit pattern.<a href="#section-3.4-3.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-3.4-3.7">
+            <p id="section-3.4-3.7.1">If the result of step 6 is a bit string consisting of entirely zeros, then the name matches the constraint. Conversely, if the result of the operation is a bit string with at least one bit asserted, then the name does not match the constraint.<a href="#section-3.4-3.7.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-3.4-5">Implementations are not required to implement this algorithm, but <span class="bcp14">MUST</span> calculate an identical result to this algorithm for a given set of inputs.<a href="#section-3.4-5" class="pilcrow">¶</a></p>
+<p id="section-3.4-4">Implementations are not required to implement this algorithm, but <span class="bcp14">MUST</span> calculate an identical result to this algorithm for a given set of inputs.<a href="#section-3.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1456,7 +1459,7 @@ otherName with value 00‑24‑98‑7B‑19‑02:<a href="#section-7.1-1" class=
         <h3 id="name-eui-48-constraint-for-unive">
 <a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-eui-48-constraint-for-unive" class="section-name selfRef">EUI-48 constraint for universal, unicast addresses</a>
         </h3>
-<p id="section-7.3-1">The first octet of a MAC address contains two flag bits.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.3-1">The first octet of a MAC address contains two flag bits. IEEE bit numbering has bit '0' as the least significant bit of the octet.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.3-2.1">
             <p id="section-7.3-2.1.1">I/G bit (bit 0) – 0 = unicast, 1 = multicast.  Multicast prefixes are never OUIs.<a href="#section-7.3-2.1.1" class="pilcrow">¶</a></p>
