@@ -70,7 +70,7 @@ Deployments that use X.509 certificates to identify a device by a Media Access C
 
 # MACAddress otherName
 
-The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1). The name form has variants to convey a EUI-48 as an OCTET STRING comprising of 6 octets, or a EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit mask of the constraint, and the second set of N octets defines the bit pattern that the address must match for the asserted bits in the mask.
+The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1). The name form has variants to convey a EUI-48 as an OCTET STRING comprising of 6 octets, or a EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.
 
 The following sub-sections describe how to encode EUI-48 and EUI-64 values and their corresponding constraints.
 
@@ -89,10 +89,6 @@ The bit patterns encoded in both the value bit pattern and mask bit pattern are 
 
 If a bit is not asserted in the mask bit pattern, then the CA MUST NOT assert the corresponding bit in the value bit pattern. This rule ensures that a canonical encoding is used for a given mask bit pattern and value bit pattern.
 
-When a constraint is included in the `permittedSubtrees` field of a Name Constraints extension, certificates containing a MACAddress name form of the specific identifier type (EUI-48 or EUI-64) that are issued by the Certification Authority are trusted only when the masked bits (masked according to the "mask bit pattern") of the value are binary equal to the "value bit pattern".
-
-When a constraint is included in the `excludedSubtrees` field of a Name Constraints extension, certificates containing a MACAddress name form of the specific identifier type (EUI-48 or EUI-64) that are issued by the Certification Authority are trusted only when the masked bits (masked according to the "mask bit pattern") of the value are not binary equal to the pattern.
-
 ## Generation and Validation Rules
 
 A certificate MAY include one or more MACAddress otherName values if and only if the subject device owns (or is expected to own) the corresponding MAC address for the certificate lifetime. MAC addresses SHOULD NOT appear in more than one valid certificate issued by the same Certification Authority (CA) at the same time, unless different layer‑2 interfaces share a public key.
@@ -107,18 +103,17 @@ Self‑signed certificates that carry a MACAddress otherName SHOULD include the 
 
 The MACAddress otherName follows the general rules for otherName constraints in RFC 5280, Section 4.2.1.10. A name constraints extension MAY impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress.
 
-A constraint that is represented as an OCTET STRING of exactly 12 octets is relevant only to `macAddress` values that are encoded using 6 octets; such a constraint is ignored for `macAddress` values that are encoded using 8 octets. Likewise, a constraint that is represented as an OCTET STRING of exactly 16 octets is relevant only to `macAddress` values that are encoded using 8 octets; such a constraint is ignored for `macAddress` values that are encoded using 6 octets.
-
 To determine if a constraint matches a given name value, the certificate-consuming application performs the following algorithm:
 
-1. Extract the value bit pattern from the upper (big-endian) N octets of the constraint value, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.
-2. Extract the mask bit pattern from the lower (big-endian) N octets of the constraint value, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.
-3. Perform an exclusive OR (XOR) operation with the value bit string extracted in step 1 and the octets of the name value.
-4. Perform a bitwise AND operation with the bit string calculated in step 3 and the mask bit pattern.
-5. If the result of step 4 is a bit string consisting of entirely zeros, then the name matches the constraint. Conversely, if the result of the operation is a bit string with at least one bit asserted, then the name does not match the constraint.
+1. If the name value is 6 octets (representing an EUI-48 value) and the constraint value is 16 octets (representing an EUI-64 constraint), then the name does not match the constraint.
+2. If the name value is 8 octets (representing an EUI-64 value) and the constraint value is 12 octets (representing an EUI-48 constraint), then the name does not match the constraint.
+3. Extract the value bit pattern from the upper (big-endian) N octets of the constraint value, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.
+4. Extract the mask bit pattern from the lower (big-endian) N octets of the constraint value, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.
+5. Perform an exclusive OR (XOR) operation with the value bit string extracted in step 3 and the octets of the name value.
+6. Perform a bitwise AND operation with the bit string calculated in step 5 and the mask bit pattern.
+7. If the result of step 6 is a bit string consisting of entirely zeros, then the name matches the constraint. Conversely, if the result of the operation is a bit string with at least one bit asserted, then the name does not match the constraint.
 
 Implementations are not required to implement this algorithm, but MUST calculate an identical result to this algorithm for a given set of inputs.
-
 
 # Security Considerations
 
@@ -218,7 +213,7 @@ An EUI‑64 example (AC‑DE‑48‑00‑11‑22‑33‑44):
 
 ## EUI-48 constraint for universal, unicast addresses
 
-The first octet of a MAC address contains two flag bits.
+The first octet of a MAC address contains two flag bits. IEEE bit numbering has bit '0' as the least significant bit of the octet.
 
 - I/G bit (bit 0) – 0 = unicast, 1 = multicast.  Multicast prefixes are never OUIs.
 - U/L bit (bit 1) – 0 = universal (IEEE‑assigned), 1 = local.
