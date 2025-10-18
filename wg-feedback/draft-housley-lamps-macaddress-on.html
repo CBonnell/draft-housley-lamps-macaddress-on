@@ -12,25 +12,24 @@
 <meta content="
        This document defines a new otherName for inclusion in the X.509 Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to bind a layer‑2 interface identifier to a public key certificate. Additionally, this document defines how constraints on this name form can be encoded and processed in the X.509 Name Constraints extension. 
     " name="description">
-<meta content="xml2rfc 3.30.2" name="generator">
+<meta content="xml2rfc 3.31.0" name="generator">
 <meta content="MACsec" name="keyword">
 <meta content="802.1AE" name="keyword">
 <meta content="X.509" name="keyword">
 <meta content="SubjectAltName" name="keyword">
 <meta content="draft-housley-lamps-macaddress-on-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.2
-    Python 3.12.11
+  xml2rfc 3.31.0
+    Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.1
-    platformdirs 4.4.0
+    platformdirs 4.5.0
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.5
-    setuptools 80.9.0
     wcwidth 0.2.14
 -->
 <link href="draft-housley-lamps-macaddress-on.xml" rel="alternate" type="application/rfc+xml">
@@ -1054,7 +1053,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Housley, et al.</td>
-<td class="center">Expires 20 April 2026</td>
+<td class="center">Expires 21 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-housley-lamps-macaddress-on-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-17" class="published">17 October 2025</time>
+<time datetime="2025-10-18" class="published">18 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-20">20 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-21">21 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1134,7 +1133,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1296,19 +1295,19 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-name-constraints-processing" class="section-name selfRef">Name Constraints Processing</a>
         </h3>
 <p id="section-3.4-1">The MACAddress otherName follows the general rules for otherName constraints in RFC 5280, Section 4.2.1.10. A name constraints extension <span class="bcp14">MAY</span> impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.4-2">To determine if a constraint matches a given name value, the certificate-consuming application performs the following algorithm:<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">To determine if a constraint matches a given name, the certificate-consuming application performs the following algorithm:<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3.4-3">
 <li id="section-3.4-3.1">
-            <p id="section-3.4-3.1.1">If the name value is 6 octets (representing an EUI-48 value) and the constraint value is 16 octets (representing an EUI-64 constraint), then the name does not match the constraint.<a href="#section-3.4-3.1.1" class="pilcrow">¶</a></p>
+            <p id="section-3.4-3.1.1">If the name is 6 octets (representing an EUI-48 value) and the constraint is 16 octets (representing an EUI-64 constraint), then the name does not match the constraint.<a href="#section-3.4-3.1.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-3.4-3.2">
-            <p id="section-3.4-3.2.1">If the name value is 8 octets (representing an EUI-64 value) and the constraint value is 12 octets (representing an EUI-48 constraint), then the name does not match the constraint.<a href="#section-3.4-3.2.1" class="pilcrow">¶</a></p>
+            <p id="section-3.4-3.2.1">If the name is 8 octets (representing an EUI-64 value) and the constraint is 12 octets (representing an EUI-48 constraint), then the name does not match the constraint.<a href="#section-3.4-3.2.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-3.4-3.3">
-            <p id="section-3.4-3.3.1">Extract the value bit pattern from the upper (big-endian) N octets of the constraint value, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.<a href="#section-3.4-3.3.1" class="pilcrow">¶</a></p>
+            <p id="section-3.4-3.3.1">Extract the value bit pattern from the upper (big-endian) N octets of the constraint, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.<a href="#section-3.4-3.3.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-3.4-3.4">
-            <p id="section-3.4-3.4.1">Extract the mask bit pattern from the lower (big-endian) N octets of the constraint value, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.<a href="#section-3.4-3.4.1" class="pilcrow">¶</a></p>
+            <p id="section-3.4-3.4.1">Extract the mask bit pattern from the lower (big-endian) N octets of the constraint, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.<a href="#section-3.4-3.4.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-3.4-3.5">
             <p id="section-3.4-3.5.1">Perform an exclusive OR (XOR) operation with the value bit string extracted in step 3 and the octets of the name value.<a href="#section-3.4-3.5.1" class="pilcrow">¶</a></p>
@@ -1320,7 +1319,11 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <p id="section-3.4-3.7.1">If the result of step 6 is a bit string consisting of entirely zeros, then the name matches the constraint. Conversely, if the result of the operation is a bit string with at least one bit asserted, then the name does not match the constraint.<a href="#section-3.4-3.7.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-3.4-4">Implementations are not required to implement this algorithm, but <span class="bcp14">MUST</span> calculate an identical result to this algorithm for a given set of inputs.<a href="#section-3.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.4-4">The algorithm can be alternatively expressed as:<a href="#section-3.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.4-5"><code>
+2 * length (name) == length (constraint) &amp;&amp; ((constraint.value_bit_pattern ^ name) &amp; constraint.mask_bit_pattern) == 0
+</code><a href="#section-3.4-5" class="pilcrow">¶</a></p>
+<p id="section-3.4-6">Implementations are not required to implement this algorithm, but <span class="bcp14">MUST</span> calculate an identical result to this algorithm for a given set of inputs.<a href="#section-3.4-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

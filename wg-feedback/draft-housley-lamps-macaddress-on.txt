@@ -5,12 +5,12 @@
 Limited Additional Mechanisms for PKIX and SMIME              R. Housley
 Internet-Draft                                            Vigil Security
 Intended status: Informational                                C. Bonnell
-Expires: 20 April 2026                                          DigiCert
+Expires: 21 April 2026                                          DigiCert
                                                                J. Mandel
                                                                   AKAYLA
                                                                 T. Okubo
                                                       Penguin Securities
-                                                         17 October 2025
+                                                         18 October 2025
 
 
        Media Access Control (MAC) Addresses in X.509 Certificates
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 April 2026.
+   This Internet-Draft will expire on 21 April 2026.
 
 Copyright Notice
 
@@ -201,24 +201,24 @@ Table of Contents
    extension MAY impose permittedSubtrees and excludedSubtrees on
    id-on-MACAddress.
 
-   To determine if a constraint matches a given name value, the
-   certificate-consuming application performs the following algorithm:
+   To determine if a constraint matches a given name, the certificate-
+   consuming application performs the following algorithm:
 
-   1.  If the name value is 6 octets (representing an EUI-48 value) and
-       the constraint value is 16 octets (representing an EUI-64
-       constraint), then the name does not match the constraint.
+   1.  If the name is 6 octets (representing an EUI-48 value) and the
+       constraint is 16 octets (representing an EUI-64 constraint), then
+       the name does not match the constraint.
 
-   2.  If the name value is 8 octets (representing an EUI-64 value) and
-       the constraint value is 12 octets (representing an EUI-48
-       constraint), then the name does not match the constraint.
+   2.  If the name is 8 octets (representing an EUI-64 value) and the
+       constraint is 12 octets (representing an EUI-48 constraint), then
+       the name does not match the constraint.
 
    3.  Extract the value bit pattern from the upper (big-endian) N
-       octets of the constraint value, where N is "6" for EUI-48
-       identifiers and "8" for EUI-64 identifiers.
+       octets of the constraint, where N is "6" for EUI-48 identifiers
+       and "8" for EUI-64 identifiers.
 
    4.  Extract the mask bit pattern from the lower (big-endian) N octets
-       of the constraint value, where N is "6" for EUI-48 identifiers
-       and "8" for EUI-64 identifiers.
+       of the constraint, where N is "6" for EUI-48 identifiers and "8"
+       for EUI-64 identifiers.
 
    5.  Perform an exclusive OR (XOR) operation with the value bit string
        extracted in step 3 and the octets of the name value.
@@ -230,6 +230,12 @@ Table of Contents
        zeros, then the name matches the constraint.  Conversely, if the
        result of the operation is a bit string with at least one bit
        asserted, then the name does not match the constraint.
+
+   The algorithm can be alternatively expressed as:
+
+   2 * length (name) == length (constraint) &&
+   ((constraint.value_bit_pattern ^ name) & constraint.mask_bit_pattern)
+   == 0
 
    Implementations are not required to implement this algorithm, but
    MUST calculate an identical result to this algorithm for a given set
