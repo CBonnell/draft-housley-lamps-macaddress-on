@@ -103,15 +103,21 @@ Self‑signed certificates that carry a MACAddress otherName SHOULD include the 
 
 The MACAddress otherName follows the general rules for otherName constraints in RFC 5280, Section 4.2.1.10. A name constraints extension MAY impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress.
 
-To determine if a constraint matches a given name value, the certificate-consuming application performs the following algorithm:
+To determine if a constraint matches a given name, the certificate-consuming application performs the following algorithm:
 
-1. If the name value is 6 octets (representing an EUI-48 value) and the constraint value is 16 octets (representing an EUI-64 constraint), then the name does not match the constraint.
-2. If the name value is 8 octets (representing an EUI-64 value) and the constraint value is 12 octets (representing an EUI-48 constraint), then the name does not match the constraint.
-3. Extract the value bit pattern from the upper (big-endian) N octets of the constraint value, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.
-4. Extract the mask bit pattern from the lower (big-endian) N octets of the constraint value, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.
+1. If the name is 6 octets (representing an EUI-48 value) and the constraint is 16 octets (representing an EUI-64 constraint), then the name does not match the constraint.
+2. If the name is 8 octets (representing an EUI-64 value) and the constraint is 12 octets (representing an EUI-48 constraint), then the name does not match the constraint.
+3. Extract the value bit pattern from the upper (big-endian) N octets of the constraint, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.
+4. Extract the mask bit pattern from the lower (big-endian) N octets of the constraint, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.
 5. Perform an exclusive OR (XOR) operation with the value bit string extracted in step 3 and the octets of the name value.
 6. Perform a bitwise AND operation with the bit string calculated in step 5 and the mask bit pattern.
 7. If the result of step 6 is a bit string consisting of entirely zeros, then the name matches the constraint. Conversely, if the result of the operation is a bit string with at least one bit asserted, then the name does not match the constraint.
+
+The algorithm can be alternatively expressed as:
+
+```
+2 * length (name) == length (constraint) && ((constraint.value_bit_pattern ^ name) & constraint.mask_bit_pattern) == 0
+```
 
 Implementations are not required to implement this algorithm, but MUST calculate an identical result to this algorithm for a given set of inputs.
 
