@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-16T01:48:58.337816+00:00",
+  "timestamp": "2025-10-19T02:00:06.212980+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -286,13 +286,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-10-12T01:05:51Z",
-      "updatedAt": "2025-10-15T08:34:12Z",
+      "updatedAt": "2025-10-18T07:53:01Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "58c9deee9fd835bceb8c1c3fe36881a4ef2d20c7",
       "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "headRefName": "wg-feedback",
-      "headRefOid": "0e190c0129ee63fc99e299d01a7113f9b79a8f54",
+      "headRefOid": "e24f15bdc5758a5ccee929f9f1b8d63415953810",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -304,6 +304,20 @@
           "body": "Well, Russ just pointed to this PR in response to what I just wrote on the LAMPS list, \r\nbut this PR so far does not actually address my points. In particular not (yet) this,\r\nwhich is a about clarifying the semantics of all-zero masks and making them more expressive/useful:\r\n\r\n>> Section 3.2:\r\n>>\r\n>> It may be worth noting that an all-zero\u00a0mask effectively means no constraint,\r\n>> at least when using the constraint in positive context, a permittedSubtrees field.\r\n>> AFAICS, by\u00a0default this would hold also when using this mask in an excludedSubtrees field.\r\n>>\r\n>> Yet one could also define that\r\n>> an all-zero mask in negative context means to exclude the given variant (either 6 or 8 octets) of MAC addresses.\r\n>> This way, it\u00a0could be expressed that only the other variant (i.e., having 8 or\u00a06 octets, respectively) is permitted.\r\n>\r\n\r\n[...] all-zero masks do already work, in a certain sense.\r\n\r\n* In positive contexts, they lead to \"pass all\" MAC addresses\u00a0of either 6 or 8 bytes length, depending on the length of the constraint. In other words, they mean the same as omitting them (i.e., no constraint given).\r\nMy point here is that this may be not entirely obvious to readers, so I suggest pointing this out **explicitly** in the spec.\r\n*  ~In negative contexts, with the\u00a0semantics defined so far, AFAICS, all-zero masks also lead to \"**pass all**\"\r\n    (or am I wrong on that? If so, please explain, also in the draft text).\r\n    This may be not what is desired from a specification point of view, and they could easily be misunderstood by users.\r\n    Therefore, also to enhance expressiveness of these constraints,\r\n    I suggest explicitly defining for negative contexts a different(!) semantics, namely:\r\n    an all-zero mask in\u00a0negative context means **rejection** of all MAC addresses of either 6 or 8 bytes length, depending on the length of the constraint.\r\n    This way, things would become very clear, and would add support for allowing **only** 8-byte or 6-byte MAC addresses, respectively. Could it be of interest to be able to express and use this type of constraint?~",
           "createdAt": "2025-10-13T18:02:53Z",
           "updatedAt": "2025-10-15T05:40:27Z"
+        },
+        {
+          "author": "mstjohns",
+          "authorAssociation": "NONE",
+          "body": "On Thu, Oct 16, 2025 at 15:50 Michael StJohns ***@***.***>\r\nwrote:\r\n\r\n> On 10/15/2025 03:11, David von Oheimb wrote:\r\n>\r\n> ***@***.**** commented on this pull request.\r\n> ------------------------------\r\n>\r\n> In draft-housley-lamps-macaddress-on.md\r\n> <https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/4#discussion_r2431381022>\r\n> :\r\n>\r\n> >\r\n>  When a constraint is included in the `permittedSubtrees` field of a Name Constraints extension, certificates containing a MACAddress name form of the specific identifier type (EUI-48 or EUI-64) that are issued by the Certification Authority are trusted only when the masked bits (masked according to the \"mask bit pattern\") of the value are binary equal to the \"value bit pattern\".\r\n>\r\n> -When a constraint is included in the `excludedSubtrees` field of a Name Constraints extension, certificates containing a MACAddress name form of the specific identifier type (EUI-48 or EUI-64) that are issued by the Certification Authority are trusted only when the masked bits (masked according ot the \"mask bit pattern\") of the value are not binary equal to the pattern.\r\n> +When a constraint is included in the `excludedSubtrees` field of a Name Constraints extension, certificates containing a MACAddress name form of the specific identifier type (EUI-48 or EUI-64) that are issued by the Certification Authority are trusted only when the masked bits (masked according to the \"mask bit pattern\") of the value are not binary equal to the pattern.\r\n>\r\n>\r\n> Thank you for explaining the overall constraint exclusion/matching\r\n> semantics.\r\n> Not the most intuitive thing to me, but it is as it is.\r\n>\r\n> Now I see that, strictly speaking, having only positive or only negative\r\n> constrains would be sufficient here\r\n> because the range of all possible MAC addresses is finite, such that (at\r\n> least in theory) they can all be enumerated.\r\n>\r\n> Still, there are cases where a combination of MACAddress constraints in\r\n> excludedSubtrees and includedSubtrees can be useful, namely when the\r\n> portion of bits in the negative constraints is different from the portion\r\n> of bits in positive constrains and these portions do not overlap for a\r\n> somewhat larger number of bit positions.\r\n>\r\n> Making my above example fully concrete, here is a simple one:\r\n>\r\n>    - excluded: MAC addresses where the last octet is 0x00\r\n>    - included: MAC addresses where the but-last octet is 0xff\r\n>\r\n> This allows 0x..00ff01, 0x..00ff02, ..., 0x..00ffff, 0x..01ff01, ...\r\n> but forbids 0x..000000, 0x..000100, ..., 0x..00ff00, 0x..01ff00, ...\r\n>\r\n> This can be expressed concisely by combining one positive and one negative\r\n> constraint,\r\n> but when using only positive constrains or only negative ones, 256\r\n> constraints would be required, which makes it more or less non-practical.\r\n> (Things would get even worse with larger portions of bits).\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/4#discussion_r2431381022>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AB5TYEONIZ5JEK5UNKBOSA33XXXS3AVCNFSM6AAAAACI6BQO7GVHI2DSMVQWIX3LMV43YUDVNRWFEZLROVSXG5CSMV3GSZLXHMZTGMZYG4ZTQMBXGA>\r\n> .\r\n> You are receiving this because you commented.Message ID:\r\n> <CBonnell/draft-housley-lamps-macaddress-on/pull/4/review/3338738070@\r\n> github.com>\r\n>\r\n> I did miss this case and you're right about the possible need to have both\r\n> includedSubtrees and excludedSubtrees.  I think that resolves my original\r\n> comment then.\r\n>\r\n> Just FYI - you can state this restriction with 7 includedSubtrees not 256\r\n> of them (looking at just the last two octets value/mask) - ff01/ffff,\r\n> ff02/ffff, ff04/ffff, ff08/ffff, ff10/ffff, ff20/ffff, ff40/ffff,\r\n> ff80/ffff.  \"Not zero in the last octet\" is equivalent to \"at least 1 bit\r\n> is set in the last octet\".\r\n>\r\n\r\nOops.  Each of these should have the mask part equal to the value part for\r\nthese two octets.  Sorry\r\n\r\n>\r\n",
+          "createdAt": "2025-10-16T20:05:55Z",
+          "updatedAt": "2025-10-16T20:05:55Z"
+        },
+        {
+          "author": "mstjohns",
+          "authorAssociation": "NONE",
+          "body": "With the exception of the outstanding ASN1 set of names question (which is a nit), this commit version resolves all of my comments.  ",
+          "createdAt": "2025-10-17T17:15:40Z",
+          "updatedAt": "2025-10-17T17:15:40Z"
         }
       ],
       "reviews": [
@@ -587,9 +601,9 @@
           "comments": [
             {
               "originalPosition": 57,
-              "body": "I meanwhile see and agree that there is some overlap with the general NameConstraint semantics and machinery.\r\nSo no need to describe here the specific effects in positive (permittedSubtrees) and negative (excludedSubtree) contexts.\r\nBeyond this, I also confirm that in the way it is described in v01, where the positive and negative contexts are described as if they were independent, the text is partly inconsistent with the overall procedure implied by RFC 5280 and summarized in https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/4#discussion_r2430375654.\r\nSo part of it must be either corrected or left out, where I agree to prefer the latter.\r\n\r\nYet what still needs to be specified here what is common between the two (permittedSubtrees and excludedSubtree) application contexts, e.g.:\r\n\r\n_A MACAddress name of a specific identifier type (i.e., either EUI-48 or EUI-64) matches a constraint on the same identifier type (EUI-48 or EUI-64) when the masked bits (according to the bits set in the \"mask bit pattern\") of the address value are binary equal to the \"value bit pattern\" (at the same bit positions). It does not match any constraint on the other identifier type (i.e., EUI-64 or EUI-48, respectively)._",
+              "body": "I meanwhile see and agree that there is some overlap with the general NameConstraint semantics and machinery.\r\nSo no need to describe here the specific effects in positive (permittedSubtrees) and negative (excludedSubtree) contexts.\r\nBeyond this, I also confirm that in the way it is described in v01, where the positive and negative contexts are described as if they were independent, the text is partly inconsistent with the overall procedure implied by RFC 5280 and summarized in https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/4#discussion_r2430375654.\r\nSo part of it must be either corrected or left out, where I agree to prefer the latter.\r\n\r\nYet still need to specify what is common between the two (permittedSubtrees and excludedSubtree) application contexts, e.g.:\r\n\r\n_A MACAddress name of a specific identifier type (i.e., either EUI-48 or EUI-64) matches a constraint on the same identifier type (EUI-48 or EUI-64) when the masked bits (according to the bits set in the \"mask bit pattern\") of the address value are binary equal to the \"value bit pattern\" (at the same bit positions). It does not match any constraint on the other identifier type (i.e., EUI-64 or EUI-48, respectively)._",
               "createdAt": "2025-10-15T08:02:25Z",
-              "updatedAt": "2025-10-15T09:06:15Z"
+              "updatedAt": "2025-10-16T17:35:20Z"
             }
           ]
         },
@@ -610,6 +624,306 @@
               "body": "I meanwhile believe to understand the intended meaning and thus agree here.\r\n\r\nFor a text suggestion covering this and other aspects in a succinct way, see the last paragraph of https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/4#discussion_r2431525489.",
               "createdAt": "2025-10-15T08:34:12Z",
               "updatedAt": "2025-10-15T08:34:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7HaINi",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-16T15:18:37Z",
+          "updatedAt": "2025-10-16T15:18:37Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "This approach is used in documents that build on the OTHER-NAME CLASS.  It defines a list of the new name forms to be merged with the ones defined elsewhere.\r\n\r\nFor example, RFC 5911 has the following to handle the other name definition from RFC 4108:\r\n\r\n~~~\r\n  FirmwareOtherNames OTHER-NAME ::= {\r\n          on-hardwareModuleName, ... }\r\n~~~\r\n\r\nIn short, This is following the example set by Jim Schaad.",
+              "createdAt": "2025-10-16T15:18:37Z",
+              "updatedAt": "2025-10-16T15:18:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7Hr_t9",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-17T12:50:46Z",
+          "updatedAt": "2025-10-17T12:50:46Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "I believe the conclusion here is that we allow constraints in both `permittedSubtrees` and `excludedSubtrees`.",
+              "createdAt": "2025-10-17T12:50:46Z",
+              "updatedAt": "2025-10-17T12:50:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7HsCuT",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-17T12:52:37Z",
+          "updatedAt": "2025-10-17T12:52:37Z",
+          "comments": [
+            {
+              "originalPosition": 55,
+              "body": "I prefer \"canonical\" over \"canonical and valid\" because setting non-significant bits in the value mask still works using the algorithm presented in the draft. I agree that it would be a bug if such a constraint value were applied to David's algorithm.",
+              "createdAt": "2025-10-17T12:52:37Z",
+              "updatedAt": "2025-10-17T12:52:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7HsEVX",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-17T12:53:35Z",
+          "updatedAt": "2025-10-17T12:53:35Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "I believe I address this in the latest commit.",
+              "createdAt": "2025-10-17T12:53:35Z",
+              "updatedAt": "2025-10-17T12:53:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7HsFpg",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-17T12:54:24Z",
+          "updatedAt": "2025-10-17T12:54:24Z",
+          "comments": [
+            {
+              "originalPosition": 57,
+              "body": "This should be addressed in the latest commit (just chopped it out because it was redundant and incorrect).",
+              "createdAt": "2025-10-17T12:54:24Z",
+              "updatedAt": "2025-10-17T12:54:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7HtrVr",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-17T14:32:05Z",
+          "updatedAt": "2025-10-17T14:32:05Z",
+          "comments": [
+            {
+              "originalPosition": 57,
+              "body": "Indeed, the removal of the two problematic paragraphs about the use in permittedSubtrees and excludedSubtree\r\ntogether with the insertion of\r\n> \r\n1. If the name value is 6 octets (representing an EUI-48 value) and the constraint value is 16 octets (representing an EUI-64 constraint), then the name does not match the constraint.\r\n2. If the name value is 8 octets (representing an EUI-64 value) and the constraint value is 12 octets (representing an EUI-48 constraint), then the name does not match the constraint.\r\n\r\nmakes the overall text correct and complete w.r.t. the intended semantics of matching.",
+              "createdAt": "2025-10-17T14:32:05Z",
+              "updatedAt": "2025-10-17T14:32:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7HtseR",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-17T14:33:22Z",
+          "updatedAt": "2025-10-17T14:33:22Z",
+          "comments": [
+            {
+              "originalPosition": 57,
+              "body": "As it stands now, the matching semantics is given in the 7-step procedure only.\r\nAs a reader, and likely even as an implementer, \r\nI would have preferred to have in addition a concise abstract definition like I suggested above:\r\n> A MACAddress name of a specific identifier type (i.e., either EUI-48 or EUI-64) matches a constraint on the same identifier type (EUI-48 or EUI-64) when the masked bits (according to the bits set in the \"mask bit pattern\") of the address value are binary equal to the \"value bit pattern\" (at the same bit positions). It does not match any constraint on the other identifier type (i.e., EUI-64 or EUI-48, respectively)\r\n\r\nWell, the choice is a matter of taste and pragmatics.",
+              "createdAt": "2025-10-17T14:33:22Z",
+              "updatedAt": "2025-10-17T14:33:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7HviIY",
+          "commit": {
+            "abbreviatedOid": "522d2e4"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-17T16:48:29Z",
+          "updatedAt": "2025-10-17T16:48:29Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "I wrote a response to this, but it didn't show up here.  I think Jim's original entry for FirmwareOtherNames was wrong and this is wrong.\n\nWhen you define a CLASS, and the associated ASN1 object, you parameterize the object using values from the class.  In our current models, we define a table of CLASS instantiations, and use that globally defined table (which is referenced in the object declaration) to lookup items used resolve the object definition.   That table generally ends up being defined as \"ClassTable SOME-CLASS ::= { ... }\".  If you later want to add a few specific items to that class table you can do \"ClassTable SOME-CLASS ::= { ..., SomeClassDef1, SomeClassDef2 }\"\n\nIn a few instances we do subcollections of various class definitions (e.g. DIGEST-ALGORITHM and DigestAlgorithmSet and MessageDigestAlgs) to group class definitions for specific purposes.\n\nBut that's not what's happening here.  We don't group \"on-hardwareModuleName\" with anything else, and we don't modify the generic set of all OTHER-NAME classes (which wasn't actually created....).\n\nIf you wanted to do \"OtherNameSet OTHER-NAME ::= { on-hardwareName, on-MacAddrss, ...} here, and change the definition in GeneralName from \"INSTANCE OF OTHER-NAME\" to a parameterized version of OtherName based on the 5280 definition, that would make more sense.  ",
+              "createdAt": "2025-10-17T16:48:29Z",
+              "updatedAt": "2025-10-17T16:48:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7Hvmrm",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-17T16:54:44Z",
+          "updatedAt": "2025-10-17T16:54:44Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "Just because we can come up with the logic for both permittedSubtrees and excludedSubtrees. Has anyone ever seen IPAddress name constraints used in both permittedSubtrees and excludedSubtrees?",
+              "createdAt": "2025-10-17T16:54:44Z",
+              "updatedAt": "2025-10-17T16:54:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7Hvy1N",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-17T17:13:36Z",
+          "updatedAt": "2025-10-17T17:13:36Z",
+          "comments": [
+            {
+              "originalPosition": 57,
+              "body": "I suggested pulling this because it felt ambiguous.  \"of a specific identifier type\" and \"same identifier type\" could be read to mean the specific OtherName in which case it was redundant, or a specific subtype of MACAddress - which AFAICT, hadn't been defined elsewhere (you used \"variants\" which isn't quite the same).  The other part was the description of the matching algorithm which had me reading it multiple times to figure out how it would translate to math.  Concise would have been \"2 * length (name) == length (constraint) &&  (constraint.value ^ address) & constraint.mask == 0\" ",
+              "createdAt": "2025-10-17T17:13:36Z",
+              "updatedAt": "2025-10-17T17:13:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7Hwaqt",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-17T18:02:16Z",
+          "updatedAt": "2025-10-17T18:02:17Z",
+          "comments": [
+            {
+              "originalPosition": 57,
+              "body": "This formula reads even better, very brief and precise! Please, add it.\r\nCould be as a note, or in my view even better as the definition of the constraint semantics, from which the given algorithm can be said to be derived. ",
+              "createdAt": "2025-10-17T18:02:16Z",
+              "updatedAt": "2025-10-17T18:20:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7HwtZy",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-17T18:23:33Z",
+          "updatedAt": "2025-10-17T18:23:34Z",
+          "comments": [
+            {
+              "originalPosition": 57,
+              "body": "Among others, from the formula it is immediate to see that an all-zero mask boils down to constraining the length/subtype only. ",
+              "createdAt": "2025-10-17T18:23:33Z",
+              "updatedAt": "2025-10-17T18:23:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7Hw4jA",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-17T18:33:57Z",
+          "updatedAt": "2025-10-17T18:33:57Z",
+          "comments": [
+            {
+              "originalPosition": 61,
+              "body": "Well, I have not seen this in the wild, \r\nbut who knows what people may do in their scenarios with IP/MAC address constraints since/when available.\r\n\r\nAt least I see little point in artificially limiting the expressiveness being offered here by default.\r\nAnd after the clarification that has been achieved now, it does not hurt that the MAC address constraints\r\n(by the virtue of permittedSubtrees and excludedSubtrees no more described here but in RFC 5280)\r\ncan be used in positive and/or negative contexts.\r\n",
+              "createdAt": "2025-10-17T18:33:57Z",
+              "updatedAt": "2025-10-18T07:49:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7H1g6n",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-18T07:00:07Z",
+          "updatedAt": "2025-10-18T07:00:08Z",
+          "comments": [
+            {
+              "originalPosition": 57,
+              "body": "Thanks, while I prefer the textual expression, I agree that having the concise expression would be beneficial to some readers.\r\n\r\nI added it.",
+              "createdAt": "2025-10-18T07:00:08Z",
+              "updatedAt": "2025-10-18T07:00:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7H1srT",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "DDvO",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-18T07:53:01Z",
+          "updatedAt": "2025-10-18T07:53:01Z",
+          "comments": [
+            {
+              "originalPosition": 57,
+              "body": "Thank you!\r\n\r\nReadability could be further enhanced by breaking up the line (which I suppose will be required anyway) this way:\r\n```\r\n2 * length(name) == length(constraint) && \r\n((constraint.value_bit_pattern ^ name) & constraint.mask_bit_pattern) == 0\r\n```",
+              "createdAt": "2025-10-18T07:53:01Z",
+              "updatedAt": "2025-10-18T07:53:01Z"
             }
           ]
         }
