@@ -5,12 +5,12 @@
 Limited Additional Mechanisms for PKIX and SMIME              R. Housley
 Internet-Draft                                            Vigil Security
 Intended status: Informational                                C. Bonnell
-Expires: 21 April 2026                                          DigiCert
+Expires: 23 April 2026                                          DigiCert
                                                                J. Mandel
                                                                   AKAYLA
                                                                 T. Okubo
                                                       Penguin Securities
-                                                         18 October 2025
+                                                         20 October 2025
 
 
        Media Access Control (MAC) Addresses in X.509 Certificates
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 April 2026.
+   This Internet-Draft will expire on 23 April 2026.
 
 Copyright Notice
 
