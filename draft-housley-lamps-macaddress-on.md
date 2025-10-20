@@ -116,7 +116,8 @@ To determine if a constraint matches a given name, the certificate-consuming app
 The algorithm can be alternatively expressed as:
 
 ```
-2 * length (name) == length (constraint) && ((constraint.value_bit_pattern ^ name) & constraint.mask_bit_pattern) == 0
+2 * length (name) == length (constraint) &&
+((constraint.value_bit_pattern ^ name) & constraint.mask_bit_pattern) == 0
 ```
 
 Implementations are not required to implement this algorithm, but MUST calculate an identical result to this algorithm for a given set of inputs.
