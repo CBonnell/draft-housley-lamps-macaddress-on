@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-19T02:00:06.212980+00:00",
+  "timestamp": "2025-10-21T01:50:56.584826+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -286,13 +286,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-10-12T01:05:51Z",
-      "updatedAt": "2025-10-18T07:53:01Z",
+      "updatedAt": "2025-10-20T12:17:43Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "58c9deee9fd835bceb8c1c3fe36881a4ef2d20c7",
       "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "headRefName": "wg-feedback",
-      "headRefOid": "e24f15bdc5758a5ccee929f9f1b8d63415953810",
+      "headRefOid": "eb75e1a8486d74a0c8501bd246f82270be7899b5",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
