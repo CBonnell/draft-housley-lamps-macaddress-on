@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-23T01:49:39.378213+00:00",
+  "timestamp": "2025-10-26T01:56:22.978614+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -286,7 +286,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-10-12T01:05:51Z",
-      "updatedAt": "2025-10-20T12:17:43Z",
+      "updatedAt": "2025-10-24T17:11:14Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "58c9deee9fd835bceb8c1c3fe36881a4ef2d20c7",
@@ -318,6 +318,20 @@
           "body": "With the exception of the outstanding ASN1 set of names question (which is a nit), this commit version resolves all of my comments.  ",
           "createdAt": "2025-10-17T17:15:40Z",
           "updatedAt": "2025-10-17T17:15:40Z"
+        },
+        {
+          "author": "mstjohns",
+          "authorAssociation": "NONE",
+          "body": "It won\u2019t harm anything, so it\u2019s not a blocker. I would be utterly surprised\r\nif anyone ever references it.\r\n\r\n That said, we should try and avoid this in the future.  It\u2019s somewhat\r\ncargo cult and fixing it would avoid possible errors in the future.\r\n\r\n\r\nOn Thu, Oct 23, 2025 at 16:07 Corey Bonnell ***@***.***>\r\nwrote:\r\n\r\n> ***@***.**** commented on this pull request.\r\n> ------------------------------\r\n>\r\n> In draft-housley-lamps-macaddress-on.md\r\n> <https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/4#discussion_r2457101228>\r\n> :\r\n>\r\n> >\r\n>\r\n> The authors discussed and believe that the best path is retaining this\r\n> definition. Although the definition may not be very useful, it is\r\n> consistent with previous documents that define OTHER-NAMEs.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/4#discussion_r2457101228>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AB5TYEPPSGIQUWZDJIEAN2T3ZEYPZAVCNFSM6AAAAACI6BQO7GVHI2DSMVQWIX3LMV43YUDVNRWFEZLROVSXG5CSMV3GSZLXHMZTGNZSGM4TGMBQGE>\r\n> .\r\n> You are receiving this because you commented.Message ID:\r\n> <CBonnell/draft-housley-lamps-macaddress-on/pull/4/review/3372393001@\r\n> github.com>\r\n>\r\n",
+          "createdAt": "2025-10-23T20:11:24Z",
+          "updatedAt": "2025-10-23T20:11:24Z"
+        },
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Jim Schaad did this to easily merge objects from multiple document to make an acceptable set.  I don't get the cargo cult comment.",
+          "createdAt": "2025-10-23T20:30:34Z",
+          "updatedAt": "2025-10-23T20:30:34Z"
         }
       ],
       "reviews": [
@@ -926,6 +940,39 @@
               "updatedAt": "2025-10-18T07:53:01Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7JAqIp",
+          "commit": {
+            "abbreviatedOid": "0e190c0"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-23T20:07:02Z",
+          "updatedAt": "2025-10-23T20:07:02Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "The authors discussed and believe that the best path is retaining this definition. Although the definition may not be very useful, it is consistent with previous documents that define OTHER-NAMEs.",
+              "createdAt": "2025-10-23T20:07:02Z",
+              "updatedAt": "2025-10-23T20:07:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7JBEz2",
+          "commit": {
+            "abbreviatedOid": "eb75e1a"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-23T20:27:34Z",
+          "updatedAt": "2025-10-23T20:27:34Z",
+          "comments": []
         }
       ]
     }
