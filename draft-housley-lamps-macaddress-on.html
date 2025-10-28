@@ -12,26 +12,25 @@
 <meta content="
        This document defines a new otherName for inclusion in the X.509 Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to bind a layer‑2 interface identifier to a public key certificate. Additionally, this document defines how constraints on this name form can be encoded and processed in the X.509 Name Constraints extension. 
     " name="description">
-<meta content="xml2rfc 3.30.2" name="generator">
+<meta content="xml2rfc 3.31.0" name="generator">
 <meta content="MACsec" name="keyword">
 <meta content="802.1AE" name="keyword">
 <meta content="X.509" name="keyword">
 <meta content="SubjectAltName" name="keyword">
 <meta content="draft-housley-lamps-macaddress-on-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.2
-    Python 3.12.11
+  xml2rfc 3.31.0
+    Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.1
-    platformdirs 4.4.0
+    platformdirs 4.5.0
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.5
-    setuptools 80.9.0
-    wcwidth 0.2.13
+    wcwidth 0.2.14
 -->
 <link href="draft-housley-lamps-macaddress-on.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1050,11 +1049,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Media Access Control (MAC) Addresses in </td>
-<td class="right">September 2025</td>
+<td class="right">October 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Housley, et al.</td>
-<td class="center">Expires 3 April 2026</td>
+<td class="center">Expires 1 May 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-housley-lamps-macaddress-on-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-09-30" class="published">30 September 2025</time>
+<time datetime="2025-10-28" class="published">28 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-03">3 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-05-01">1 May 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1134,7 +1133,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 1 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1210,7 +1209,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-eui-64-identifier" class="internal xref">EUI-64 identifier</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-eui-48-constraint-for-unive" class="internal xref">EUI-48 constraint for universal addresses</a></p>
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-eui-48-constraint-for-unive" class="internal xref">EUI-48 constraint for universal, unicast addresses</a></p>
 </li>
             </ul>
 </li>
@@ -1251,7 +1250,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-macaddress-othername">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-macaddress-othername" class="section-name selfRef">MACAddress otherName</a>
       </h2>
-<p id="section-3-1">The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1). The name form has variants to convey a EUI-48 as an OCTET STRING comprising of 6 octets, or a EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit mask of the constraint, and the second set of N octets defines the bit pattern that the address must match for the asserted bits in the mask.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1). The name form has variants to convey a EUI-48 as an OCTET STRING comprising of 6 octets, or a EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">The following sub-sections describe how to encode EUI-48 and EUI-64 values and their corresponding constraints.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="encoding-a-macaddress-as-an-alternative-name">
 <section id="section-3.1">
@@ -1269,16 +1268,14 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <p id="section-3.2-1">When the name form is included in the Name Constraints extension, the syntax consists of an OCTET STRING that is twice as long as the OCTET STRING representation of the address type being constrained. Within the OCTET STRING, two elements are encoded:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3.2-2">
 <li id="section-3.2-2.1">
-            <p id="section-3.2-2.1.1">The first N octets (where N is 6 for an EUI-48 constraint or 8 for an EUI-64 constraint) encodes the "mask bit pattern" of the constraint. Each bit that is asserted in the mask bit pattern indicates that the bit in the same position in the address is constrained by the second set of N octets.<a href="#section-3.2-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-2.1.1">The first set of N octets (where N is 6 for an EUI-48 constraint or 8 for an EUI-64 constraint) contains the "value bit pattern". This bit pattern encodes the bits that the masked address must contain to be considered a match.<a href="#section-3.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-3.2-2.2">
-            <p id="section-3.2-2.2.1">The second set of N octets contains the "value bit pattern". This bit pattern encodes the bits that the masked address must contain to be considered a match.<a href="#section-3.2-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-2.2.1">The second set of N octets encodes the "mask bit pattern" of the constraint. Each bit that is asserted in the mask bit pattern indicates that the bit in the same position in the address is constrained by the first set of N octets.<a href="#section-3.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-3.2-3">The bit patterns encoded in both the mask bit pattern and value bit pattern are encoded with the most significant bit encoded first ("big-endian" or "left-to-right" encoding).<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4">If a bit is not asserted in the mask bit pattern, then the CA <span class="bcp14">MUST NOT</span> assert the corresponding bit in the value bit pattern. This rule ensures that a distinguished encoding is used for a given mask bit pattern and value bit pattern.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
-<p id="section-3.2-5">When a constraint is included in the <code>permittedSubtrees</code> field of a Name Constraints extension, certificates containing a MACAddress name form of the specific identifier type (EUI-48 or EUI-64) that are issued by the Certification Authority are trusted only when the masked bits (masked according to the "mask bit pattern") of the value are binary equal to the "value bit pattern".<a href="#section-3.2-5" class="pilcrow">¶</a></p>
-<p id="section-3.2-6">When a constraint is included in the <code>excludedSubtrees</code> field of a Name Constraints extension, certificates containing a MACAddress name form of the specific identifier type (EUI-48 or EUI-64) that are issued by the Certification Authority are trusted only when the masked bits (masked according ot the "mask bit pattern") of the value are not binary equal to the pattern.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">The bit patterns encoded in both the value bit pattern and mask bit pattern are encoded with the most significant bit encoded first ("big-endian" or "left-to-right" encoding).<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-4">If a bit is not asserted in the mask bit pattern, then the CA <span class="bcp14">MUST NOT</span> assert the corresponding bit in the value bit pattern. This rule ensures that a canonical encoding is used for a given mask bit pattern and value bit pattern.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="generation-and-validation-rules">
@@ -1298,35 +1295,36 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-name-constraints-processing" class="section-name selfRef">Name Constraints Processing</a>
         </h3>
 <p id="section-3.4-1">The MACAddress otherName follows the general rules for otherName constraints in RFC 5280, Section 4.2.1.10. A name constraints extension <span class="bcp14">MAY</span> impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.4-2">A constraint that is represented as an OCTET STRING of exactly 12 octets is relevant only to <code>macAddress</code> values that are encoded using 6 octets; such a constraint is ignored for <code>macAddress</code> values that are encoded using 8 octets. Likewise, a constraint that is represented as an OCTET STRING of exactly 16 octets is relevant only to <code>macAddress</code> values that are encoded using 8 octets; such a constraint is ignored for <code>macAddress</code> values that are encoded using 6 octets.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
-<p id="section-3.4-3">To determine if a constraint matches a given name value, the certificate-consuming application performs the following steps:<a href="#section-3.4-3" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="normal type-1" id="section-3.4-4">
-<li id="section-3.4-4.1">
-            <p id="section-3.4-4.1.1">Extract the mask bit pattern from the upper N octets of the constraint value, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.<a href="#section-3.4-4.1.1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">To determine if a constraint matches a given name, the certificate-consuming application performs the following algorithm:<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-3.4-3">
+<li id="section-3.4-3.1">
+            <p id="section-3.4-3.1.1">If the name is 6 octets (representing an EUI-48 value) and the constraint is 16 octets (representing an EUI-64 constraint), then the name does not match the constraint.<a href="#section-3.4-3.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.4-4.2">
-            <p id="section-3.4-4.2.1">Extract the value bit pattern from the lower N octets of the constraint value, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.<a href="#section-3.4-4.2.1" class="pilcrow">¶</a></p>
+          <li id="section-3.4-3.2">
+            <p id="section-3.4-3.2.1">If the name is 8 octets (representing an EUI-64 value) and the constraint is 12 octets (representing an EUI-48 constraint), then the name does not match the constraint.<a href="#section-3.4-3.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.4-4.3">
-            <p id="section-3.4-4.3.1">Perform an exclusive OR (XOR) operation with the value bit string extracted in step 2 and the octets of the name value.<a href="#section-3.4-4.3.1" class="pilcrow">¶</a></p>
+          <li id="section-3.4-3.3">
+            <p id="section-3.4-3.3.1">Extract the value bit pattern from the upper (big-endian) N octets of the constraint, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.<a href="#section-3.4-3.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.4-4.4">
-            <p id="section-3.4-4.4.1">Perform a bitwise AND operation with the bit string calculated in step 3 and the mask bit pattern.<a href="#section-3.4-4.4.1" class="pilcrow">¶</a></p>
+          <li id="section-3.4-3.4">
+            <p id="section-3.4-3.4.1">Extract the mask bit pattern from the lower (big-endian) N octets of the constraint, where N is "6" for EUI-48 identifiers and "8" for EUI-64 identifiers.<a href="#section-3.4-3.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li id="section-3.4-4.5">
-            <p id="section-3.4-4.5.1">If the result of step 4 is a bit string consisting of entirely zeros, then the name matches the constraint. Conversely, if the result of the operation is a bit string with at least one bit asserted, then the name does not match the constraint.<a href="#section-3.4-4.5.1" class="pilcrow">¶</a></p>
+          <li id="section-3.4-3.5">
+            <p id="section-3.4-3.5.1">Perform an exclusive OR (XOR) operation with the value bit string extracted in step 3 and the octets of the name value.<a href="#section-3.4-3.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-3.4-3.6">
+            <p id="section-3.4-3.6.1">Perform a bitwise AND operation with the bit string calculated in step 5 and the mask bit pattern.<a href="#section-3.4-3.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-3.4-3.7">
+            <p id="section-3.4-3.7.1">If the result of step 6 is a bit string consisting of entirely zeros, then the name matches the constraint. Conversely, if the result of the operation is a bit string with at least one bit asserted, then the name does not match the constraint.<a href="#section-3.4-3.7.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-3.4-5">The first octet of a MAC address contains two flag bits.<a href="#section-3.4-5" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3.4-6.1">
-            <p id="section-3.4-6.1.1">I/G bit (bit 0) – 0 = unicast, 1 = multicast.  Multicast prefixes are never OUIs.<a href="#section-3.4-6.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-3.4-6.2">
-            <p id="section-3.4-6.2.1">U/L bit (bit 1) – 0 = universal (IEEE‑assigned), 1 = local.<a href="#section-3.4-6.2.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="section-3.4-7">These flags let the implementations exclude multicast and local prefixes but still cannot prove that a 24‑bit value is an IEEE‑registered OUI. 36‑bit CIDs share the same first 24 bits and enterprises <span class="bcp14">MAY</span> deploy pseudo‑OUIs. CAs <span class="bcp14">MUST</span> include only prefixes the subscriber legitimately controls (registered OUI or CID).  Before issuing a certificate that contains a MACAddress or a name constraint based on such a prefix, the CA <span class="bcp14">MUST</span> verify that control—for example, by consulting the IEEE registry or reviewing manufacturer documentation.<a href="#section-3.4-7" class="pilcrow">¶</a></p>
+<p id="section-3.4-4">The algorithm can be alternatively expressed as:<a href="#section-3.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.4-5"><code>
+2 * length (name) == length (constraint) &amp;&amp;
+((constraint.value_bit_pattern ^ name) &amp; constraint.mask_bit_pattern) == 0
+</code><a href="#section-3.4-5" class="pilcrow">¶</a></p>
+<p id="section-3.4-6">Implementations are not required to implement this algorithm, but <span class="bcp14">MUST</span> calculate an identical result to this algorithm for a given set of inputs.<a href="#section-3.4-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1460,19 +1458,29 @@ otherName with value 00‑24‑98‑7B‑19‑02:<a href="#section-7.1-1" class=
 </div>
 </section>
 </div>
-<div id="eui-48-constraint-for-universal-addresses">
+<div id="eui-48-constraint-for-universal-unicast-addresses">
 <section id="section-7.3">
         <h3 id="name-eui-48-constraint-for-unive">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-eui-48-constraint-for-unive" class="section-name selfRef">EUI-48 constraint for universal addresses</a>
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-eui-48-constraint-for-unive" class="section-name selfRef">EUI-48 constraint for universal, unicast addresses</a>
         </h3>
-<p id="section-7.3-1">The following constraint definition constrains EUI-48 values to only
-those are universal; locally assigned values will not match the
-constraint.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-7.3-2">
+<p id="section-7.3-1">The first octet of a MAC address contains two flag bits. IEEE bit numbering has bit '0' as the least significant bit of the octet.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.3-2.1">
+            <p id="section-7.3-2.1.1">I/G bit (bit 0) – 0 = unicast, 1 = multicast.  Multicast prefixes are never OUIs.<a href="#section-7.3-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-7.3-2.2">
+            <p id="section-7.3-2.2.1">U/L bit (bit 1) – 0 = universal (IEEE‑assigned), 1 = local.<a href="#section-7.3-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-7.3-3">These flags let the implementations exclude multicast and local addresses but still cannot prove that a 24‑bit value is an IEEE‑registered OUI. 36‑bit CIDs share the same first 24 bits and enterprises <span class="bcp14">MAY</span> deploy pseudo‑OUIs. CAs <span class="bcp14">MUST</span> include only addresses the subscriber legitimately controls (registered OUI or CID).  Before issuing a certificate that contains a MACAddress or a name constraint based on such a permitted set of addresses, the CA <span class="bcp14">MUST</span> verify that control: for example, by consulting the IEEE registry or reviewing manufacturer documentation.<a href="#section-7.3-3" class="pilcrow">¶</a></p>
+<p id="section-7.3-4">The following constraint definition constrains EUI-48 values to only
+those are universal and unicast; locally assigned or multicast values will not match the
+constraint.<a href="#section-7.3-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7.3-5">
 <pre>
-  [0] OCTET STRING '020000000000020000000000'H
+  [0] OCTET STRING '020000000000030000000000'H
 
-</pre><a href="#section-7.3-2" class="pilcrow">¶</a>
+</pre><a href="#section-7.3-5" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1484,10 +1492,6 @@ constraint.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
       </h2>
 <dl class="references">
-<dt id="IEEE802.1AE">[IEEE802.1AE]</dt>
-      <dd>
-<span class="refAuthor">IEEE</span>, <span class="refTitle">"IEEE Standard for Local and metropolitan area networks - Media Access Control (MAC) Security"</span>, <span class="seriesInfo">IEEE 802-1ae-2018</span>, <span class="seriesInfo">DOI 10.1109/IEEESTD.2018.8585421</span>, <time datetime="2018-12-21" class="refDate">21 December 2018</time>, <span>&lt;<a href="https://doi.org/10.1109/IEEESTD.2018.8585421">https://doi.org/10.1109/IEEESTD.2018.8585421</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
@@ -1501,16 +1505,8 @@ constraint.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <span class="refAuthor">Hoffman, P.</span> and <span class="refAuthor">J. Schaad</span>, <span class="refTitle">"New ASN.1 Modules for the Public Key Infrastructure Using X.509 (PKIX)"</span>, <span class="seriesInfo">RFC 5912</span>, <span class="seriesInfo">DOI 10.17487/RFC5912</span>, <time datetime="2010-06" class="refDate">June 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5912">https://www.rfc-editor.org/rfc/rfc5912</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-      <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="X680">[X680]</dt>
-      <dd>
-<span class="refAuthor">ITU-T</span>, <span class="refTitle">"Information technology -- Abstract Syntax Notation One (ASN.1): Specification of basic notation"</span>, <span class="seriesInfo">ITU-T Recommendation X.680</span>, <span class="seriesInfo">ISO/IEC 8824-1:2021</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.itu.int/rec/T-REC-X.680">https://www.itu.int/rec/T-REC-X.680</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="X690">[X690]</dt>
     <dd>
-<span class="refAuthor">ITU-T</span>, <span class="refTitle">"Information technology -- ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)"</span>, <span class="seriesInfo">ITU-T Recommendation X.690</span>, <span class="seriesInfo">ISO/IEC 8825-1-2021</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.itu.int/rec/T-REC-X.690">https://www.itu.int/rec/T-REC-X.690</a>&gt;</span>. </dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1520,7 +1516,7 @@ constraint.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to John Mattsson and Michael St. Johns for their reviews and suggestions, which greatly improved the quality of this document.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to David von Oheimb, John Mattsson, and Michael StJohns for their reviews and suggestions, which greatly improved the quality of this document.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
