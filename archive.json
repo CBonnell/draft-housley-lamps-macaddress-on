@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-28T01:49:54.652249+00:00",
+  "timestamp": "2025-10-30T01:56:15.199522+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -279,24 +279,26 @@
       "id": "PR_kwDOPNu74s6tR44i",
       "title": "Address WG feedback on -01",
       "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/4",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-12T01:05:51Z",
-      "updatedAt": "2025-10-24T17:11:14Z",
+      "updatedAt": "2025-10-28T02:00:05Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "58c9deee9fd835bceb8c1c3fe36881a4ef2d20c7",
       "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "headRefName": "wg-feedback",
       "headRefOid": "eb75e1a8486d74a0c8501bd246f82270be7899b5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-28T01:59:42Z",
+      "mergedAt": "2025-10-28T01:59:42Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "6d9ec53365b998b6fdfe7e13eb415ed700c86672"
+      },
       "comments": [
         {
           "author": "DDvO",
