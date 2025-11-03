@@ -2,7 +2,7 @@
 title: "Media Access Control (MAC) Addresses in X.509 Certificates"
 category: info
 
-docname: draft-housley-lamps-macaddress-on-latest
+docname: draft-ietf-lamps-macaddress-on-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
@@ -21,7 +21,7 @@ venue:
   mail: "spasm@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/spasm/"
   github: "CBonnell/draft-housley-lamps-macaddress-on"
-  latest: "https://CBonnell.github.io/draft-housley-lamps-macaddress-on/draft-housley-lamps-macaddress-on.html"
+  latest: "https://CBonnell.github.io/draft-housley-lamps-macaddress-on/draft-ietf-lamps-macaddress-on.html"
 
 author:
 
