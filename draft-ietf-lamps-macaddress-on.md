@@ -103,6 +103,8 @@ Self‑signed certificates that carry a MACAddress otherName SHOULD include the 
 
 The MACAddress otherName follows the general rules for otherName constraints in RFC 5280, Section 4.2.1.10. A name constraints extension MAY impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress.
 
+Restictions apply to the MACAddress otherName only when the specified name form is present in an end entity certificate (a non CA certificate), and are completely specified in the constraints present in the issueing CA certificate of an end entity certificate in a certification path. If no MACAddress name form is present, the certificate is accceptable. Restrictions in further CA certificates of a certification path do not apply to the MACAddress otherName.
+
 To determine if a constraint matches a given name, the certificate-consuming application performs the following algorithm:
 
 1. If the name is 6 octets (representing an EUI-48 value) and the constraint is 16 octets (representing an EUI-64 constraint), then the name does not match the constraint.
@@ -121,7 +123,6 @@ The algorithm can be alternatively expressed as:
 ```
 
 Implementations are not required to implement this algorithm, but MUST calculate an identical result to this algorithm for a given set of inputs.
-
 # Security Considerations
 
 The binding of a MAC address to a certificate is only as strong as the CA’s validation process. CAs MUST verify that the subscriber legitimately controls or owns the asserted MAC address.
