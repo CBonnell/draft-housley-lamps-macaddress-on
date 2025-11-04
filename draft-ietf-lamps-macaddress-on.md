@@ -103,6 +103,8 @@ Self‑signed certificates that carry a MACAddress otherName SHOULD include the 
 
 The MACAddress otherName follows the general rules for otherName constraints in RFC 5280, Section 4.2.1.10. A name constraints extension MAY impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress.
 
+Unlike the General Name name constraints extension in RFC 5280, The MACAddress otherName name constraints extension is only valid when present in a certificate for which the Basic Constraints CA flag is true, and the Basic Constraints Path Length has the value of 0.
+
 To determine if a constraint matches a given name, the certificate-consuming application performs the following algorithm:
 
 1. If the name is 6 octets (representing an EUI-48 value) and the constraint is 16 octets (representing an EUI-64 constraint), then the name does not match the constraint.
