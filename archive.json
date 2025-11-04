@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-02T01:58:52.095334+00:00",
+  "timestamp": "2025-11-04T01:53:33.457475+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -977,6 +977,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOPNu74s6xPDDL",
+      "title": "Adopted by LAMPS",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/5",
+      "state": "MERGED",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-11-03T17:09:38Z",
+      "updatedAt": "2025-11-03T17:15:34Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "6d9ec53365b998b6fdfe7e13eb415ed700c86672",
+      "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "headRefName": "wg-adopt",
+      "headRefOid": "8f5ba362edb411baaec507fbaeb946a1805e9981",
+      "closedAt": "2025-11-03T17:15:30Z",
+      "mergedAt": "2025-11-03T17:15:30Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "7d93fbea51d0ce70cab30f73905a703d77f6efa4"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
