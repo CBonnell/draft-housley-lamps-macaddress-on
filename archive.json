@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-04T01:53:33.457475+00:00",
+  "timestamp": "2025-11-06T01:55:10.100420+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -1004,6 +1004,74 @@
         "oid": "7d93fbea51d0ce70cab30f73905a703d77f6efa4"
       },
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOPNu74s6xeUvb",
+      "title": "Specify that name constraints are only for a leaf.",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/6",
+      "state": "CLOSED",
+      "author": "bob-beck",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "And when you need these, you can ensure you make the issueing intermediate be the place they are.\r\n\r\nAnd you do not need to make this apply up a chain.. because that is terrible, a large part of why all we implementors hate name constraints with a passion. Since this is an otherName, 5280 lets us make the rules.\r\n\r\nI believe this both makes something \"sufficiently name constrait-y\" to be useful for those of us (including myself in my past life) who would have made use of this, while making this not horrible to implement. Yes, this means that anyone wishing to use this must put them into the leaf issuer, and can't encode their org chart in a chain. IMO, this is fine.\r\n",
+      "createdAt": "2025-11-04T17:37:15Z",
+      "updatedAt": "2025-11-04T17:49:49Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "gh-pages",
+      "baseRefOid": "4e5f1dc9e5cdc5041dccbbac56d848ea19963138",
+      "headRepository": "bob-beck/draft-housley-lamps-macaddress-on",
+      "headRefName": "main",
+      "headRefOid": "d2d569a51445fc78b86fc2b8db596c32f9d674e1",
+      "closedAt": "2025-11-04T17:48:04Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "bob-beck",
+          "authorAssociation": "NONE",
+          "body": "oh github, I hate you. ",
+          "createdAt": "2025-11-04T17:49:49Z",
+          "updatedAt": "2025-11-04T17:49:49Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOPNu74s6xef1B",
+      "title": "Specify that name constraints are only for a leaf.",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/7",
+      "state": "OPEN",
+      "author": "bob-beck",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "And when you need these, you can ensure you make the issueing intermediate be the place they are.\r\n\r\nAnd you do not need to make this apply up a chain.. because that is terrible, a large part of why all we implementors hate name constraints with a passion. Since this is an otherName, 5280 lets us make the rules.\r\n\r\nI believe this both makes something \"sufficiently name constrait-y\" to be useful for those of us (including myself in my past life) who would have made use of this, while making this not horrible to implement. Yes, this means that anyone wishing to use this must put them into the leaf issuer, and can't encode their org chart in a chain. IMO, this is fine.\r\n",
+      "createdAt": "2025-11-04T17:51:03Z",
+      "updatedAt": "2025-11-04T19:41:40Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "7d93fbea51d0ce70cab30f73905a703d77f6efa4",
+      "headRepository": "bob-beck/draft-housley-lamps-macaddress-on",
+      "headRefName": "main",
+      "headRefOid": "21196df30cd84bb614ef2a82cc1c482bb14eee0d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "bob-beck",
+          "authorAssociation": "NONE",
+          "body": "Apologies for the duplicate PR. There seem to be infinite ways to bump the github app on your phone and have it close a PR in a silly way without any confirmation. ",
+          "createdAt": "2025-11-04T17:51:46Z",
+          "updatedAt": "2025-11-04T17:51:46Z"
+        }
+      ],
       "reviews": []
     }
   ]
