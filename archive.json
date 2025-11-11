@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-09T01:57:58.404722+00:00",
+  "timestamp": "2025-11-11T01:55:55.285631+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -1052,13 +1052,13 @@
       "labels": [],
       "body": "And when you need these, you can ensure you make the issueing intermediate be the place they are.\r\n\r\nAnd you do not need to make this apply up a chain.. because that is terrible, a large part of why all we implementors hate name constraints with a passion. Since this is an otherName, 5280 lets us make the rules.\r\n\r\nI believe this both makes something \"sufficiently name constrait-y\" to be useful for those of us (including myself in my past life) who would have made use of this, while making this not horrible to implement. Yes, this means that anyone wishing to use this must put them into the leaf issuer, and can't encode their org chart in a chain. IMO, this is fine.\r\n",
       "createdAt": "2025-11-04T17:51:03Z",
-      "updatedAt": "2025-11-04T19:41:40Z",
+      "updatedAt": "2025-11-10T23:53:22Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "7d93fbea51d0ce70cab30f73905a703d77f6efa4",
       "headRepository": "bob-beck/draft-housley-lamps-macaddress-on",
       "headRefName": "main",
-      "headRefOid": "21196df30cd84bb614ef2a82cc1c482bb14eee0d",
+      "headRefOid": "f1f270169902055bdfc03ecb57cbea527a0518b8",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -1070,6 +1070,13 @@
           "body": "Apologies for the duplicate PR. There seem to be infinite ways to bump the github app on your phone and have it close a PR in a silly way without any confirmation. ",
           "createdAt": "2025-11-04T17:51:46Z",
           "updatedAt": "2025-11-04T17:51:46Z"
+        },
+        {
+          "author": "bob-beck",
+          "authorAssociation": "NONE",
+          "body": "As discussed, this would handle my previous \"real world\" case where I felt name constraints would be reasonable for this case, while avoiding the complexity of them that might make implementors say \"no\". \r\n\r\nAlternatively if you don't have *other* actual real implementations clamouring for name constraints, and they just sound like a good idea, I suggest removing them from the draft. \r\n",
+          "createdAt": "2025-11-10T23:53:22Z",
+          "updatedAt": "2025-11-10T23:53:22Z"
         }
       ],
       "reviews": []
