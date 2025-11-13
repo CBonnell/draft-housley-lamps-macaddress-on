@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-11T01:55:55.285631+00:00",
+  "timestamp": "2025-11-13T01:56:28.571132+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -1052,7 +1052,7 @@
       "labels": [],
       "body": "And when you need these, you can ensure you make the issueing intermediate be the place they are.\r\n\r\nAnd you do not need to make this apply up a chain.. because that is terrible, a large part of why all we implementors hate name constraints with a passion. Since this is an otherName, 5280 lets us make the rules.\r\n\r\nI believe this both makes something \"sufficiently name constrait-y\" to be useful for those of us (including myself in my past life) who would have made use of this, while making this not horrible to implement. Yes, this means that anyone wishing to use this must put them into the leaf issuer, and can't encode their org chart in a chain. IMO, this is fine.\r\n",
       "createdAt": "2025-11-04T17:51:03Z",
-      "updatedAt": "2025-11-10T23:53:22Z",
+      "updatedAt": "2025-11-12T19:14:13Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "7d93fbea51d0ce70cab30f73905a703d77f6efa4",
@@ -1077,6 +1077,27 @@
           "body": "As discussed, this would handle my previous \"real world\" case where I felt name constraints would be reasonable for this case, while avoiding the complexity of them that might make implementors say \"no\". \r\n\r\nAlternatively if you don't have *other* actual real implementations clamouring for name constraints, and they just sound like a good idea, I suggest removing them from the draft. \r\n",
           "createdAt": "2025-11-10T23:53:22Z",
           "updatedAt": "2025-11-10T23:53:22Z"
+        },
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I strongly oppose any deviation from the RFC 5280 certification path validation algorithm regarding name constrainsts.",
+          "createdAt": "2025-11-12T15:03:43Z",
+          "updatedAt": "2025-11-12T15:03:43Z"
+        },
+        {
+          "author": "bob-beck",
+          "authorAssociation": "NONE",
+          "body": "> I strongly oppose any deviation from the RFC 5280 certification path validation algorithm regarding name constrainsts.\r\n\r\n5280 States in 4.2.1.10: \r\n\r\n```  \r\nThe syntax and semantics for name constraints for otherName,\r\n ediPartyName, and registeredID are not defined by this specification,\r\n however, syntax and semantics for name constraints for other name\r\n forms may be specified in other documents.\r\n```\r\n\r\nAs this draft specifies an otherName - this does not appear to be a deviation from 5280, but rather, defining the syntax and semantics of the otherName as suggested by 5280. \r\n",
+          "createdAt": "2025-11-12T18:41:45Z",
+          "updatedAt": "2025-11-12T18:41:45Z"
+        },
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Bob, I disagree with your interpretation of that text in RFC 5280.  This draft does specify the syntax and semantics for processing the name constraints for MAC addresses.  It does not change the places in a certification path where such name constraints can appear.",
+          "createdAt": "2025-11-12T19:14:13Z",
+          "updatedAt": "2025-11-12T19:14:13Z"
         }
       ],
       "reviews": []
