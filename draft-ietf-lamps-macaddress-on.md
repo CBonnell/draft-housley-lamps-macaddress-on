@@ -103,7 +103,12 @@ Self‑signed certificates that carry a MACAddress otherName SHOULD include the 
 
 The MACAddress otherName follows the general rules for otherName constraints in RFC 5280, Section 4.2.1.10. A name constraints extension MAY impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress.
 
-To determine if a constraint matches a given name, the certificate-consuming application performs the following algorithm:
+In the pseudo-code below, 'mask' is short hand for the bit string formed from the mask portion of a constraint (e.g. the last 1/2 of the constraint octets), 
+similarly, 'value' refers to the bit string formed from the first 1/2 of the constraint octets.
+
+### Matching Rule
+
+To determine if a name matches a given constraint, the certificate-consuming application performs the following algorithm:
 
 1. If the name is 6 octets (representing an EUI-48 value) and the constraint is 16 octets (representing an EUI-64 constraint), then the name does not match the constraint.
 2. If the name is 8 octets (representing an EUI-64 value) and the constraint is 12 octets (representing an EUI-48 constraint), then the name does not match the constraint.
@@ -116,12 +121,122 @@ To determine if a constraint matches a given name, the certificate-consuming app
 The algorithm can be alternatively expressed as:
 
 ```
-2 * length (name) == length (constraint) &&
-((constraint.value_bit_pattern ^ name) & constraint.mask_bit_pattern) == 0
+// Returns true if 'name' matches 'constraint'
+boolean nameMatchesConstraint (name, constraint) {
+   return (2 * length (name) == length (constraint) &&
+           ((constraint.value ^ name) &
+            constraint.mask) == 0) ;
+}
 ```
 
 Implementations are not required to implement this algorithm, but MUST calculate an identical result to this algorithm for a given set of inputs.
 
+### OtherName.MACAddress Path Validation Processing
+
+This section describes the Path Validation Processing specific to OtherName.MACAddress constraints.  
+
+The following is a utility function used to determine whether or not 
+a given constraint is completely contained within another constraint.
+
+~~~
+// Returns true if 'child' is a logical subset of 'parent'
+// Both 'child' and 'parent' are OtherName.MACAddress
+// constraints.
+// Used to calculate both UNION and INTERSECTION sets for
+// OtherName.MACAddress constraints.
+boolean childIncludedInParent (constraint child, constraint parent)
+  return (
+     // if the lengths are the same
+     child.length == parent.length &&
+     // and if there are no bits set in the pst.mask that aren't also set in the rst.mask
+     // e.g. we can add mask bits to the current set, we can't remove them
+     (child.mask | parent.mask) == child.mask &&
+     // and if the rst.value has at least all the bits set that were set (and live) in the pst.value
+     // e.g. we can't change the values of the live bits from the superior constraint
+     (child.value & parent.mask) == (parent.value & parent.mask)
+    );
+}
+~~~
+
+#### Initialization
+
+Per sections 6.1.2 (b) and (c) of [RFC5280], we need to specify NameConstraint.MACAddress set values for both the initial-permitted-subtrees and for initial-excluded-subtrees:
+
+~~~
+initial-permitted-subtrees{} += { 000000000000000000000000H,
+                                  00000000000000000000000000000000H }
+initial-excluded-subtrees{} += { };
+~~~
+
+#### Intersection Operation
+
+See Section 6.1.4 (g) (1) of [RFC5280].  The intersection of the set of OtherName.MACAddress current permitted_subtrees with each certificate in the path is as follows:
+
+~~~
+
+// This logic can be used for both MACAddress and iPAddress OtherName types
+// Initialize -
+permitted_subtrees{} (0) = initial-permitted-subtrees;
+
+// Foreach certificate i = (1..n) in the path {
+set prevSubtrees{}  =
+   { the set of OtherName.MACAddress.permitted_subtrees from the permitted_subtree (i-1) variable};
+tempPermittedSubtrees {} = {};
+tempRequestedSubtrees {} =
+   { the set of OtherName.MACAddress.permitted_subtrees from
+     the NameConstraintExtenson in the current certificate };
+
+foreach ( constraint rst in tempRequestedSubtrees) { // rst => one of the requested subtrees
+    foreach ( constraint pst in prevSubtrees) { // one of the current permitted subtrees
+          if (childIncludedInParent (rst, pst) {  
+                tempPermitedSubtree += rst;
+                break;
+          }
+     } 
+ }
+
+permitted_subtrees{} (i) = tempPermittedSubtree;
+// } end for each cert on path
+
+~~~
+
+#### Union Operation 
+
+See Section 6.1.4 (g) (2) of [RFC5280].  The union of the set of OtherName.MACAddress current excluded_subtrees with each certificate in the path is as follows:
+
+~~~
+// Initialize
+excluded_subtrees{} (0) = initial-excluded-subtrees;
+
+// Foreach certificate i = (1..n) in the path {
+tempExcludedSubtrees {} =
+  { the set of OtherName.MACAddress.excluded_subtrees from
+    excluded_subtrees (i-1) };
+tempRequestedSubtrees {} =
+  { the set of OtherName.MACAddress.excluded_subtrees from
+    the current certificate };
+
+// note that the ordering of the loop here differs
+// from the 'intersection' operation.
+foreach (constraint rst in tempRequestedSubtrees) {
+  boolean matches = false;
+  foreach (constraint est in tempExcludedSubtrees) {
+      // If I find a constraint in the current excluded
+      // constraints that 'covers' the requested subtree,
+      // I do no need to add the requested subtree
+      // to the set of excluded subtrees.
+      if (childIncludedInParent (rst, est)) {
+        matches = true; 
+        break;
+     }
+   }
+   if (!matches) {
+      tempExcludedSubtrees += rst;
+   }
+}
+// } end foreach certificate in the path
+excluded_subtrees{} (i) = tempExcludedSubtrees;
+~~~
 # Security Considerations
 
 The binding of a MAC address to a certificate is only as strong as the CA’s validation process. CAs MUST verify that the subscriber legitimately controls or owns the asserted MAC address.
@@ -204,7 +319,7 @@ otherName with value 00‑24‑98‑7B‑19‑02:
 ~~~
   SEQUENCE {
     otherName [0] {
-      OBJECT IDENTIFIER id-on-MACAddress (TBD)
+      OBJECT IDENTIFIER id-on-MACAddress
       [0] OCTET STRING '0024987B1902'H
     }
   }
