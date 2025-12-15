@@ -160,7 +160,7 @@ boolean childIncludedInParent (constraint child, constraint parent)
 
 #### Initialization
 
-Per sections 6.1.2 (b) and (c) of [RFC5280], we need to specify NameConstraint.MACAddress set values for both the initial-permitted-subtrees and for initial-excluded-subtrees:
+Per sections 6.1.1 (h) and (i) of [RFC5280], we need to specify NameConstraint.MACAddress set values for both the initial-permitted-subtrees and for initial-excluded-subtrees:
 
 ~~~
 initial-permitted-subtrees{} += { 000000000000000000000000H,
