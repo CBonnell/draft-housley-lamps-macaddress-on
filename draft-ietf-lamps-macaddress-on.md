@@ -148,10 +148,12 @@ boolean childIncludedInParent (constraint child, constraint parent)
   return (
      // if the lengths are the same
      child.length == parent.length &&
-     // and if there are no bits set in the pst.mask that aren't also set in the rst.mask
+     // and if there are no bits set in the pst.mask that
+     //    aren't also set in the rst.mask
      // e.g. we can add mask bits to the current set, we can't remove them
      (child.mask | parent.mask) == child.mask &&
-     // and if the rst.value has at least all the bits set that were set (and live) in the pst.value
+     // and if the rst.value has at least all the bits set that
+     //   were set (and live) in the pst.value
      // e.g. we can't change the values of the live bits from the superior constraint
      (child.value & parent.mask) == (parent.value & parent.mask)
     );
@@ -180,14 +182,17 @@ permitted_subtrees{} (0) = initial-permitted-subtrees;
 
 // Foreach certificate i = (1..n) in the path {
 set prevSubtrees{}  =
-   { the set of OtherName.MACAddress.permitted_subtrees from the permitted_subtree (i-1) variable};
+   { the set of OtherName.MACAddress.permitted_subtrees
+     from the permitted_subtree (i-1) variable};
 tempPermittedSubtrees {} = {};
 tempRequestedSubtrees {} =
    { the set of OtherName.MACAddress.permitted_subtrees from
      the NameConstraintExtenson in the current certificate };
 
-foreach ( constraint rst in tempRequestedSubtrees) { // rst => one of the requested subtrees
-    foreach ( constraint pst in prevSubtrees) { // one of the current permitted subtrees
+// rst => one of the requested subtrees (from the cert)
+// pst -> one of the current permitted subtrees
+foreach ( constraint rst in tempRequestedSubtrees) { 
+    foreach ( constraint pst in prevSubtrees) { 
           if (childIncludedInParent (rst, pst) {  
                 tempPermitedSubtree += rst;
                 break;
