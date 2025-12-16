@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-14T02:08:41.939173+00:00",
+  "timestamp": "2025-12-16T02:02:44.950409+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -49,7 +49,24 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 8,
+      "id": "I_kwDOPNu74s7ebhvK",
+      "title": "Need additional details for initialization and processing of MACAddress NameConstraints",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/issues/8",
+      "state": "OPEN",
+      "author": "mstjohns",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Need to add RFC5280 path validation initialization constants, and description of how to process UNION and INTERSECTION operations.",
+      "createdAt": "2025-12-15T19:11:56Z",
+      "updatedAt": "2025-12-15T19:11:56Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": [
     {
       "number": 1,
@@ -1100,6 +1117,32 @@
           "updatedAt": "2025-11-12T19:14:13Z"
         }
       ],
+      "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOPNu74s64_yz7",
+      "title": "Provide additional processing guidance for MACAddress NameConstraints",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/9",
+      "state": "OPEN",
+      "author": "mstjohns",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Added RFC5280 path validation initialization and processing logic for MACAddress NameConstraints.",
+      "createdAt": "2025-12-15T19:24:49Z",
+      "updatedAt": "2025-12-15T19:24:49Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "7d93fbea51d0ce70cab30f73905a703d77f6efa4",
+      "headRepository": "mstjohns/draft-housley-lamps-macaddress-on",
+      "headRefName": "patch-1",
+      "headRefOid": "2e7c848e48f7dad23b4d9efa56a64b9afbc35e77",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
       "reviews": []
     }
   ]
