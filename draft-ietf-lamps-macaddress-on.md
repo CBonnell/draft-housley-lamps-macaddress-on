@@ -103,7 +103,7 @@ Self‑signed certificates that carry a MACAddress otherName SHOULD include the 
 
 The MACAddress otherName follows the general rules for otherName constraints in RFC 5280, Section 4.2.1.10. A name constraints extension MAY impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress.
 
-In the pseudo-code below, 'mask' is short hand for the bit string formed from the mask portion of a constraint (e.g. the last 1/2 of the constraint octets), 
+In the pseudo-code below, 'mask' is short hand for the bit string formed from the mask portion of a constraint (e.g. the last 1/2 of the constraint octets),
 similarly, 'value' refers to the bit string formed from the first 1/2 of the constraint octets.
 
 ### Matching Rule
@@ -133,9 +133,9 @@ Implementations are not required to implement this algorithm, but MUST calculate
 
 ### OtherName.MACAddress Path Validation Processing
 
-This section describes the Path Validation Processing specific to OtherName.MACAddress constraints.  
+This section describes the Path Validation Processing specific to OtherName.MACAddress constraints.
 
-The following is a utility function used to determine whether or not 
+The following is a utility function used to determine whether or not
 a given constraint is completely contained within another constraint.
 
 ~~~
@@ -191,13 +191,13 @@ tempRequestedSubtrees {} =
 
 // rst => one of the requested subtrees (from the cert)
 // pst -> one of the current permitted subtrees
-foreach ( constraint rst in tempRequestedSubtrees) { 
-    foreach ( constraint pst in prevSubtrees) { 
-          if (childIncludedInParent (rst, pst) {  
+foreach ( constraint rst in tempRequestedSubtrees) {
+    foreach ( constraint pst in prevSubtrees) {
+          if (childIncludedInParent (rst, pst) {
                 tempPermitedSubtree += rst;
                 break;
           }
-     } 
+     }
  }
 
 permitted_subtrees{} (i) = tempPermittedSubtree;
@@ -205,7 +205,7 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
 
 ~~~
 
-#### Union Operation 
+#### Union Operation
 
 See Section 6.1.4 (g) (2) of [RFC5280].  The union of the set of OtherName.MACAddress current excluded_subtrees with each certificate in the path is as follows:
 
@@ -231,7 +231,7 @@ foreach (constraint rst in tempRequestedSubtrees) {
       // I do no need to add the requested subtree
       // to the set of excluded subtrees.
       if (childIncludedInParent (rst, est)) {
-        matches = true; 
+        matches = true;
         break;
      }
    }
