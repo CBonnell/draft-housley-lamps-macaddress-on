@@ -5,12 +5,12 @@
 Limited Additional Mechanisms for PKIX and SMIME              R. Housley
 Internet-Draft                                            Vigil Security
 Intended status: Informational                                C. Bonnell
-Expires: 7 May 2026                                             DigiCert
+Expires: 10 July 2026                                           DigiCert
                                                                J. Mandel
                                                                   AKAYLA
                                                                 T. Okubo
                                                       Penguin Securities
-                                                         3 November 2025
+                                                          6 January 2026
 
 
        Media Access Control (MAC) Addresses in X.509 Certificates
@@ -60,11 +60,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 May 2026.
+   This Internet-Draft will expire on 10 July 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -85,15 +85,16 @@ Table of Contents
      3.2.  Encoding a MACAddress constraint
      3.3.  Generation and Validation Rules
      3.4.  Name Constraints Processing
-   4.  Security Considerations
-     4.1.  Privacy Considerations
-   5.  IANA Considerations
-   6.  ASN.1 Module
-   7.  MAC Address otherName Examples
-     7.1.  EUI-48 identifier
-     7.2.  EUI-64 identifier
-     7.3.  EUI-48 constraint for universal, unicast addresses
-   8.  Normative References
+       3.4.1.  Matching Rule
+       3.4.2.  OtherName.MACAddress Path Validation Processing
+     3.5.  Privacy Considerations
+   4.  IANA Considerations
+   5.  ASN.1 Module
+   6.  MAC Address otherName Examples
+     6.1.  EUI-48 identifier
+     6.2.  EUI-64 identifier
+     6.3.  EUI-48 constraint for universal, unicast addresses
+   7.  Normative References
    Acknowledgments
    Authors' Addresses
 
@@ -201,7 +202,14 @@ Table of Contents
    extension MAY impose permittedSubtrees and excludedSubtrees on
    id-on-MACAddress.
 
-   To determine if a constraint matches a given name, the certificate-
+   In the pseudo-code below, 'mask' is short hand for the bit string
+   formed from the mask portion of a constraint (e.g. the last 1/2 of
+   the constraint octets), similarly, 'value' refers to the bit string
+   formed from the first 1/2 of the constraint octets.
+
+3.4.1.  Matching Rule
+
+   To determine if a name matches a given constraint, the certificate-
    consuming application performs the following algorithm:
 
    1.  If the name is 6 octets (representing an EUI-48 value) and the
@@ -233,15 +241,125 @@ Table of Contents
 
    The algorithm can be alternatively expressed as:
 
-   2 * length (name) == length (constraint) &&
-   ((constraint.value_bit_pattern ^ name) & constraint.mask_bit_pattern)
-   == 0
+   // Returns true if 'name' matches 'constraint' boolean
+   nameMatchesConstraint (name, constraint) { return (2 * length (name)
+   == length (constraint) && ((constraint.value ^ name) &
+   constraint.mask) == 0) ; }
 
    Implementations are not required to implement this algorithm, but
    MUST calculate an identical result to this algorithm for a given set
    of inputs.
 
-4.  Security Considerations
+3.4.2.  OtherName.MACAddress Path Validation Processing
+
+   This section describes the Path Validation Processing specific to
+   OtherName.MACAddress constraints.
+
+   The following is a utility function used to determine whether or not
+   a given constraint is completely contained within another constraint.
+
+// Returns true if 'child' is a logical subset of 'parent'
+// Both 'child' and 'parent' are OtherName.MACAddress
+// constraints.
+// Used to calculate both UNION and INTERSECTION sets for
+// OtherName.MACAddress constraints.
+boolean childIncludedInParent (constraint child, constraint parent)
+  return (
+     // if the lengths are the same
+     child.length == parent.length &&
+     // and if there are no bits set in the pst.mask that
+     //    aren't also set in the rst.mask
+     // e.g. we can add mask bits to the current set, we can't remove them
+     (child.mask | parent.mask) == child.mask &&
+     // and if the rst.value has at least all the bits set that
+     //   were set (and live) in the pst.value
+     // e.g. we can't change the values of the live bits from the superior constraint
+     (child.value & parent.mask) == (parent.value & parent.mask)
+    );
+}
+
+3.4.2.1.  Initialization
+
+   Per sections 6.1.1 (h) and (i) of [RFC5280], we need to specify
+   NameConstraint.MACAddress set values for both the initial-permitted-
+   subtrees and for initial-excluded-subtrees:
+
+   initial-permitted-subtrees{} += { 000000000000000000000000H,
+                                     00000000000000000000000000000000H }
+   initial-excluded-subtrees{} += { };
+
+3.4.2.2.  Intersection Operation
+
+   See Section 6.1.4 (g) (1) of [RFC5280].  The intersection of the set
+   of OtherName.MACAddress current permitted_subtrees with each
+   certificate in the path is as follows:
+
+// This logic can be used for both MACAddress and iPAddress OtherName types
+// Initialize -
+permitted_subtrees{} (0) = initial-permitted-subtrees;
+
+// Foreach certificate i = (1..n) in the path {
+set prevSubtrees{}  =
+   { the set of OtherName.MACAddress.permitted_subtrees
+     from the permitted_subtree (i-1) variable};
+tempPermittedSubtrees {} = {};
+tempRequestedSubtrees {} =
+   { the set of OtherName.MACAddress.permitted_subtrees from
+     the NameConstraintExtenson in the current certificate };
+
+// rst => one of the requested subtrees (from the cert)
+// pst -> one of the current permitted subtrees
+foreach ( constraint rst in tempRequestedSubtrees) {
+    foreach ( constraint pst in prevSubtrees) {
+          if (childIncludedInParent (rst, pst) {
+                tempPermitedSubtree += rst;
+                break;
+          }
+     }
+ }
+
+permitted_subtrees{} (i) = tempPermittedSubtree;
+// } end for each cert on path
+
+3.4.2.3.  Union Operation
+
+   See Section 6.1.4 (g) (2) of [RFC5280].  The union of the set of
+   OtherName.MACAddress current excluded_subtrees with each certificate
+   in the path is as follows:
+
+   // Initialize
+   excluded_subtrees{} (0) = initial-excluded-subtrees;
+
+   // Foreach certificate i = (1..n) in the path {
+   tempExcludedSubtrees {} =
+     { the set of OtherName.MACAddress.excluded_subtrees from
+       excluded_subtrees (i-1) };
+   tempRequestedSubtrees {} =
+     { the set of OtherName.MACAddress.excluded_subtrees from
+       the current certificate };
+
+   // note that the ordering of the loop here differs
+   // from the 'intersection' operation.
+   foreach (constraint rst in tempRequestedSubtrees) {
+     boolean matches = false;
+     foreach (constraint est in tempExcludedSubtrees) {
+         // If I find a constraint in the current excluded
+         // constraints that 'covers' the requested subtree,
+         // I do no need to add the requested subtree
+         // to the set of excluded subtrees.
+         if (childIncludedInParent (rst, est)) {
+           matches = true;
+           break;
+        }
+      }
+      if (!matches) {
+         tempExcludedSubtrees += rst;
+      }
+   }
+   // } end foreach certificate in the path
+   excluded_subtrees{} (i) = tempExcludedSubtrees;
+
+   # Security Considerations
 
    The binding of a MAC address to a certificate is only as strong as
    the CA’s validation process.  CAs MUST verify that the subscriber
@@ -255,7 +373,7 @@ Table of Contents
    layer 3 boundaries.  Relying parties in different broadcast domains
    SHOULD NOT assume uniqueness beyond their local network.
 
-4.1.  Privacy Considerations
+3.5.  Privacy Considerations
 
    A MAC address can uniquely identify a physical device and by
    extension, its user.  Certificates that embed unchanging MAC
@@ -264,7 +382,7 @@ Table of Contents
    temporary certificates, or employing MAC Address Randomization where
    feasible.
 
-5.  IANA Considerations
+4.  IANA Considerations
 
    IANA is requested to make the following assignments in the “SMI
    Security for PKIX Module Identifier” (1.3.6.1.5.5.7.0) registry:
@@ -284,7 +402,7 @@ Table of Contents
        | TBD1    | id-on-MACAddress                | This document |
        +---------+---------------------------------+---------------+
 
-6.  ASN.1 Module
+5.  ASN.1 Module
 
    This Appendix contains the ASN.1 Module for the MAC Address; it
    follows the conventions established by [RFC5912].
@@ -324,9 +442,9 @@ Table of Contents
 
    END
 
-7.  MAC Address otherName Examples
+6.  MAC Address otherName Examples
 
-7.1.  EUI-48 identifier
+6.1.  EUI-48 identifier
 
    The following is a human-readable summary of the Subject Alternative
    Name extension from a certificate containing a single MACAddress
@@ -334,18 +452,18 @@ Table of Contents
 
      SEQUENCE {
        otherName [0] {
-         OBJECT IDENTIFIER id-on-MACAddress (TBD)
+         OBJECT IDENTIFIER id-on-MACAddress
          [0] OCTET STRING '0024987B1902'H
        }
      }
 
-7.2.  EUI-64 identifier
+6.2.  EUI-64 identifier
 
    An EUI-64 example (AC-DE-48-00-11-22-33-44):
 
      [0] OCTET STRING 'ACDE480011223344'H
 
-7.3.  EUI-48 constraint for universal, unicast addresses
+6.3.  EUI-48 constraint for universal, unicast addresses
 
    The first octet of a MAC address contains two flag bits.  IEEE bit
    numbering has bit '0' as the least significant bit of the octet.
@@ -371,7 +489,7 @@ Table of Contents
 
      [0] OCTET STRING '020000000000030000000000'H
 
-8.  Normative References
+7.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
