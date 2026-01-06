@@ -103,8 +103,8 @@ Self‑signed certificates that carry a MACAddress otherName SHOULD include the 
 
 The MACAddress otherName follows the general rules for otherName constraints in RFC 5280, Section 4.2.1.10. A name constraints extension MAY impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress.
 
-In the pseudo-code below, 'mask' is short hand for the bit string formed from the mask portion of a constraint (e.g. the last 1/2 of the constraint octets),
-similarly, 'value' refers to the bit string formed from the first 1/2 of the constraint octets.
+In the pseudo-code below, 'mask' is shorthand for the bit string formed from the mask portion of a constraint (e.g., the second set of N octets in the constraint, where N is 6 for an EUI-48 constraint or 8 for an EUI-64 constraint).
+Similarly, 'value' refers to the bit string formed from the first set of N octets in the constraint.
 
 ### Matching Rule
 
