@@ -1298,8 +1298,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-name-constraints-processing" class="section-name selfRef">Name Constraints Processing</a>
         </h3>
 <p id="section-3.4-1">The MACAddress otherName follows the general rules for otherName constraints in RFC 5280, Section 4.2.1.10. A name constraints extension <span class="bcp14">MAY</span> impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
-<p id="section-3.4-2">In the pseudo-code below, 'mask' is short hand for the bit string formed from the mask portion of a constraint (e.g. the last 1/2 of the constraint octets),
-similarly, 'value' refers to the bit string formed from the first 1/2 of the constraint octets.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">In the pseudo-code below, 'mask' is shorthand for the bit string formed from the mask portion of a constraint (e.g., the second set of N octets in the constraint, where N is 6 for an EUI-48 constraint or 8 for an EUI-64 constraint).
+Similarly, 'value' refers to the bit string formed from the first set of N octets in the constraint.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 <div id="matching-rule">
 <section id="section-3.4.1">
           <h4 id="name-matching-rule">
