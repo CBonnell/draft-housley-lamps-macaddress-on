@@ -242,6 +242,7 @@ foreach (constraint rst in tempRequestedSubtrees) {
 // } end foreach certificate in the path
 excluded_subtrees{} (i) = tempExcludedSubtrees;
 ~~~
+
 # Security Considerations
 
 The binding of a MAC address to a certificate is only as strong as the CA’s validation process. CAs MUST verify that the subscriber legitimately controls or owns the asserted MAC address.
