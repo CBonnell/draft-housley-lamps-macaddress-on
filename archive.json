@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-06T02:05:30.805030+00:00",
+  "timestamp": "2026-01-08T02:05:32.666561+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -55,16 +55,24 @@
       "id": "I_kwDOPNu74s7ebhvK",
       "title": "Need additional details for initialization and processing of MACAddress NameConstraints",
       "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/issues/8",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "mstjohns",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Need to add RFC5280 path validation initialization constants, and description of how to process UNION and INTERSECTION operations.",
       "createdAt": "2025-12-15T19:11:56Z",
-      "updatedAt": "2025-12-15T19:11:56Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-01-06T21:08:41Z",
+      "closedAt": "2026-01-06T21:08:41Z",
+      "comments": [
+        {
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "body": "Resolved by #9.",
+          "createdAt": "2026-01-06T21:08:38Z",
+          "updatedAt": "2026-01-06T21:08:38Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1124,24 +1132,26 @@
       "id": "PR_kwDOPNu74s64_yz7",
       "title": "Provide additional processing guidance for MACAddress NameConstraints",
       "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/9",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "mstjohns",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Added RFC5280 path validation initialization and processing logic for MACAddress NameConstraints.",
       "createdAt": "2025-12-15T19:24:49Z",
-      "updatedAt": "2026-01-05T18:44:18Z",
+      "updatedAt": "2026-01-06T20:51:01Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "7d93fbea51d0ce70cab30f73905a703d77f6efa4",
       "headRepository": "mstjohns/draft-housley-lamps-macaddress-on",
       "headRefName": "patch-1",
       "headRefOid": "caf4eb43604ea6b86c4900932adc25d02d103602",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-01-06T20:51:01Z",
+      "mergedAt": "2026-01-06T20:51:01Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "fbceb89260d5659503ce89d907e253570f877523"
+      },
       "comments": [
         {
           "author": "CBonnell",
@@ -1159,14 +1169,14 @@
         },
         {
           "author": "mstjohns",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "On 1/5/2026 11:58, Corey Bonnell wrote:\n> *CBonnell* left a comment \n> (CBonnell/draft-housley-lamps-macaddress-on#9) \n> <https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/9#issuecomment-3711286530>\n>\n> @mstjohns <https://github.com/mstjohns>, thanks for submitting your \n> suggestions as a PR. Your changes look good from a content standpoint, \n> but the doc build pipeline is complaining about trailing whitespace on \n> the following lines:\n>\n> |106:In the pseudo-code below, 'mask' is short hand for the bit string \n> formed from the mask portion of a constraint (e.g. the last 1/2 of the \n> constraint octets), 136:This section describes the Path Validation \n> Processing specific to OtherName.MACAddress constraints. 138:The \n> following is a utility function used to determine whether or not \n> 194:foreach ( constraint rst in tempRequestedSubtrees) { 195: foreach \n> ( constraint pst in prevSubtrees) { 196: if (childIncludedInParent \n> (rst, pst) { 200: } 208:#### Union Operation 234: matches = true; |\n>\n> Can you remove this whitespace, or should I take care of it in a \n> subsequent PR?\n>\n> \u2014\n> Reply to this email directly, view it on GitHub \n> <https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/9#issuecomment-3711286530>, \n> or unsubscribe \n> <https://github.com/notifications/unsubscribe-auth/AB5TYELIHFBXD776AK2ANJ34FKJ3BAVCNFSM6AAAAACPDQZ52GVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZTOMJRGI4DMNJTGA>.\n> You are receiving this because you were mentioned.Message ID: \n> ***@***.***>\n>\nI fixed and committed the update.\u00a0 Do I need to do another PR?\n\nMike\n\n",
           "createdAt": "2026-01-05T18:09:43Z",
           "updatedAt": "2026-01-05T18:09:43Z"
         },
         {
           "author": "mstjohns",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "On 1/5/2026 12:36, Russ Housley wrote:\n> *russhousley* left a comment \n> (CBonnell/draft-housley-lamps-macaddress-on#9) \n> <https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/9#issuecomment-3711419569>\n>\n> I think that \"first 1/2\" and \"last 1/2\" might be replaced with \"first \n> half\" and \"last half\", respectively.\n>\n> \u2014\n> Reply to this email directly, view it on GitHub \n> <https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/9#issuecomment-3711419569>, \n> or unsubscribe \n> <https://github.com/notifications/unsubscribe-auth/AB5TYELKQ4BUI7XWVNJLRW34FKOKHAVCNFSM6AAAAACPDQZ52GVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZTOMJRGQYTSNJWHE>.\n> You are receiving this because you were mentioned.Message ID: \n> ***@***.***>\n>\nI didn't change this mainly because\u00a0 \"half\" isn't used elsewhere.\u00a0 It \nmay need to be changed, but I think reconciling it with the text\u00a0 \"first \nset of N octets\" and \"second set of N octets\" may make sense.\u00a0 Or \n\"upper\" vs \"lower\".\u00a0 Might as well do these all at once.\n\nMike\n\n\n",
           "createdAt": "2026-01-05T18:17:39Z",
           "updatedAt": "2026-01-05T18:17:39Z"
@@ -1194,6 +1204,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOPNu74s67yxTA",
+      "title": "Minor edits",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/10",
+      "state": "MERGED",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-06T21:00:00Z",
+      "updatedAt": "2026-01-06T21:04:31Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "fbceb89260d5659503ce89d907e253570f877523",
+      "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "headRefName": "minor-edits",
+      "headRefOid": "93e10f541ab02f06bad5fbd400d2cbf044896682",
+      "closedAt": "2026-01-06T21:04:27Z",
+      "mergedAt": "2026-01-06T21:04:27Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "ec1cf0706bcdad588d34d7d381e45a6ad45cbf7a"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
