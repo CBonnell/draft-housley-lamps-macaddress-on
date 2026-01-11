@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-08T02:05:32.666561+00:00",
+  "timestamp": "2026-01-11T02:21:55.636609+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -1232,6 +1232,74 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOPNu74s68YP8v",
+      "title": "Fixes from Tim's review",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/11",
+      "state": "OPEN",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-09T18:06:52Z",
+      "updatedAt": "2026-01-10T11:59:28Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "42a48edbecaffe5d6c34ee782a1315d17076c255",
+      "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "headRefName": "shepherd-fixes",
+      "headRefOid": "011fd15d4e3998b9b5a5868812721a08b932a454",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "All fine.  On line 59, do we want to reword to drop \"new\".  That is, will future readers care that it was a new otherName?",
+          "createdAt": "2026-01-09T18:42:20Z",
+          "updatedAt": "2026-01-09T18:42:20Z"
+        },
+        {
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "body": "> All fine. On line 59, do we want to reword to drop \"new\". That is, will future readers care that it was a new otherName?\r\n\r\nI think we should drop \"new\" from the document. I did so in the latest commit.",
+          "createdAt": "2026-01-09T20:00:18Z",
+          "updatedAt": "2026-01-09T20:00:18Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPNu74s7ZQ3Ek",
+          "commit": {
+            "abbreviatedOid": "76b3c3b"
+          },
+          "author": "mandelj7",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-09T18:19:52Z",
+          "updatedAt": "2026-01-09T18:19:52Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7ZXQlQ",
+          "commit": {
+            "abbreviatedOid": "011fd15"
+          },
+          "author": "tomofumiokubo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM!",
+          "createdAt": "2026-01-10T11:59:28Z",
+          "updatedAt": "2026-01-10T11:59:28Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
