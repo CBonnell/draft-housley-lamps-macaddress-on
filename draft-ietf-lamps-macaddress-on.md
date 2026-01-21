@@ -150,7 +150,7 @@ The following is a utility function used to determine whether or not the set of 
 
 Examples - given the following (using the IANA assigned DOI) - 'child' is a constraint wholly contained within 'parent':
 
-constraint parent = '000000000000 000000000000'H  
+constraint parent = '000000000000 000000000000'H\
 constraint child =  '00005E000000 FCFFFF000000'H
 
 'child' is a subset of parent because:
