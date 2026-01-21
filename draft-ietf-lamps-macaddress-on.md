@@ -158,7 +158,7 @@ constraint child =  '00005E000000 FCFFFF000000'H
 2) The child.mask ANDed with the parent.mask equals the parent mask and
 3) The bits in the child.value under the parent.mask are set to the same values as the bits in the parent.value under the parent mask.
 
-Note that the child mask allows for any combination of the local/universal and unicast/multicast address bits within the OUI of 00-00-0e. 
+Note that the child mask allows for any combination of the local/universal and unicast/multicast address bits within the OUI of 00-00-0e.
 
 If you had 'constraint child2 = '000005E0000000 FFFFFF000000'H and compared it to 'child', 'child2' would be a subset of 'child'  'child2' uses the same OUI as 'child', but further restricts the matching addresses to universal/unicast by turning on the '0300000000'H mask bits.
 
@@ -238,7 +238,7 @@ Assuming the sole CA certificate in the path that has a NameConstraints extensio
 
 #### Union Operation
 
-See Section 6.1.4 (g) (2) of [RFC5280].  Unlike permitted_subtrees which is the intersection of the NameConstraints at each level, excluded_subtrees are the union of all constraints.  Starting with an excluded_trees empty set, with each level add to that set any constraints from the CA certificates that are not already in the set, or that are not covered by a constraint already in the set.  
+See Section 6.1.4 (g) (2) of [RFC5280].  Unlike permitted_subtrees which is the intersection of the NameConstraints at each level, excluded_subtrees are the union of all constraints.  Starting with an excluded_trees empty set, with each level add to that set any constraints from the CA certificates that are not already in the set, or that are not covered by a constraint already in the set.
 
 The union of the set of OtherName.MACAddress current excluded_subtrees with each certificate in the path is as follows:
 
