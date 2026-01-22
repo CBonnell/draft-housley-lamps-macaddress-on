@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-11T02:21:55.636609+00:00",
+  "timestamp": "2026-01-22T02:11:11.729710+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -1300,6 +1300,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOPNu74s6-jB1h",
+      "title": "Update draft-ietf-lamps-macaddress-on.md",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/12",
+      "state": "OPEN",
+      "author": "mstjohns",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Address AD's comments.  Rework Pathvalidation",
+      "createdAt": "2026-01-21T21:15:37Z",
+      "updatedAt": "2026-01-21T22:00:26Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "42a48edbecaffe5d6c34ee782a1315d17076c255",
+      "headRepository": "mstjohns/draft-housley-lamps-macaddress-on",
+      "headRefName": "main",
+      "headRefOid": "0d639cc30211c607a8467e4143bd14df45acd19e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
