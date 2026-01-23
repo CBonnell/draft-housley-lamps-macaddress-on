@@ -56,13 +56,13 @@ normative:
 
 --- abstract
 
-This document defines a new GeneralName.otherName for inclusion in the X.509 Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to bind a layer‑2 interface identifier to a public key certificate. Additionally, this document defines how constraints on this name form can be encoded and processed in the X.509 NameConstraints extension.
+This document defines a new GeneralName.otherName for inclusion in the X.509 Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to bind a layer‑2 interface identifier to a public key certificate. Additionally, this document defines how constraints on this name form can be encoded and processed in the X.509 Name Constraints extension (NCE).
 
 --- middle
 
 # Introduction
 
-Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in [RFC5280]. This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the NameConstraints extension defined in [RFC5280]. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
+Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in [RFC5280]. This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension (NCE) defined in [RFC5280]. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
 
 Note that while this construct may be used to carry EUI-48 or EUI-64 addresses in an IAN extension, there are probably few, if any, reasons to do so.
 
@@ -84,7 +84,7 @@ Example: 00-24-98-7B-19-02 encodes as OCTET STRING '0024987B1902'H.
 
 ## Encoding a MACAddress constraint
 
-When the name form is included in the NameConstraints extension, the syntax consists of an OCTET STRING that is twice as long as the OCTET STRING representation of the address type being constrained. Within the OCTET STRING, two elements are encoded:
+When the name form is included in the NCE, the syntax consists of an OCTET STRING that is twice as long as the OCTET STRING representation of the address type being constrained. Within the OCTET STRING, two elements are encoded:
 
 1. The first set of N octets (where N is 6 for an EUI-48 constraint or 8 for an EUI-64 constraint) contains the "value bit pattern". This bit pattern encodes the bits that the masked address must contain to be considered a match.
 2. The second set of N octets encodes the "mask bit pattern" of the constraint. Each bit that is asserted in the mask bit pattern indicates that the bit in the same position in the address is constrained by the first set of N octets.
@@ -95,7 +95,7 @@ The bit patterns encoded in both the value bit pattern and mask bit pattern are 
 
 If a bit is not asserted in the mask bit pattern, then the CA MUST NOT assert the corresponding bit in the value bit pattern. This rule ensures that a canonical encoding is used for a given mask bit pattern and value bit pattern.
 
-Per [RFC5280], NameConstraints extensions are valid in and should be placed only in CA certificates.
+Per [RFC5280], NCE are valid in and should be placed only in CA certificates.
 
 ## Generation and Validation Rules
 
@@ -107,9 +107,9 @@ Wildcards are not supported.
 
 Self‑signed certificates that carry a MACAddress otherName SHOULD include the address of one of the device’s physical ports.
 
-## NameConstraints Path Processing
+## Name Constraints Extension Path Processing
 
-The MACAddress otherName follows the general rules for otherName constraints in [RFC5280], Section 4.2.1.10. A NameConstraints extension MAY impose permittedSubtrees and excludedSubtrees on id‑on‑MACAddress.
+The MACAddress otherName follows the general rules for otherName constraints in [RFC5280], Section 4.2.1.10. An NCE MAY impose permittedSubtrees and excludedSubtrees on OtherNames of type id‑on‑MACAddress.
 
 In the pseudo-code below, 'mask' is shorthand for the bit string formed from the mask portion of a constraint (e.g., the second set of N octets in the constraint, where N is 6 for an EUI-48 constraint or 8 for an EUI-64 constraint). Similarly, 'value' refers to the bit string formed from the first set of N octets in the constraint.
 
@@ -138,15 +138,15 @@ boolean nameMatchesConstraint (name n, constraint c) {
 }
 ~~~
 
-For example, a constraint of '000000000000 030000000000'H will be matched by any universal/unicast EUI-48 address such as 00-00-5e-12-23-34.  A constraint of '00005E000000 FFFFFF000000'H will be matched by any universal/unicast address with a OUI of 00-00-5E - i.e., it will also match 00-00-5e-12-23-34.  Note that '00-00-5E' is an OUI controlled by IANA.
+For example, a constraint of '000000000000 030000000000'H will be matched by any universal/unicast EUI-48 address such as 00-00-5e-00-50-34.  A constraint of '00005E000000 FFFFFF000000'H will be matched by any universal/unicast address with a OUI of 00-00-5E - i.e., it will also match 00-00-5e-00-50-34.  Note that '00-00-5E' is an OUI controlled by IANA.
 
 Implementations are not required to implement this algorithm, but MUST calculate an identical result to this algorithm for a given set of inputs.
 
 ### OtherName.MACAddress Path Validation Processing
 
-This section describes the Path Validation Processing specific to OtherName.MACAddress constraints.  N.B., It is possible to build hierarchies of NameConstraints for OtherName.MACAddress's that prohibit ALL names, even if that wasn't intended. For example, say that your level 1 NameConstraints contained only a "permitted_subtrees" of only global/unicast EUI-48, and your level 2 NameConstraints contained only a "permitted_subtress" of "any address" (i.e. the initial constraint set).  This would result in an empty permitted_subtrees set as an "any address" constraint is not contained within a "global/unicast" constraint. The worked example is left to the reader.
+This section describes the Path Validation Processing specific to OtherName.MACAddress constraints.  N.B., It is possible to build hierarchies of NCEs for OtherName.MACAddress's that prohibit ALL names, even if that wasn't intended. For example, say that your level 1 NCE contained only a "permitted_subtrees" of only (OtherName.MACAddress) global/unicast EUI-48, and your level 2 NCE contained only a "permitted_subtress" of "any address" (i.e. the initial constraint set).  This would result in an empty permitted_subtrees set as an "any address" constraint is not contained within a "global/unicast" constraint. The worked example is left to the reader.
 
-The following is a utility function used to determine whether or not the set of matching addresses for one constraint is a subset of the matching addresses for another constraint.
+The following is a utility function used to determine whether or not the set of matching addresses for one MACAddress constraint is a subset of the matching addresses for another constraint.
 
 Examples - given the following (using the IANA assigned DOI) - 'child' is a constraint wholly contained within 'parent':
 
@@ -160,7 +160,7 @@ constraint child =  '00005E000000 FCFFFF000000'H
 
 Note that the child mask allows for any combination of the local/universal and unicast/multicast address bits within the OUI of 00-00-0e.
 
-If you had 'constraint child2 = '000005E0000000 FFFFFF000000'H and compared it to 'child', 'child2' would be a subset of 'child'  'child2' uses the same OUI as 'child', but further restricts the matching addresses to universal/unicast by turning on the '0300000000'H mask bits.
+If you had 'constraint child2 = '00005E005000 FFFFFFFFFFF00'H and compared it to 'child', 'child2' would be a subset of 'child'  'child2' uses the same OUI as 'child', but further restricts the matching addresses to universal/unicast by turning on the '0300000000'H mask bits and also restricts the range of valid addresses from 00-00-5E-00-50-00 to 00-00-5E-00-50-FF - i.e., to the 'example' range for the 00-00-5E OUI.
 
 ~~~
 // Both 'child' and 'parent' are OtherName.MACAddress
@@ -169,18 +169,18 @@ If you had 'constraint child2 = '000005E0000000 FFFFFF000000'H and compared it t
 // parent, false otherwise
 // Used to calculate INTERSECTION sets for
 // OtherName.MACAddress constraints.
-boolean childIsSubsetOfParent (constraint child, constraint parent)
+boolean childIsSubsetOfParent (constraint c, constraint p)
   return (
      // if the lengths are the same
-     child.length == parent.length &&
-     // and if there are no bits set in the parent.mask that
-     //    aren't also set in the child.mask
+     c.length == p.length &&
+     // and if there are no bits set in the parent's mask that
+     //    aren't also set in the child's mask
      // e.g. we can add mask bits to the current set, we can't remove them
-     (child.mask & parent.mask) == parent.mask &&
-     // and if the child.value has at least all the bits set that
-     //   were set (and live) in the parent.value
+     (c.mask & p.mask) == p.mask &&
+     // and if the child's value has at least all the bits set that
+     //   were set (and live) in the parent's value
      // e.g. we can't change the values of the live bits from the superior constraint
-     (child.value & parent.mask) == (parent.value & parent.mask)
+     (c.value & p.mask) == (p.value & p.mask)
     );
 }
 ~~~
@@ -188,7 +188,7 @@ boolean childIsSubsetOfParent (constraint child, constraint parent)
 
 #### Initialization
 
-Per sections 6.1.1 (h) and (i) of [RFC5280], we need to specify NameConstraint.MACAddress set values for both the initial-permitted-subtrees and for initial-excluded-subtrees.  The first constraint is "accept all EUI-48 MACAddresses", and the second constraint is "accept all EUI-64 addresses"
+Per sections 6.1.1 (h) and (i) of [RFC5280], we need to specify NCE OtherName.MACAddress set values for both the initial-permitted-subtrees and for initial-excluded-subtrees.  For initial-permitted-subtree, the first constraint is "accept all EUI-48 MACAddresses", and the second constraint is "accept all EUI-64 MACAddresses":
 
 ~~~
 initial-permitted-subtrees{} += { 000000000000000000000000H,
@@ -198,7 +198,7 @@ initial-excluded-subtrees{} += { };
 
 #### Intersection Operation
 
-See Section 6.1.4 (g) (1) of [RFC5280].  As we walk down the tree from the root, the set of permitted_subtrees can only stay the same or shrink. At each level, we clear the set of permitted_subtrees and for each NameConstraint.OtherName.MACAddress.permitted_subtree constraint in the certificate we look to see if there is a permitted_subtree constraint at the previous level that equals or encloses this new constraint.  If so, we add this new constraint to the current level's set of permitted_subtrees.  We repeat this going down the tree for the remaining CA certificates.
+See Section 6.1.4 (g) (1) of [RFC5280].  As we walk down the tree from the root, the set of permitted_subtrees can only stay the same or shrink. At each level, we clear the set of permitted_subtrees and for each NCE OtherName.MACAddress.permitted_subtree constraint in the certificate we look to see if there is a permitted_subtree constraint at the previous level that equals or encloses this new constraint.  If so, we add this new constraint to the current level's set of permitted_subtrees.  We repeat this going down the tree for the remaining CA certificates.
 
 The intersection of the set of OtherName.MACAddress current permitted_subtrees with each certificate in the path is as follows:
 
@@ -215,7 +215,7 @@ set constraint prevSubtrees{}  =
 constraint tempPermittedSubtrees {} = {};
 constraint tempRequestedSubtrees {} =
    { the set of OtherName.MACAddress.permitted_subtrees from
-     the NameConstraints Extenson in the current certificate };
+     the Name Constraints extension in the current certificate };
 
 // rst => one of the requested subtrees (from the cert)
 // pst -> one of the current permitted subtrees
@@ -234,11 +234,10 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
 
 ~~~
 
-Assuming the sole CA certificate in the path that has a NameConstraints extension containing '00 00 0e 00 00 00 ff ff ff 00 00 00'H
 
 #### Union Operation
 
-See Section 6.1.4 (g) (2) of [RFC5280].  Unlike permitted_subtrees which is the intersection of the NameConstraints at each level, excluded_subtrees are the union of all constraints.  Starting with an excluded_trees empty set, with each level add to that set any constraints from the CA certificates that are not already in the set, or that are not covered by a constraint already in the set.
+See Section 6.1.4 (g) (2) of [RFC5280].  Unlike permitted_subtrees which is the intersection of the NCEs  at each level, excluded_subtrees are the union of all constraints.  Starting with an excluded_trees empty set, with each level add to that set any constraints from the CA certificates that are not already in the set, or that are not covered by a constraint already in the set.
 
 The union of the set of OtherName.MACAddress current excluded_subtrees with each certificate in the path is as follows:
 
@@ -343,7 +342,7 @@ id-on-MACAddress OBJECT IDENTIFIER ::= { id-on TBD1 }
 MACAddressOtherNames OTHER-NAME ::= { on-MACAddress, ... }
 
 on-MACAddress OTHER-NAME ::= {
-MACAddress IDENTIFIED BY id-on-MACAddress }
+    MACAddress IDENTIFIED BY id-on-MACAddress }
 
 MACAddress ::= OCTET STRING (SIZE (6 | 8 | 12 | 16))
 
