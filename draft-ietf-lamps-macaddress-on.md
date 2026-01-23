@@ -62,7 +62,7 @@ This document defines a new GeneralName.otherName for inclusion in the X.509 Sub
 
 # Introduction
 
-Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in [RFC5280]. This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension (NCE) defined in [RFC5280]. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
+Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in {{RFC5280}}. This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension (NCE) defined in {{RFC5280}}. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
 
 Note that while this construct may be used to carry EUI-48 or EUI-64 addresses in an IAN extension, there are probably few, if any, reasons to do so.
 
@@ -95,7 +95,7 @@ The bit patterns encoded in both the value bit pattern and mask bit pattern are 
 
 If a bit is not asserted in the mask bit pattern, then the CA MUST NOT assert the corresponding bit in the value bit pattern. This rule ensures that a canonical encoding is used for a given mask bit pattern and value bit pattern.
 
-Per [RFC5280], NCE are valid in and should be placed only in CA certificates.
+Per {{RFC5280}}, NCE are valid in and should be placed only in CA certificates.
 
 ## Generation and Validation Rules
 
@@ -109,7 +109,7 @@ Self‑signed certificates that carry a MACAddress otherName SHOULD include the 
 
 ## Name Constraints Extension Path Processing
 
-The MACAddress otherName follows the general rules for otherName constraints in [RFC5280], Section 4.2.1.10. An NCE MAY impose permittedSubtrees and excludedSubtrees on OtherNames of type id‑on‑MACAddress.
+The MACAddress otherName follows the general rules for otherName constraints in {{RFC5280}}, Section 4.2.1.10. An NCE MAY impose permittedSubtrees and excludedSubtrees on OtherNames of type id‑on‑MACAddress.
 
 In the pseudo-code below, 'mask' is shorthand for the bit string formed from the mask portion of a constraint (e.g., the second set of N octets in the constraint, where N is 6 for an EUI-48 constraint or 8 for an EUI-64 constraint). Similarly, 'value' refers to the bit string formed from the first set of N octets in the constraint.
 
@@ -188,7 +188,7 @@ boolean childIsSubsetOfParent (constraint c, constraint p)
 
 #### Initialization
 
-Per sections 6.1.1 (h) and (i) of [RFC5280], we need to specify NCE OtherName.MACAddress set values for both the initial-permitted-subtrees and for initial-excluded-subtrees.  For initial-permitted-subtree, the first constraint is "accept all EUI-48 MACAddresses", and the second constraint is "accept all EUI-64 MACAddresses":
+Per sections 6.1.1 (h) and (i) of {{RFC5280}}, we need to specify NCE OtherName.MACAddress set values for both the initial-permitted-subtrees and for initial-excluded-subtrees.  For initial-permitted-subtree, the first constraint is "accept all EUI-48 MACAddresses", and the second constraint is "accept all EUI-64 MACAddresses":
 
 ~~~
 initial-permitted-subtrees{} += { 000000000000000000000000H,
@@ -198,7 +198,7 @@ initial-excluded-subtrees{} += { };
 
 #### Intersection Operation
 
-See Section 6.1.4 (g) (1) of [RFC5280].  As we walk down the tree from the root, the set of permitted_subtrees can only stay the same or shrink. At each level, we clear the set of permitted_subtrees and for each NCE OtherName.MACAddress.permitted_subtree constraint in the certificate we look to see if there is a permitted_subtree constraint at the previous level that equals or encloses this new constraint.  If so, we add this new constraint to the current level's set of permitted_subtrees.  We repeat this going down the tree for the remaining CA certificates.
+See Section 6.1.4 (g) (1) of {{RFC5280}}.  As we walk down the tree from the root, the set of permitted_subtrees can only stay the same or shrink. At each level, we clear the set of permitted_subtrees and for each NCE OtherName.MACAddress.permitted_subtree constraint in the certificate we look to see if there is a permitted_subtree constraint at the previous level that equals or encloses this new constraint.  If so, we add this new constraint to the current level's set of permitted_subtrees.  We repeat this going down the tree for the remaining CA certificates.
 
 The intersection of the set of OtherName.MACAddress current permitted_subtrees with each certificate in the path is as follows:
 
@@ -237,7 +237,7 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
 
 #### Union Operation
 
-See Section 6.1.4 (g) (2) of [RFC5280].  Unlike permitted_subtrees which is the intersection of the NCEs  at each level, excluded_subtrees are the union of all constraints.  Starting with an excluded_trees empty set, with each level add to that set any constraints from the CA certificates that are not already in the set, or that are not covered by a constraint already in the set.
+See Section 6.1.4 (g) (2) of {{RFC5280}}.  Unlike permitted_subtrees which is the intersection of the NCEs  at each level, excluded_subtrees are the union of all constraints.  Starting with an excluded_trees empty set, with each level add to that set any constraints from the CA certificates that are not already in the set, or that are not covered by a constraint already in the set.
 
 The union of the set of OtherName.MACAddress current excluded_subtrees with each certificate in the path is as follows:
 
