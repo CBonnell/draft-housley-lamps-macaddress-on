@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-22T02:11:11.729710+00:00",
+  "timestamp": "2026-01-25T02:24:03.279886+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -1313,19 +1313,300 @@
       "labels": [],
       "body": "Address AD's comments.  Rework Pathvalidation",
       "createdAt": "2026-01-21T21:15:37Z",
-      "updatedAt": "2026-01-21T22:00:26Z",
+      "updatedAt": "2026-01-24T20:16:06Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "42a48edbecaffe5d6c34ee782a1315d17076c255",
       "headRepository": "mstjohns/draft-housley-lamps-macaddress-on",
       "headRefName": "main",
-      "headRefOid": "0d639cc30211c607a8467e4143bd14df45acd19e",
+      "headRefOid": "97e29d8a099d62ebd30b37242b3b9d4946cd4a74",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "On line 81, you might want to include \"00:24:98:7B:19:02\" as another human-readable presentation.\r\n\r\nI do not know where this example MAC address comes from.  I wonder if IEEE 802 has a OUI set aside for examples.",
+          "createdAt": "2026-01-22T15:23:45Z",
+          "updatedAt": "2026-01-22T15:23:45Z"
+        },
+        {
+          "author": "mstjohns",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> On line 81, you might want to include \"00:24:98:7B:19:02\" as another human-readable presentation.\r\n> \r\n> I do not know where this example MAC address comes from. I wonder if IEEE 802 has a OUI set aside for examples.\r\n\r\nI got this address from the IEEE slides and this was an example address.\r\n\r\nTo be fair, I'm mostly of a don't care with using any address here regardless of ownership.  It's unlikely the example will show up in code.",
+          "createdAt": "2026-01-23T16:28:59Z",
+          "updatedAt": "2026-01-23T16:28:59Z"
+        },
+        {
+          "author": "debcooley",
+          "authorAssociation": "NONE",
+          "body": "I like the changes I see here.  The examples are MUCH better.  \r\n\r\nTYVM for the work.\r\n\r\n",
+          "createdAt": "2026-01-24T11:56:01Z",
+          "updatedAt": "2026-01-24T11:56:27Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPNu74s7cF-gq",
+          "commit": {
+            "abbreviatedOid": "0d639cc"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2026-01-22T13:50:05Z",
+          "updatedAt": "2026-01-22T15:13:28Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "RFC 5280 does not use the term \"NameConstraints\" in any prose; it is only used in the ASN.1 definition.\n\nI'd prefer to use terminology and formatting consistent with 5280 (i.e. \"name constraints\")",
+              "createdAt": "2026-01-22T13:50:05Z",
+              "updatedAt": "2026-01-22T15:13:28Z"
+            },
+            {
+              "originalPosition": 132,
+              "body": "Might be more consistent to use single-letter param names to align with the function above.",
+              "createdAt": "2026-01-22T15:12:12Z",
+              "updatedAt": "2026-01-22T15:13:28Z"
+            },
+            {
+              "originalPosition": 157,
+              "body": "```suggestion\nPer sections 6.1.1 (h) and (i) of [RFC5280], we need to specify NameConstraint.MACAddress set values for both the initial-permitted-subtrees and for initial-excluded-subtrees.  The first constraint is \"accept all EUI-48 MACAddresses\", and the second constraint is \"accept all EUI-64 addresses\":\n```",
+              "createdAt": "2026-01-22T15:12:35Z",
+              "updatedAt": "2026-01-22T15:13:28Z"
+            },
+            {
+              "originalPosition": 187,
+              "body": "```suggestion\n     the NameConstraints Extension in the current certificate };\n```",
+              "createdAt": "2026-01-22T15:12:53Z",
+              "updatedAt": "2026-01-22T15:13:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7cK7jO",
+          "commit": {
+            "abbreviatedOid": "0d639cc"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-22T18:09:21Z",
+          "updatedAt": "2026-01-22T18:09:21Z",
+          "comments": [
+            {
+              "originalPosition": 132,
+              "body": "The IEEE RAC uses the example AC-DE-48 in its tutorial (https://standards.ieee.org/wp-content/uploads/import/documents/tutorials/eui.pdf'). A note explains that OUI not reserved, so it could be in use seems appropriate.",
+              "createdAt": "2026-01-22T18:09:21Z",
+              "updatedAt": "2026-01-22T18:09:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7cL4Jb",
+          "commit": {
+            "abbreviatedOid": "0d639cc"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-22T19:10:11Z",
+          "updatedAt": "2026-01-22T19:10:11Z",
+          "comments": [
+            {
+              "originalPosition": 132,
+              "body": "There are EUI-48 and EUI-64 addresses set aside for example use under the IANA OUI as documented in RFC 9542 and https://www.iana.org/assignments/ethernet-numbers/ethernet-numbers.xhtml.  We should use them.\r\n\r\nSpecifically, for EUI-48, 00-00-5E-00-53-00 through 00-00-5E-00-53-FF for unicast, and for EUI-64\r\n00-00-5E-10-00-00-00-00 through 00-00-5E-10-00-00-00-FF for unicast.",
+              "createdAt": "2026-01-22T19:10:11Z",
+              "updatedAt": "2026-01-22T19:10:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7ccS_z",
+          "commit": {
+            "abbreviatedOid": "0d639cc"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-23T16:24:47Z",
+          "updatedAt": "2026-01-23T16:24:47Z",
+          "comments": [
+            {
+              "originalPosition": 132,
+              "body": "I use 00-00-5E as examples.  Easy enough to do a DOI plus range constraint:  00005e005300ffffffffff.\r\n",
+              "createdAt": "2026-01-23T16:24:47Z",
+              "updatedAt": "2026-01-23T16:24:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7ccTzZ",
+          "commit": {
+            "abbreviatedOid": "0d639cc"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-23T16:25:16Z",
+          "updatedAt": "2026-01-23T16:25:16Z",
+          "comments": [
+            {
+              "originalPosition": 132,
+              "body": "> Might be more consistent to use single-letter param names to align with the function above.\r\n\r\nYup.  I'll try to find time to make an editing pass today.",
+              "createdAt": "2026-01-23T16:25:16Z",
+              "updatedAt": "2026-01-23T16:25:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7ccU9_",
+          "commit": {
+            "abbreviatedOid": "0d639cc"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-23T16:25:59Z",
+          "updatedAt": "2026-01-23T16:25:59Z",
+          "comments": [
+            {
+              "originalPosition": 157,
+              "body": "OK.  And need to fix NameConstraint to NameConstraitns",
+              "createdAt": "2026-01-23T16:25:59Z",
+              "updatedAt": "2026-01-23T16:25:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7ccWYb",
+          "commit": {
+            "abbreviatedOid": "0d639cc"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-23T16:26:57Z",
+          "updatedAt": "2026-01-23T16:26:57Z",
+          "comments": [
+            {
+              "originalPosition": 187,
+              "body": "Oops.",
+              "createdAt": "2026-01-23T16:26:57Z",
+              "updatedAt": "2026-01-23T16:26:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7ccZr7",
+          "commit": {
+            "abbreviatedOid": "0d639cc"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-23T16:29:17Z",
+          "updatedAt": "2026-01-23T16:29:17Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "It does need to be internally consistent (one of Deb's comments), but not necessarily consistent with RFC5280. one of the issues is that we're generally referring to the structure rather than a general extension.  We use SAN and IAN because these are used frequently, but NameConstraints is not.  I guess I could use \"NCE\" for Name Constraints extension throughout, but I'd have to check.   I'm going to leave it alone here for now as a style issue and let's circle back after we deal with any technical stuff.",
+              "createdAt": "2026-01-23T16:29:17Z",
+              "updatedAt": "2026-01-23T16:29:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7coCP4",
+          "commit": {
+            "abbreviatedOid": "0d639cc"
+          },
+          "author": "debcooley",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-24T11:52:47Z",
+          "updatedAt": "2026-01-24T11:52:47Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "You can use them interchangeably, if you say that's what you are doing.  i.e. like you do for otherName.  You *could* put all of that up in the 'Conventions and Definitions' section (where you have the BCP14 blurb), so it doesn't mess with the flow of these sections. ",
+              "createdAt": "2026-01-24T11:52:47Z",
+              "updatedAt": "2026-01-24T11:52:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7csaVu",
+          "commit": {
+            "abbreviatedOid": "0d639cc"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-24T20:15:17Z",
+          "updatedAt": "2026-01-24T20:15:17Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "I moved evertyhing to \"Name Constraints extension\" or NCE througout.",
+              "createdAt": "2026-01-24T20:15:17Z",
+              "updatedAt": "2026-01-24T20:15:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7csala",
+          "commit": {
+            "abbreviatedOid": "0d639cc"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-24T20:15:37Z",
+          "updatedAt": "2026-01-24T20:15:37Z",
+          "comments": [
+            {
+              "originalPosition": 132,
+              "body": "Done",
+              "createdAt": "2026-01-24T20:15:37Z",
+              "updatedAt": "2026-01-24T20:15:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7csa8Y",
+          "commit": {
+            "abbreviatedOid": "0d639cc"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-24T20:16:06Z",
+          "updatedAt": "2026-01-24T20:16:06Z",
+          "comments": [
+            {
+              "originalPosition": 157,
+              "body": "See the 4th commit... all this should have been fixed.",
+              "createdAt": "2026-01-24T20:16:06Z",
+              "updatedAt": "2026-01-24T20:16:06Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
