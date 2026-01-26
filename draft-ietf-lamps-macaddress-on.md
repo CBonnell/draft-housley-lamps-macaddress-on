@@ -95,7 +95,7 @@ The bit patterns encoded in both the value bit pattern and mask bit pattern are 
 
 If a bit is not asserted in the mask bit pattern, then the CA MUST NOT assert the corresponding bit in the value bit pattern. This rule ensures that a canonical encoding is used for a given mask bit pattern and value bit pattern.
 
-Per {{RFC5280}}, NCE are valid in and should be placed only in CA certificates.
+Per {{RFC5280}}, NCE are valid in and MUST be placed only in CA certificates.
 
 ## Generation and Validation Rules
 
