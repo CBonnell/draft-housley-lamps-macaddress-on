@@ -49,6 +49,11 @@ author:
     abbrev: Penguin Securities
     email: tomofumi.okubo+ietf@gmail.com
 
+  - name: Michael StJohns
+    ins: M. StJohns
+    org: NthPermutation Security LLC
+    email: msj@nthpermutation.com
+
 normative:
   RFC5280:
   RFC5912:
@@ -399,4 +404,4 @@ constraint.
 # Acknowledgments
 {:numbered="false"}
 
-We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to David von Oheimb, John Mattsson, Michael StJohns, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.
+We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to David von Oheimb, John Mattsson, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.
