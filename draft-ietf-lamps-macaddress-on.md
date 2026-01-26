@@ -1,6 +1,6 @@
 ---
 title: "Media Access Control (MAC) Addresses in X.509 Certificates"
-category: info
+category: std
 
 docname: draft-ietf-lamps-macaddress-on-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
@@ -57,6 +57,7 @@ normative:
 --- abstract
 
 This document defines a new GeneralName.otherName for inclusion in the X.509 Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to bind a layer‑2 interface identifier to a public key certificate. Additionally, this document defines how constraints on this name form can be encoded and processed in the X.509 Name Constraints extension (NCE).
+This document defines an otherName for inclusion in the X.509 Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions to carry an IEEE Media Access Control (MAC) address. The name form makes it possible to bind a layer-2 interface identifier to a public key certificate. Additionally, this document defines how constraints on this name form can be encoded and processed in the X.509 Name Constraints extension.
 
 --- middle
 
@@ -101,11 +102,11 @@ Per {{RFC5280}}, NCE are valid in and MUST be placed only in CA certificates.
 
 A certificate MAY include one or more MACAddress otherName values if, and only if, the subject device owns (or is expected to own) the corresponding MAC address for the certificate lifetime. MAC addresses SHOULD NOT appear in more than one valid certificate issued by the same Certification Authority (CA) at the same time, unless different layer‑2 interfaces share a public key.
 
-A Relying party that matches a presented MAC address to a certificate SHALL perform a byte‑for‑byte comparison of the OCTET STRING contents. Canonicalization, case folding, or removal of delimiter characters MUST NOT be performed.
+A Relying party that matches a presented MAC address to a certificate SHALL perform a byte-for-byte comparison of the OCTET STRING contents. Canonicalization, case folding, or removal of delimiter characters MUST NOT be performed.
 
 Wildcards are not supported.
 
-Self‑signed certificates that carry a MACAddress otherName SHOULD include the address of one of the device’s physical ports.
+Self-signed certificates that carry a MACAddress otherName SHOULD include the address of one of the device's physical ports.
 
 ## Name Constraints Extension Path Processing
 
@@ -280,19 +281,19 @@ excluded_subtrees{} (i) = tempExcludedSubtrees;
 
 # Security Considerations
 
-The binding of a MAC address to a certificate is only as strong as the CA’s validation process. CAs MUST verify that the subscriber legitimately controls or owns the asserted MAC address.
+The binding of a MAC address to a certificate is only as strong as the CA's validation process. CAs MUST verify that the subscriber legitimately controls or owns the asserted MAC address.
 
 Some systems dynamically assign or share MAC addresses. Such practices can undermine the uniqueness and accountability that this name form aims to provide.
 
-Unlike IP addresses, MAC addresses are not typically routed across layer 3 boundaries. Relying parties in different broadcast domains SHOULD NOT assume uniqueness beyond their local network.
+Unlike IP addresses, MAC addresses are not typically routed across layer 3 boundaries. Relying parties in different broadcast domains SHOULD NOT assume uniqueness beyond their local network.
 
 ## Privacy Considerations
 
-A MAC address can uniquely identify a physical device and by extension, its user. Certificates that embed unchanging MAC addresses facilitate long‑term device tracking. Deployments that use the MACAddress name SHOULD consider rotating addresses, using temporary certificates, or employing MAC Address Randomization where feasible.
+A MAC address can uniquely identify a physical device and by extension, its user. Certificates that embed unchanging MAC addresses facilitate long-term device tracking. Deployments that use the MACAddress name SHOULD consider rotating addresses, using temporary certificates, or employing MAC Address Randomization where feasible.
 
 # IANA Considerations
 
-IANA is requested to make the following assignments in the “SMI Security for PKIX Module Identifier” (1.3.6.1.5.5.7.0) registry:
+IANA is requested to make the following assignments in the "SMI Security for PKIX Module Identifier" (1.3.6.1.5.5.7.0) registry:
 
         +=========+====================================+===============+
         | Decimal | Description                        | References    |
@@ -300,7 +301,7 @@ IANA is requested to make the following assignments in the “SMI Security for P
         | TBD0    | id-mod-mac-address-other-name-2025 | This document |
         +---------+------------------------------------+---------------+
 
-IANA is requested to make the following assignment in the “SMI Security for PKIX Other Name Forms” (1.3.6.1.5.5.7.8) registry:
+IANA is requested to make the following assignment in the "SMI Security for PKIX Other Name Forms" (1.3.6.1.5.5.7.8) registry:
 
         +=========+=================================+===============+
         | Decimal | Description                     | References    |
@@ -353,9 +354,9 @@ END
 
 ## EUI-48 identifier
 
-The following is a human‑readable summary of the Subject Alternative
+The following is a human-readable summary of the Subject Alternative
 Name extension from a certificate containing a single MACAddress
-otherName with value 00‑24‑98‑7B‑19‑02:
+otherName with value 00-24-98-7B-19-02:
 
 ~~~
   SEQUENCE {
@@ -368,7 +369,7 @@ otherName with value 00‑24‑98‑7B‑19‑02:
 
 ## EUI-64 identifier
 
-An EUI‑64 example (AC‑DE‑48‑00‑11‑22‑33‑44):
+An EUI-64 example (AC-DE-48-00-11-22-33-44):
 
 ~~~
   [0] OCTET STRING 'ACDE480011223344'H
@@ -381,7 +382,7 @@ The first octet of a MAC address contains two flag bits. IEEE bit numbering has 
 - Individual(I)/Group(G) bit (bit 0 or mask 0x01) – 0 = unicast, 1 = multicast.  Multicast prefixes are never OUIs.
 - Universal(U)/Local(L) bit (bit 1 or mask 0x02) – 0 = universal (IEEE‑assigned), 1 = local.
 
-These flags let the implementations exclude multicast and local addresses but still cannot prove that a 24‑bit value is an IEEE‑registered OUI. 36‑bit CIDs share the same first 24 bits and enterprises MAY deploy pseudo‑OUIs. CAs MUST include only addresses the subscriber legitimately controls (registered OUI or CID).  Before issuing a certificate that contains a MACAddress or a name constraint based on such a permitted set of addresses, the CA MUST verify that control: for example, by consulting the IEEE registry or reviewing manufacturer documentation.
+These flags let the implementations exclude multicast and local addresses but still cannot prove that a 24-bit value is an IEEE-registered OUI. 36-bit CIDs share the same first 24 bits and enterprises MAY deploy pseudo-OUIs. CAs MUST include only addresses the subscriber legitimately controls (registered OUI or CID).  Before issuing a certificate that contains a MACAddress or a name constraint based on such a permitted set of addresses, the CA MUST verify that control: for example, by consulting the IEEE registry or reviewing manufacturer documentation.
 
 The following constraint definition constrains EUI-48 values to only
 those are universal and unicast; locally assigned or multicast values will not match the
@@ -399,4 +400,4 @@ constraint.
 # Acknowledgments
 {:numbered="false"}
 
-We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to David von Oheimb, John Mattsson, and Michael StJohns for their reviews and suggestions, which greatly improved the quality of this document.
+We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to David von Oheimb, John Mattsson, Michael StJohns, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.
