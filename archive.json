@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-25T02:24:03.279886+00:00",
+  "timestamp": "2026-01-27T02:20:10.801581+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -1070,21 +1070,21 @@
       "id": "PR_kwDOPNu74s6xef1B",
       "title": "Specify that name constraints are only for a leaf.",
       "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/7",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "bob-beck",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "And when you need these, you can ensure you make the issueing intermediate be the place they are.\r\n\r\nAnd you do not need to make this apply up a chain.. because that is terrible, a large part of why all we implementors hate name constraints with a passion. Since this is an otherName, 5280 lets us make the rules.\r\n\r\nI believe this both makes something \"sufficiently name constrait-y\" to be useful for those of us (including myself in my past life) who would have made use of this, while making this not horrible to implement. Yes, this means that anyone wishing to use this must put them into the leaf issuer, and can't encode their org chart in a chain. IMO, this is fine.\r\n",
       "createdAt": "2025-11-04T17:51:03Z",
-      "updatedAt": "2025-11-12T19:14:13Z",
+      "updatedAt": "2026-01-26T18:57:18Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "7d93fbea51d0ce70cab30f73905a703d77f6efa4",
       "headRepository": "bob-beck/draft-housley-lamps-macaddress-on",
       "headRefName": "main",
       "headRefOid": "f1f270169902055bdfc03ecb57cbea527a0518b8",
-      "closedAt": null,
+      "closedAt": "2026-01-26T18:57:18Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -1238,24 +1238,26 @@
       "id": "PR_kwDOPNu74s68YP8v",
       "title": "Fixes from Tim's review",
       "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/11",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-01-09T18:06:52Z",
-      "updatedAt": "2026-01-10T11:59:28Z",
+      "updatedAt": "2026-01-26T18:57:02Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "42a48edbecaffe5d6c34ee782a1315d17076c255",
       "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "headRefName": "shepherd-fixes",
       "headRefOid": "011fd15d4e3998b9b5a5868812721a08b932a454",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-01-26T18:56:58Z",
+      "mergedAt": "2026-01-26T18:56:58Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "546e8edaef285e4441a8cbab4baf2b68c77beb37"
+      },
       "comments": [
         {
           "author": "russhousley",
@@ -1306,21 +1308,21 @@
       "id": "PR_kwDOPNu74s6-jB1h",
       "title": "Update draft-ietf-lamps-macaddress-on.md",
       "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/12",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "mstjohns",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Address AD's comments.  Rework Pathvalidation",
       "createdAt": "2026-01-21T21:15:37Z",
-      "updatedAt": "2026-01-24T20:16:06Z",
+      "updatedAt": "2026-01-26T19:05:03Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
-      "baseRefName": "main",
-      "baseRefOid": "42a48edbecaffe5d6c34ee782a1315d17076c255",
+      "baseRefName": "gh-pages",
+      "baseRefOid": "d07598403c5c436a178304ddf9242190e4aacd57",
       "headRepository": "mstjohns/draft-housley-lamps-macaddress-on",
       "headRefName": "main",
-      "headRefOid": "97e29d8a099d62ebd30b37242b3b9d4946cd4a74",
-      "closedAt": null,
+      "headRefOid": "f78f5c95a951531cca51385ccd31898add6a389b",
+      "closedAt": "2026-01-26T19:05:03Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -1345,6 +1347,20 @@
           "body": "I like the changes I see here.  The examples are MUCH better.  \r\n\r\nTYVM for the work.\r\n\r\n",
           "createdAt": "2026-01-24T11:56:01Z",
           "updatedAt": "2026-01-24T11:56:27Z"
+        },
+        {
+          "author": "mstjohns",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Actually should\u2019ve have been a MUST as this is how RFC5280 does it.\r\n\r\nOn Mon, Jan 26, 2026 at 12:08 Corey Bonnell ***@***.***>\r\nwrote:\r\n\r\n> ***@***.**** approved this pull request.\r\n> ------------------------------\r\n>\r\n> In draft-ietf-lamps-macaddress-on.md\r\n> <https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/12#discussion_r2728451341>\r\n> :\r\n>\r\n> >  The bit patterns encoded in both the value bit pattern and mask bit pattern are encoded with the most significant bit encoded first (\"big-endian\" or \"left-to-right\" encoding).\r\n>\r\n>  If a bit is not asserted in the mask bit pattern, then the CA MUST NOT assert the corresponding bit in the value bit pattern. This rule ensures that a canonical encoding is used for a given mask bit pattern and value bit pattern.\r\n>\r\n> +Per {{RFC5280}}, NCE are valid in and should be placed only in CA certificates.\r\n>\r\n> \u2b07\ufe0f Suggested change\r\n>\r\n> -Per {{RFC5280}}, NCE are valid in and should be placed only in CA certificates.\r\n> +Per {{RFC5280}}, NCE are valid in and must be placed only in CA certificates.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/12#pullrequestreview-3707031605>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AB5TYEIHICU4YFBHHKK6VAL4IZCYNAVCNFSM6AAAAACSOQGFPSVHI2DSMVQWIX3LMV43YUDVNRWFEZLROVSXG5CSMV3GSZLXHMZTOMBXGAZTCNRQGU>\r\n> .\r\n> You are receiving this because you authored the thread.Message ID:\r\n> <CBonnell/draft-housley-lamps-macaddress-on/pull/12/review/3707031605@\r\n> github.com>\r\n>\r\n",
+          "createdAt": "2026-01-26T17:12:11Z",
+          "updatedAt": "2026-01-26T17:12:11Z"
+        },
+        {
+          "author": "mstjohns",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Nope.  Youre suggestion had \u201cmust be placed\u201d. Should be/should\u2019ve been\r\n\u201cMUST be placed\u201d\r\n\r\nMike\r\n\r\nOn Mon, Jan 26, 2026 at 12:25 Corey Bonnell ***@***.***>\r\nwrote:\r\n\r\n> ***@***.**** commented on this pull request.\r\n> ------------------------------\r\n>\r\n> In draft-ietf-lamps-macaddress-on.md\r\n> <https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/12#discussion_r2728537500>\r\n> :\r\n>\r\n> >  The bit patterns encoded in both the value bit pattern and mask bit pattern are encoded with the most significant bit encoded first (\"big-endian\" or \"left-to-right\" encoding).\r\n>\r\n>  If a bit is not asserted in the mask bit pattern, then the CA MUST NOT assert the corresponding bit in the value bit pattern. This rule ensures that a canonical encoding is used for a given mask bit pattern and value bit pattern.\r\n>\r\n> +Per {{RFC5280}}, NCE are valid in and should be placed only in CA certificates.\r\n>\r\n> @mstjohns <https://github.com/mstjohns> does this suggestion match what\r\n> you have in mind?\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/12#discussion_r2728537500>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AB5TYEOUUA364Q2FF2YQ5S34IZEWXAVCNFSM6AAAAACSOQGFPSVHI2DSMVQWIX3LMV43YUDVNRWFEZLROVSXG5CSMV3GSZLXHMZTOMBXGEZDSNBXHA>\r\n> .\r\n> You are receiving this because you were mentioned.Message ID:\r\n> <CBonnell/draft-housley-lamps-macaddress-on/pull/12/review/3707129478@\r\n> github.com>\r\n>\r\n",
+          "createdAt": "2026-01-26T17:27:48Z",
+          "updatedAt": "2026-01-26T17:27:48Z"
         }
       ],
       "reviews": [
@@ -1605,8 +1621,102 @@
               "updatedAt": "2026-01-24T20:16:06Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7c9NA1",
+          "commit": {
+            "abbreviatedOid": "97e29d8"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-26T17:03:02Z",
+          "updatedAt": "2026-01-26T17:07:59Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "```suggestion\r\nPer {{RFC5280}}, NCE are valid in and MUST be placed only in CA certificates.\r\n```",
+              "createdAt": "2026-01-26T17:03:02Z",
+              "updatedAt": "2026-01-26T17:15:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7c9k6G",
+          "commit": {
+            "abbreviatedOid": "97e29d8"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-26T17:24:38Z",
+          "updatedAt": "2026-01-26T17:24:38Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "@mstjohns does this suggestion match what you have in mind?",
+              "createdAt": "2026-01-26T17:24:38Z",
+              "updatedAt": "2026-01-26T17:24:38Z"
+            }
+          ]
         }
       ]
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOPNu74s6_bvJp",
+      "title": " Address AD's comments. Rework Pathvalidation",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/13",
+      "state": "MERGED",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-26T19:10:14Z",
+      "updatedAt": "2026-01-26T19:11:54Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "546e8edaef285e4441a8cbab4baf2b68c77beb37",
+      "headRepository": "mstjohns/draft-housley-lamps-macaddress-on",
+      "headRefName": "main",
+      "headRefOid": "f78f5c95a951531cca51385ccd31898add6a389b",
+      "closedAt": "2026-01-26T19:11:54Z",
+      "mergedAt": "2026-01-26T19:11:54Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "fcc70076bf1646b298068e1a89f1d3edc8127816"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOPNu74s6_b1KJ",
+      "title": "Add Mike as author",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/14",
+      "state": "OPEN",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-26T19:19:04Z",
+      "updatedAt": "2026-01-26T19:19:04Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "a5f635af1f2e604eaf3ec15023b19ed19bfdad5b",
+      "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "headRefName": "add-msj",
+      "headRefOid": "67cda278f3f14e974fdfc06c5dceace9ae07edc2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
