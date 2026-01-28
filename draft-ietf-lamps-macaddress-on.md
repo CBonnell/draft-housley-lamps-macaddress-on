@@ -155,8 +155,10 @@ The following is a utility function used to determine whether or not the set of 
 
 Examples - given the following (using the IANA assigned DOI) - 'child' is a constraint wholly contained within 'parent':
 
-constraint parent = '000000000000 000000000000'H\
+~~~
+constraint parent = '000000000000 000000000000'H
 constraint child =  '00005E000000 FCFFFF000000'H
+~~~
 
 'child' is a subset of parent because:
 1) They are the same length (both EUI-48 constraints) and
@@ -165,7 +167,7 @@ constraint child =  '00005E000000 FCFFFF000000'H
 
 Note that the child mask allows for any combination of the local/universal and unicast/multicast address bits within the OUI of 00-00-0e.
 
-If you had 'constraint child2 = '00005E005000 FFFFFFFFFFF00'H and compared it to 'child', 'child2' would be a subset of 'child'  'child2' uses the same OUI as 'child', but further restricts the matching addresses to universal/unicast by turning on the '0300000000'H mask bits and also restricts the range of valid addresses from 00-00-5E-00-50-00 to 00-00-5E-00-50-FF - i.e., to the 'example' range for the 00-00-5E OUI.
+If you had 'constraint child2 = '00005E005000 FFFFFFFFFFF00'H and compared it to 'child', 'child2' would be a subset of 'child'.  'child2' uses the same OUI as 'child', but further restricts the matching addresses to universal/unicast by turning on the '0300000000'H mask bits and also restricts the range of valid addresses from 00-00-5E-00-50-00 to 00-00-5E-00-50-FF - i.e., to the 'example' range for the 00-00-5E OUI.
 
 ~~~
 // Both 'child' and 'parent' are OtherName.MACAddress
