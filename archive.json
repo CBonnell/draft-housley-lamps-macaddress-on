@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-27T02:20:10.801581+00:00",
+  "timestamp": "2026-01-29T02:31:47.344497+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -1697,26 +1697,118 @@
       "id": "PR_kwDOPNu74s6_b1KJ",
       "title": "Add Mike as author",
       "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/14",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-01-26T19:19:04Z",
-      "updatedAt": "2026-01-26T19:19:04Z",
+      "updatedAt": "2026-01-28T19:52:49Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "a5f635af1f2e604eaf3ec15023b19ed19bfdad5b",
       "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "headRefName": "add-msj",
       "headRefOid": "67cda278f3f14e974fdfc06c5dceace9ae07edc2",
+      "closedAt": "2026-01-28T19:52:44Z",
+      "mergedAt": "2026-01-28T19:52:44Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "9de28dde32bd0f7718d1c4651e06c96f77aec475"
+      },
+      "comments": [
+        {
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "body": "@mstjohns does your name and affiliation look OK? If so, I'll merge this PR and then we can open another one for the formatting issues that you found.",
+          "createdAt": "2026-01-28T12:14:44Z",
+          "updatedAt": "2026-01-28T12:14:44Z"
+        },
+        {
+          "author": "mstjohns",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Name/affliliation Looks good   I left a comment on the PR to fix two nits\r\nthat came from my version.  Mike\r\n\r\nOn Wed, Jan 28, 2026 at 07:15 Corey Bonnell ***@***.***>\r\nwrote:\r\n\r\n> *CBonnell* left a comment (CBonnell/draft-housley-lamps-macaddress-on#14)\r\n> <https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/14#issuecomment-3810970418>\r\n>\r\n> @mstjohns <https://github.com/mstjohns> does your name and affiliation\r\n> look OK? If so, I'll merge this PR and then we can open another one for the\r\n> formatting issues that you found.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/14#issuecomment-3810970418>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AB5TYEPHORNGTYORZ4JMTN34JCR4VAVCNFSM6AAAAACS6HLWL2VHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZTQMJQHE3TANBRHA>\r\n> .\r\n> You are receiving this because you were mentioned.Message ID:\r\n> ***@***.***\r\n> com>\r\n>\r\n",
+          "createdAt": "2026-01-28T15:49:42Z",
+          "updatedAt": "2026-01-28T15:49:42Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPNu74s7dTakw",
+          "commit": {
+            "abbreviatedOid": "67cda27"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Most of this is OK - some is related to things I don't understand about markdown or doesn't actually work the way documented.\n\nAnd I can't figure out how to comment inline here... *sigh*\n\nLines 158-159 - that trailing backslash is supposed to provide the equivalent of a SHIFT-RETURN, but doesn't in the editors copy.  Help!\n\nLine 168.  Insert a period after \"... subset of 'child'\"\n\nI'll make another pass on the editor copy and see if I can see anything else amiss.\n",
+          "createdAt": "2026-01-27T18:38:32Z",
+          "updatedAt": "2026-01-27T18:38:32Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOPNu74s6_8m-X",
+      "title": "Various fixes",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/15",
+      "state": "OPEN",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-28T20:06:39Z",
+      "updatedAt": "2026-01-29T01:38:52Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "9de28dde32bd0f7718d1c4651e06c96f77aec475",
+      "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "headRefName": "various-fixes",
+      "headRefOid": "8cfc376963b0c1a78127afd956c617944e4187fa",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Looks fine.",
+          "createdAt": "2026-01-28T21:19:44Z",
+          "updatedAt": "2026-01-28T21:19:44Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPNu74s7drwcP",
+          "commit": {
+            "abbreviatedOid": "8cfc376"
+          },
+          "author": "mandelj7",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-28T21:24:01Z",
+          "updatedAt": "2026-01-28T21:24:01Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7du5BF",
+          "commit": {
+            "abbreviatedOid": "8cfc376"
+          },
+          "author": "tomofumiokubo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "LGTM!",
+          "createdAt": "2026-01-29T01:38:52Z",
+          "updatedAt": "2026-01-29T01:38:52Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
