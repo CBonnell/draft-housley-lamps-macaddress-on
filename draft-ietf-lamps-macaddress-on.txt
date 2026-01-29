@@ -5,14 +5,14 @@
 Limited Additional Mechanisms for PKIX and SMIME              R. Housley
 Internet-Draft                                            Vigil Security
 Intended status: Standards Track                              C. Bonnell
-Expires: 1 August 2026                                          DigiCert
+Expires: 2 August 2026                                          DigiCert
                                                                J. Mandel
                                                                   AKAYLA
                                                                 T. Okubo
                                                       Penguin Securities
                                                               M. StJohns
                                              NthPermutation Security LLC
-                                                         28 January 2026
+                                                         29 January 2026
 
 
        Media Access Control (MAC) Addresses in X.509 Certificates
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 August 2026.
+   This Internet-Draft will expire on 2 August 2026.
 
 Copyright Notice
 
@@ -310,8 +310,8 @@ Table of Contents
    Examples - given the following (using the IANA assigned DOI) -
    'child' is a constraint wholly contained within 'parent':
 
-   constraint parent = '000000000000 000000000000'H\ constraint child =
-   '00005E000000 FCFFFF000000'H
+   constraint parent = '000000000000 000000000000'H
+   constraint child =  '00005E000000 FCFFFF000000'H
 
    'child' is a subset of parent because: 1) They are the same length
    (both EUI-48 constraints) and 2) The child.mask ANDed with the
@@ -324,7 +324,7 @@ Table of Contents
    00-00-0e.
 
    If you had 'constraint child2 = '00005E005000 FFFFFFFFFFF00'H and
-   compared it to 'child', 'child2' would be a subset of 'child'
+   compared it to 'child', 'child2' would be a subset of 'child'.
    'child2' uses the same OUI as 'child', but further restricts the
    matching addresses to universal/unicast by turning on the
    '0300000000'H mask bits and also restricts the range of valid
@@ -612,9 +612,9 @@ Acknowledgments
 
    We thank the participants on the LAMPS Working Group mailing list for
    their insightful feedback and comments.  In particular, the authors
-   extend sincere appreciation to David von Oheimb, John Mattsson, and
-   Tim Hollebeek for their reviews and suggestions, which greatly
-   improved the quality of this document.
+   extend sincere appreciation to Bob Beck, David von Oheimb, Deb
+   Cooley, John Mattsson, and Tim Hollebeek for their reviews and
+   suggestions, which greatly improved the quality of this document.
 
 Authors' Addresses
 
