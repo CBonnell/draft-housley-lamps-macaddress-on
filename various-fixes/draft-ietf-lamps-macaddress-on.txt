@@ -5,14 +5,14 @@
 Limited Additional Mechanisms for PKIX and SMIME              R. Housley
 Internet-Draft                                            Vigil Security
 Intended status: Standards Track                              C. Bonnell
-Expires: 1 August 2026                                          DigiCert
+Expires: 2 August 2026                                          DigiCert
                                                                J. Mandel
                                                                   AKAYLA
                                                                 T. Okubo
                                                       Penguin Securities
                                                               M. StJohns
                                              NthPermutation Security LLC
-                                                         28 January 2026
+                                                         29 January 2026
 
 
        Media Access Control (MAC) Addresses in X.509 Certificates
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 August 2026.
+   This Internet-Draft will expire on 2 August 2026.
 
 Copyright Notice
 
@@ -612,9 +612,9 @@ Acknowledgments
 
    We thank the participants on the LAMPS Working Group mailing list for
    their insightful feedback and comments.  In particular, the authors
-   extend sincere appreciation to Bob Beck, David von Oheimb, John
-   Mattsson, and Tim Hollebeek for their reviews and suggestions, which
-   greatly improved the quality of this document.
+   extend sincere appreciation to Bob Beck, David von Oheimb, Deb
+   Cooley, John Mattsson, and Tim Hollebeek for their reviews and
+   suggestions, which greatly improved the quality of this document.
 
 Authors' Addresses
 
