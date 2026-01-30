@@ -64,7 +64,7 @@ informative:
     author:
       org: IEEE Standards Association
     date: false
-    url: https://standards.ieee.org/wp-content/uploads/import/documents/tutorials/eui.pdf
+    target: https://standards.ieee.org/wp-content/uploads/import/documents/tutorials/eui.pdf
 ...
 
 --- abstract
