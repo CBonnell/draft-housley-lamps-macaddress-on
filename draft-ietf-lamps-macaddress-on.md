@@ -60,7 +60,7 @@ normative:
 
 informative:
   IEEERA:
-    title: "Guidelines for Use of Extended Unique Identifier (EUI), Organizationally Unique Identifier (OUI), and Company ID (CID)""
+    title: "Guidelines for Use of Extended Unique Identifier (EUI), Organizationally Unique Identifier (OUI), and Company ID (CID)"
     author:
       org: IEEE Standards Association
     date: false
