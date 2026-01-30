@@ -97,7 +97,9 @@ Table of Contents
      7.1.  EUI-48 identifier
      7.2.  EUI-64 identifier
      7.3.  EUI-48 constraint for universal, unicast addresses
-   8.  Normative References
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -575,8 +577,8 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
    the subscriber legitimately controls (registered OUI or CID).  Before
    issuing a certificate that contains a MACAddress or a name constraint
    based on such a permitted set of addresses, the CA MUST verify that
-   control: for example, by consulting the IEEE registry or reviewing
-   manufacturer documentation.
+   control: for example, by consulting the IEEE registry [IEEERA] or
+   reviewing manufacturer documentation.
 
    The following constraint definition constrains EUI-48 values to only
    those are universal and unicast; locally assigned or multicast values
@@ -584,7 +586,9 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
 
      [0] OCTET STRING '000000000000 030000000000'H
 
-8.  Normative References
+8.  References
+
+8.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -605,6 +609,12 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+8.2.  Informative References
+
+   [IEEERA]   IEEE Standards Association, "Guidelines for Use of
+              Extended Unique Identifier (EUI), Organizationally Unique
+              Identifier (OUI), and Company ID (CID)".
 
 Acknowledgments
 
