@@ -104,9 +104,9 @@ Per {{RFC5280}}, NCE are valid in and MUST be placed only in CA certificates.
 
 ## Generation and Validation Rules
 
-A certificate MAY include one or more MACAddress otherName values if, and only if, the subject device owns (or is expected to own) the corresponding MAC address for the certificate lifetime. MAC addresses SHOULD NOT appear in more than one valid certificate issued by the same Certification Authority (CA) at the same time, unless different layer‑2 interfaces share a public key.
+The CA MUST ensure that MACAddress otherName values included in certificates that it issues are owned by (or is expected to be owned by) the subject device for the certificate's lifetime. The same MAC address MUST NOT be included in certificates issued to different devices, unless different devices share the same layer‑2 interface.
 
-A Relying party that matches a presented MAC address to a certificate SHALL perform a byte-for-byte comparison of the OCTET STRING contents. Canonicalization, case folding, or removal of delimiter characters MUST NOT be performed.
+A Relying party that matches a presented MAC address to a certificate SHALL perform a byte-for-byte comparison of the OCTET STRING contents.
 
 Wildcards are not supported.
 
@@ -295,7 +295,7 @@ Unlike IP addresses, MAC addresses are not typically routed across layer 3 bound
 
 ## Privacy Considerations
 
-A MAC address can uniquely identify a physical device and by extension, its user. Certificates that embed unchanging MAC addresses facilitate long-term device tracking. Deployments that use the MACAddress name SHOULD consider rotating addresses, using temporary certificates, or employing MAC Address Randomization where feasible.
+A MAC address can uniquely identify a physical device and by extension, its user. Certificates that embed unchanging MAC addresses facilitate long-term device tracking. Deployments that use the MACAddress name SHOULD consider rotating addresses, using short-lived certificates, or employing MAC Address randomization where feasible.
 
 # IANA Considerations
 
