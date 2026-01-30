@@ -614,7 +614,9 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
 
    [IEEERA]   IEEE Standards Association, "Guidelines for Use of
               Extended Unique Identifier (EUI), Organizationally Unique
-              Identifier (OUI), and Company ID (CID)".
+              Identifier (OUI), and Company ID (CID)",
+              <https://standards.ieee.org/wp-
+              content/uploads/import/documents/tutorials/eui.pdf>.
 
 Acknowledgments
 
