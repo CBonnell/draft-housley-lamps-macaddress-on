@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-29T02:31:47.344497+00:00",
+  "timestamp": "2026-02-01T02:52:24.886417+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -1754,24 +1754,26 @@
       "id": "PR_kwDOPNu74s6_8m-X",
       "title": "Various fixes",
       "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/15",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-01-28T20:06:39Z",
-      "updatedAt": "2026-01-29T01:38:52Z",
+      "updatedAt": "2026-01-29T13:36:59Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "9de28dde32bd0f7718d1c4651e06c96f77aec475",
       "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "headRefName": "various-fixes",
-      "headRefOid": "8cfc376963b0c1a78127afd956c617944e4187fa",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "0e255846488ebccb4b4337b937e7bef867c8c988",
+      "closedAt": "2026-01-29T13:36:56Z",
+      "mergedAt": "2026-01-29T13:36:56Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "69178dec1a65f05be04535782c365156268745a1"
+      },
       "comments": [
         {
           "author": "russhousley",
@@ -1806,6 +1808,87 @@
           "body": "LGTM!",
           "createdAt": "2026-01-29T01:38:52Z",
           "updatedAt": "2026-01-29T01:38:52Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7dvxd6",
+          "commit": {
+            "abbreviatedOid": "8cfc376"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "*sigh* I need to spend a few days figuring out github.  Too many options.\n\nLooks good to me.",
+          "createdAt": "2026-01-29T02:52:21Z",
+          "updatedAt": "2026-01-29T02:53:03Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "Looks good. ",
+              "createdAt": "2026-01-29T02:52:21Z",
+              "updatedAt": "2026-01-29T02:53:03Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOPNu74s7AZaGq",
+      "title": "More fixes",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/16",
+      "state": "OPEN",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-01-30T13:39:15Z",
+      "updatedAt": "2026-01-30T19:46:53Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "69178dec1a65f05be04535782c365156268745a1",
+      "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "headRefName": "more-fixes",
+      "headRefOid": "f87cc0f498461e8967ba07f7e0517fbd1040d8b9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks for these.  They look good to me.\r\n\r\n",
+          "createdAt": "2026-01-30T13:53:38Z",
+          "updatedAt": "2026-01-30T13:53:38Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPNu74s7ePEIj",
+          "commit": {
+            "abbreviatedOid": "1b74356"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-30T13:54:21Z",
+          "updatedAt": "2026-01-30T13:54:21Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7eVMmj",
+          "commit": {
+            "abbreviatedOid": "f87cc0f"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-30T19:46:53Z",
+          "updatedAt": "2026-01-30T19:46:53Z",
           "comments": []
         }
       ]
