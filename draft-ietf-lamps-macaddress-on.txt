@@ -5,14 +5,14 @@
 Limited Additional Mechanisms for PKIX and SMIME              R. Housley
 Internet-Draft                                            Vigil Security
 Intended status: Standards Track                              C. Bonnell
-Expires: 2 August 2026                                          DigiCert
+Expires: 6 August 2026                                          DigiCert
                                                                J. Mandel
                                                                   AKAYLA
                                                                 T. Okubo
                                                       Penguin Securities
                                                               M. StJohns
                                              NthPermutation Security LLC
-                                                         29 January 2026
+                                                         2 February 2026
 
 
        Media Access Control (MAC) Addresses in X.509 Certificates
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 August 2026.
+   This Internet-Draft will expire on 6 August 2026.
 
 Copyright Notice
 
@@ -97,7 +97,9 @@ Table of Contents
      7.1.  EUI-48 identifier
      7.2.  EUI-64 identifier
      7.3.  EUI-48 constraint for universal, unicast addresses
-   8.  Normative References
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -199,17 +201,15 @@ Table of Contents
 
 3.3.  Generation and Validation Rules
 
-   A certificate MAY include one or more MACAddress otherName values if,
-   and only if, the subject device owns (or is expected to own) the
-   corresponding MAC address for the certificate lifetime.  MAC
-   addresses SHOULD NOT appear in more than one valid certificate issued
-   by the same Certification Authority (CA) at the same time, unless
-   different layer-2 interfaces share a public key.
+   The CA MUST ensure that MACAddress otherName values included in
+   certificates that it issues are owned by (or is expected to be owned
+   by) the subject device for the certificate's lifetime.  The same MAC
+   address MUST NOT be included in certificates issued to different
+   devices, unless different devices share the same layer-2 interface.
 
    A Relying party that matches a presented MAC address to a certificate
    SHALL perform a byte-for-byte comparison of the OCTET STRING
-   contents.  Canonicalization, case folding, or removal of delimiter
-   characters MUST NOT be performed.
+   contents.
 
    Wildcards are not supported.
 
@@ -473,8 +473,8 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
    A MAC address can uniquely identify a physical device and by
    extension, its user.  Certificates that embed unchanging MAC
    addresses facilitate long-term device tracking.  Deployments that use
-   the MACAddress name SHOULD consider rotating addresses, using
-   temporary certificates, or employing MAC Address Randomization where
+   the MACAddress name SHOULD consider rotating addresses, using short-
+   lived certificates, or employing MAC Address randomization where
    feasible.
 
 5.  IANA Considerations
@@ -577,8 +577,8 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
    the subscriber legitimately controls (registered OUI or CID).  Before
    issuing a certificate that contains a MACAddress or a name constraint
    based on such a permitted set of addresses, the CA MUST verify that
-   control: for example, by consulting the IEEE registry or reviewing
-   manufacturer documentation.
+   control: for example, by consulting the IEEE registry [IEEERA] or
+   reviewing manufacturer documentation.
 
    The following constraint definition constrains EUI-48 values to only
    those are universal and unicast; locally assigned or multicast values
@@ -586,7 +586,9 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
 
      [0] OCTET STRING '000000000000 030000000000'H
 
-8.  Normative References
+8.  References
+
+8.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -607,6 +609,14 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+8.2.  Informative References
+
+   [IEEERA]   IEEE Standards Association, "Guidelines for Use of
+              Extended Unique Identifier (EUI), Organizationally Unique
+              Identifier (OUI), and Company ID (CID)",
+              <https://standards.ieee.org/wp-
+              content/uploads/import/documents/tutorials/eui.pdf>.
 
 Acknowledgments
 
