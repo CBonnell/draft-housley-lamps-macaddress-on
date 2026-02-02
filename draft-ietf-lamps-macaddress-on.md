@@ -57,6 +57,14 @@ author:
 normative:
   RFC5280:
   RFC5912:
+
+informative:
+  IEEERA:
+    title: "Guidelines for Use of Extended Unique Identifier (EUI), Organizationally Unique Identifier (OUI), and Company ID (CID)"
+    author:
+      org: IEEE Standards Association
+    date: false
+    target: https://standards.ieee.org/wp-content/uploads/import/documents/tutorials/eui.pdf
 ...
 
 --- abstract
@@ -104,9 +112,9 @@ Per {{RFC5280}}, NCE are valid in and MUST be placed only in CA certificates.
 
 ## Generation and Validation Rules
 
-A certificate MAY include one or more MACAddress otherName values if, and only if, the subject device owns (or is expected to own) the corresponding MAC address for the certificate lifetime. MAC addresses SHOULD NOT appear in more than one valid certificate issued by the same Certification Authority (CA) at the same time, unless different layer‑2 interfaces share a public key.
+The CA MUST ensure that MACAddress otherName values included in certificates that it issues are owned by (or is expected to be owned by) the subject device for the certificate's lifetime. The same MAC address MUST NOT be included in certificates issued to different devices, unless different devices share the same layer‑2 interface.
 
-A Relying party that matches a presented MAC address to a certificate SHALL perform a byte-for-byte comparison of the OCTET STRING contents. Canonicalization, case folding, or removal of delimiter characters MUST NOT be performed.
+A Relying party that matches a presented MAC address to a certificate SHALL perform a byte-for-byte comparison of the OCTET STRING contents.
 
 Wildcards are not supported.
 
@@ -295,7 +303,7 @@ Unlike IP addresses, MAC addresses are not typically routed across layer 3 bound
 
 ## Privacy Considerations
 
-A MAC address can uniquely identify a physical device and by extension, its user. Certificates that embed unchanging MAC addresses facilitate long-term device tracking. Deployments that use the MACAddress name SHOULD consider rotating addresses, using temporary certificates, or employing MAC Address Randomization where feasible.
+A MAC address can uniquely identify a physical device and by extension, its user. Certificates that embed unchanging MAC addresses facilitate long-term device tracking. Deployments that use the MACAddress name SHOULD consider rotating addresses, using short-lived certificates, or employing MAC Address randomization where feasible.
 
 # IANA Considerations
 
@@ -388,7 +396,7 @@ The first octet of a MAC address contains two flag bits. IEEE bit numbering has 
 - Individual(I)/Group(G) bit (bit 0 or mask 0x01) – 0 = unicast, 1 = multicast.  Multicast prefixes are never OUIs.
 - Universal(U)/Local(L) bit (bit 1 or mask 0x02) – 0 = universal (IEEE‑assigned), 1 = local.
 
-These flags let the implementations exclude multicast and local addresses but still cannot prove that a 24-bit value is an IEEE-registered OUI. 36-bit CIDs share the same first 24 bits and enterprises MAY deploy pseudo-OUIs. CAs MUST include only addresses the subscriber legitimately controls (registered OUI or CID).  Before issuing a certificate that contains a MACAddress or a name constraint based on such a permitted set of addresses, the CA MUST verify that control: for example, by consulting the IEEE registry or reviewing manufacturer documentation.
+These flags let the implementations exclude multicast and local addresses but still cannot prove that a 24-bit value is an IEEE-registered OUI. 36-bit CIDs share the same first 24 bits and enterprises MAY deploy pseudo-OUIs. CAs MUST include only addresses the subscriber legitimately controls (registered OUI or CID).  Before issuing a certificate that contains a MACAddress or a name constraint based on such a permitted set of addresses, the CA MUST verify that control: for example, by consulting the IEEE registry [IEEERA] or reviewing manufacturer documentation.
 
 The following constraint definition constrains EUI-48 values to only
 those are universal and unicast; locally assigned or multicast values will not match the
