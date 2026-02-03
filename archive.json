@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-01T02:52:24.886417+00:00",
+  "timestamp": "2026-02-03T02:38:32.397157+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -1837,24 +1837,26 @@
       "id": "PR_kwDOPNu74s7AZaGq",
       "title": "More fixes",
       "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/16",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-01-30T13:39:15Z",
-      "updatedAt": "2026-01-30T19:46:53Z",
+      "updatedAt": "2026-02-02T13:08:35Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "69178dec1a65f05be04535782c365156268745a1",
       "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "headRefName": "more-fixes",
       "headRefOid": "f87cc0f498461e8967ba07f7e0517fbd1040d8b9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-02T13:08:31Z",
+      "mergedAt": "2026-02-02T13:08:31Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "7553f8e30e6b9dac5e23ecf08a14f3ec16aa63d4"
+      },
       "comments": [
         {
           "author": "russhousley",
