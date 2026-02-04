@@ -5,14 +5,14 @@
 Limited Additional Mechanisms for PKIX and SMIME              R. Housley
 Internet-Draft                                            Vigil Security
 Intended status: Standards Track                              C. Bonnell
-Expires: 6 August 2026                                          DigiCert
+Expires: 8 August 2026                                          DigiCert
                                                                J. Mandel
                                                                   AKAYLA
                                                                 T. Okubo
                                                       Penguin Securities
                                                               M. StJohns
                                              NthPermutation Security LLC
-                                                         2 February 2026
+                                                         4 February 2026
 
 
        Media Access Control (MAC) Addresses in X.509 Certificates
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 August 2026.
+   This Internet-Draft will expire on 8 August 2026.
 
 Copyright Notice
 
@@ -118,8 +118,8 @@ Table of Contents
    Internet-of-Things and automotive networks.
 
    Note that while this construct may be used to carry EUI-48 or EUI-64
-   addresses in an IAN extension, there are probably few, if any,
-   reasons to do so.
+   addresses in an Issuer Alternative Name (IAN) extension, there are
+   probably few, if any, reasons to do so.
 
 2.  Conventions and Definitions
 
@@ -135,8 +135,8 @@ Table of Contents
    all refer to a GeneraName.otherName field included in a SAN or IAN.
    The new name form is identified by the object identifier (OID)
    id-on-MACAddress (TBD1) and declared below using the OTHER-NAME class
-   declaration syntax.  The name form has variants to convey a EUI-48 as
-   an OCTET STRING comprising of 6 octets, or a EUI-64 as an OCTET
+   declaration syntax.  The name form has variants to convey an EUI-48
+   as an OCTET STRING comprising of 6 octets, or an EUI-64 as an OCTET
    STRING comprising of 8 octets.  Constraints on EUI-48 and EUI-64
    values are conveyed as OCTET STRINGs whose lengths are twice the
    octet length of the identifiers.  The first set of N octets (where N
@@ -207,7 +207,7 @@ Table of Contents
    address MUST NOT be included in certificates issued to different
    devices, unless different devices share the same layer-2 interface.
 
-   A Relying party that matches a presented MAC address to a certificate
+   A relying party that matches a presented MAC address to a certificate
    SHALL perform a byte-for-byte comparison of the OCTET STRING
    contents.
 
@@ -294,9 +294,9 @@ Table of Contents
    This section describes the Path Validation Processing specific to
    OtherName.MACAddress constraints.  N.B., It is possible to build
    hierarchies of NCEs for OtherName.MACAddress's that prohibit ALL
-   names, even if that wasn't intended.  For example, say that your
+   names, even if that was not intended.  For example, say that the
    level 1 NCE contained only a "permitted_subtrees" of only
-   (OtherName.MACAddress) global/unicast EUI-48, and your level 2 NCE
+   (OtherName.MACAddress) global/unicast EUI-48, and the level 2 NCE
    contained only a "permitted_subtress" of "any address" (i.e. the
    initial constraint set).  This would result in an empty
    permitted_subtrees set as an "any address" constraint is not
@@ -323,13 +323,13 @@ Table of Contents
    universal and unicast/multicast address bits within the OUI of
    00-00-0e.
 
-   If you had 'constraint child2 = '00005E005000 FFFFFFFFFFF00'H and
-   compared it to 'child', 'child2' would be a subset of 'child'.
-   'child2' uses the same OUI as 'child', but further restricts the
-   matching addresses to universal/unicast by turning on the
-   '0300000000'H mask bits and also restricts the range of valid
-   addresses from 00-00-5E-00-50-00 to 00-00-5E-00-50-FF - i.e., to the
-   'example' range for the 00-00-5E OUI.
+   If 'constraint child2 = '00005E005000 FFFFFFFFFFF00'H and 'child' are
+   compared, 'child2' would be a subset of 'child'.  'child2' uses the
+   same OUI as 'child', but further restricts the matching addresses to
+   universal/unicast by turning on the '0300000000'H mask bits and also
+   restricts the range of valid addresses from 00-00-5E-00-50-00 to
+   00-00-5E-00-50-FF - i.e., to the 'example' range for the 00-00-5E
+   OUI.
 
 // Both 'child' and 'parent' are OtherName.MACAddress
 // constraints.
@@ -342,8 +342,8 @@ boolean childIsSubsetOfParent (constraint c, constraint p)
      // if the lengths are the same
      c.length == p.length &&
      // and if there are no bits set in the parent's mask that
-     //    aren't also set in the child's mask
-     // e.g. we can add mask bits to the current set, we can't remove them
+     //    are not also set in the child's mask
+     // e.g. we can add mask bits to the current set, we can not remove them
      (c.mask & p.mask) == p.mask &&
      // and if the child's value has at least all the bits set that
      //   were set (and live) in the parent's value
@@ -423,7 +423,7 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
    excluded_subtrees{} (0) = initial-excluded-subtrees;
 
    // Foreach certificate i = (1..n) in the path {
-   // Since we're doing a union operation we start with
+   // Since we are doing a union operation we start with
    // what was excluded at the previous level and try and
    // add to it.
    tempExcludedSubtrees {} =
@@ -467,6 +467,9 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
    Unlike IP addresses, MAC addresses are not typically routed across
    layer 3 boundaries.  Relying parties in different broadcast domains
    SHOULD NOT assume uniqueness beyond their local network.
+
+   The Security Considerations section of [RFC5280] applies to this
+   specification as well.
 
 4.1.  Privacy Considerations
 
