@@ -77,7 +77,7 @@ This document defines a new GeneralName.otherName for inclusion in the X.509 Sub
 
 Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in {{RFC5280}}. This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension (NCE) defined in {{RFC5280}}. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
 
-Note that while this construct may be used to carry EUI-48 or EUI-64 addresses in an IAN extension, there are probably few, if any, reasons to do so.
+Note that while this construct may be used to carry EUI-48 or EUI-64 addresses in an Issuer Alternative Name (IAN) extension, there are probably few, if any, reasons to do so.
 
 # Conventions and Definitions
 
@@ -85,7 +85,7 @@ Note that while this construct may be used to carry EUI-48 or EUI-64 addresses i
 
 # MACAddress otherName
 
-In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneraName.otherName field included in a SAN or IAN.  The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey a EUI-48 as an OCTET STRING comprising of 6 octets, or a EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.
+In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneraName.otherName field included in a SAN or IAN.  The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING comprising of 6 octets, or an EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.
 
 The following sub-sections describe how to encode EUI-48 and EUI-64 values and their corresponding constraints.
 
@@ -114,7 +114,7 @@ Per {{RFC5280}}, NCE are valid in and MUST be placed only in CA certificates.
 
 The CA MUST ensure that MACAddress otherName values included in certificates that it issues are owned by (or is expected to be owned by) the subject device for the certificate's lifetime. The same MAC address MUST NOT be included in certificates issued to different devices, unless different devices share the same layer‑2 interface.
 
-A Relying party that matches a presented MAC address to a certificate SHALL perform a byte-for-byte comparison of the OCTET STRING contents.
+A relying party that matches a presented MAC address to a certificate SHALL perform a byte-for-byte comparison of the OCTET STRING contents.
 
 Wildcards are not supported.
 
@@ -157,7 +157,7 @@ Implementations are not required to implement this algorithm, but MUST calculate
 
 ### OtherName.MACAddress Path Validation Processing
 
-This section describes the Path Validation Processing specific to OtherName.MACAddress constraints.  N.B., It is possible to build hierarchies of NCEs for OtherName.MACAddress's that prohibit ALL names, even if that wasn't intended. For example, say that your level 1 NCE contained only a "permitted_subtrees" of only (OtherName.MACAddress) global/unicast EUI-48, and your level 2 NCE contained only a "permitted_subtress" of "any address" (i.e. the initial constraint set).  This would result in an empty permitted_subtrees set as an "any address" constraint is not contained within a "global/unicast" constraint. The worked example is left to the reader.
+This section describes the Path Validation Processing specific to OtherName.MACAddress constraints.  N.B., It is possible to build hierarchies of NCEs for OtherName.MACAddress's that prohibit ALL names, even if that was not intended. For example, say that the level 1 NCE contained only a "permitted_subtrees" of only (OtherName.MACAddress) global/unicast EUI-48, and the level 2 NCE contained only a "permitted_subtress" of "any address" (i.e. the initial constraint set).  This would result in an empty permitted_subtrees set as an "any address" constraint is not contained within a "global/unicast" constraint. The worked example is left to the reader.
 
 The following is a utility function used to determine whether or not the set of matching addresses for one MACAddress constraint is a subset of the matching addresses for another constraint.
 
@@ -175,7 +175,7 @@ constraint child =  '00005E000000 FCFFFF000000'H
 
 Note that the child mask allows for any combination of the local/universal and unicast/multicast address bits within the OUI of 00-00-0e.
 
-If you had 'constraint child2 = '00005E005000 FFFFFFFFFFF00'H and compared it to 'child', 'child2' would be a subset of 'child'.  'child2' uses the same OUI as 'child', but further restricts the matching addresses to universal/unicast by turning on the '0300000000'H mask bits and also restricts the range of valid addresses from 00-00-5E-00-50-00 to 00-00-5E-00-50-FF - i.e., to the 'example' range for the 00-00-5E OUI.
+If 'constraint child2 = '00005E005000 FFFFFFFFFFF00'H and 'child' are compared, 'child2' would be a subset of 'child'.  'child2' uses the same OUI as 'child', but further restricts the matching addresses to universal/unicast by turning on the '0300000000'H mask bits and also restricts the range of valid addresses from 00-00-5E-00-50-00 to 00-00-5E-00-50-FF - i.e., to the 'example' range for the 00-00-5E OUI.
 
 ~~~
 // Both 'child' and 'parent' are OtherName.MACAddress
@@ -189,8 +189,8 @@ boolean childIsSubsetOfParent (constraint c, constraint p)
      // if the lengths are the same
      c.length == p.length &&
      // and if there are no bits set in the parent's mask that
-     //    aren't also set in the child's mask
-     // e.g. we can add mask bits to the current set, we can't remove them
+     //    are not also set in the child's mask
+     // e.g. we can add mask bits to the current set, we can not remove them
      (c.mask & p.mask) == p.mask &&
      // and if the child's value has at least all the bits set that
      //   were set (and live) in the parent's value
@@ -261,7 +261,7 @@ The union of the set of OtherName.MACAddress current excluded_subtrees with each
 excluded_subtrees{} (0) = initial-excluded-subtrees;
 
 // Foreach certificate i = (1..n) in the path {
-// Since we're doing a union operation we start with
+// Since we are doing a union operation we start with
 // what was excluded at the previous level and try and
 // add to it.
 tempExcludedSubtrees {} =
@@ -300,6 +300,8 @@ The binding of a MAC address to a certificate is only as strong as the CA's vali
 Some systems dynamically assign or share MAC addresses. Such practices can undermine the uniqueness and accountability that this name form aims to provide.
 
 Unlike IP addresses, MAC addresses are not typically routed across layer 3 boundaries. Relying parties in different broadcast domains SHOULD NOT assume uniqueness beyond their local network.
+
+The Security Considerations section of {{RFC5280}} applies to this specification as well.
 
 ## Privacy Considerations
 
