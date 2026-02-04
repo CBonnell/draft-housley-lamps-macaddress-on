@@ -416,4 +416,4 @@ constraint.
 # Acknowledgments
 {:numbered="false"}
 
-We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to Bob Beck, David von Oheimb, Deb Cooley, John Mattsson, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.
+We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to Bob Beck, David von Oheimb, Deb Cooley, John Mattsson, Sean Turner, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.
