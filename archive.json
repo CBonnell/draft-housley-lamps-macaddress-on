@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-03T02:38:32.397157+00:00",
+  "timestamp": "2026-02-05T02:34:28.745274+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -1891,6 +1891,87 @@
           "body": "",
           "createdAt": "2026-01-30T19:46:53Z",
           "updatedAt": "2026-01-30T19:46:53Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOPNu74s7BPk1x",
+      "title": "SECDIR Review",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/17",
+      "state": "MERGED",
+      "author": "mandelj7",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "see [Email](https://mailarchive.ietf.org/arch/msg/spasm/t3vatmdFnCbmFpN554zUuNCwuV8/)",
+      "createdAt": "2026-02-03T16:57:13Z",
+      "updatedAt": "2026-02-04T21:24:48Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "7553f8e30e6b9dac5e23ecf08a14f3ec16aa63d4",
+      "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "headRefName": "SECDIR-Review",
+      "headRefOid": "4c460dcf59304470ff852366f21b94ca0b44c668",
+      "closedAt": "2026-02-04T21:24:44Z",
+      "mergedAt": "2026-02-04T21:24:44Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "0cbcd8d07423d0860569fdb3fe4c2feced9dc5b4"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPNu74s7fUfCo",
+          "commit": {
+            "abbreviatedOid": "4c460dc"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-03T17:49:34Z",
+          "updatedAt": "2026-02-03T17:49:34Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7fUk7Z",
+          "commit": {
+            "abbreviatedOid": "4c460dc"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Looks good.  I'm (I am) a don't care with respect to contractions.  But I don't remember any editor guidance prohibiting them.",
+          "createdAt": "2026-02-03T17:54:33Z",
+          "updatedAt": "2026-02-03T17:54:33Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7fs0pr",
+          "commit": {
+            "abbreviatedOid": "4c460dc"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-04T19:57:36Z",
+          "updatedAt": "2026-02-04T19:57:36Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7ft-3q",
+          "commit": {
+            "abbreviatedOid": "4c460dc"
+          },
+          "author": "tomofumiokubo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-04T21:23:26Z",
+          "updatedAt": "2026-02-04T21:23:26Z",
           "comments": []
         }
       ]
