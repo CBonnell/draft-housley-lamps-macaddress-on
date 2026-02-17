@@ -68,18 +68,6 @@ normative:
     seriesinfo:
       ITU-T Recommendation: X.680
       ISO/IEC: 8824-1:2021
-  X690:
-    target: https://www.itu.int/rec/T-REC-X.690
-    title: >
-      Information Technology -- Abstract Syntax Notation One (ASN.1):
-      ASN.1 encoding rules: Specification of Basic Encoding Rules (BER),
-      Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)
-    date: 2021-02
-    author:
-    -  org: ITU-T
-    seriesinfo:
-      ITU-T Recommendation: X.690
-      ISO/IEC: 8825-1:2021
 
 informative:
   IEEERA:
@@ -120,7 +108,7 @@ Example: 00-24-98-7B-19-02 encodes as OCTET STRING '0024987B1902'H.
 
 ## Encoding a MACAddress constraint
 
-When the name form is included in the NCE, the syntax consists of an OCTET STRING that is twice as long as the OCTET STRING representation of the address type being constrained. The OCTET STRING MUST be encoded using Distinguished Encoding Rules ({{X690}}). Within the OCTET STRING, two elements are encoded:
+When the name form is included in the NCE, the syntax consists of an OCTET STRING that is twice as long as the OCTET STRING representation of the address type being constrained. Within the OCTET STRING, two elements are encoded:
 
 1. The first set of N octets (where N is 6 for an EUI-48 constraint or 8 for an EUI-64 constraint) contains the "value bit pattern". This bit pattern encodes the bits that the masked address must contain to be considered a match.
 2. The second set of N octets encodes the "mask bit pattern" of the constraint. Each bit that is asserted in the mask bit pattern indicates that the bit in the same position in the address is constrained by the first set of N octets.
