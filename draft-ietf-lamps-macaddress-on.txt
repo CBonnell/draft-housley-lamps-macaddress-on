@@ -5,14 +5,14 @@
 Limited Additional Mechanisms for PKIX and SMIME              R. Housley
 Internet-Draft                                            Vigil Security
 Intended status: Standards Track                              C. Bonnell
-Expires: 8 August 2026                                          DigiCert
+Expires: 21 August 2026                                         DigiCert
                                                                J. Mandel
                                                                   AKAYLA
                                                                 T. Okubo
                                                       Penguin Securities
                                                               M. StJohns
                                              NthPermutation Security LLC
-                                                         4 February 2026
+                                                        17 February 2026
 
 
        Media Access Control (MAC) Addresses in X.509 Certificates
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 August 2026.
+   This Internet-Draft will expire on 21 August 2026.
 
 Copyright Notice
 
@@ -157,10 +157,11 @@ Table of Contents
    is permitted in the certificate, as human-readable forms such as
    "00-24-98-7B-19-02" or "0024.987B.1902" are used only in management
    interfaces.  When a device natively possesses a 48-bit MAC
-   identifier, the CA MUST encode it using a 6-octet OCTET STRING as the
-   MACAddress value.  When the device’s factory identifier is a 64-bit
-   EUI-64 or when no canonical 48-bit form exists, the CA MUST encode it
-   using an 8-octet OCTET STRING as the MACAddress value.
+   identifier, the Certification Authority (CA) MUST encode it using a
+   6-octet OCTET STRING as the MACAddress value.  When the device’s
+   factory identifier is a 64-bit EUI-64 or when no canonical 48-bit
+   form exists, the CA MUST encode it using an 8-octet OCTET STRING as
+   the MACAddress value.
 
    Example: 00-24-98-7B-19-02 encodes as OCTET STRING '0024987B1902'H.
 
@@ -575,13 +576,13 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
 
    These flags let the implementations exclude multicast and local
    addresses but still cannot prove that a 24-bit value is an IEEE-
-   registered OUI. 36-bit CIDs share the same first 24 bits and
-   enterprises MAY deploy pseudo-OUIs.  CAs MUST include only addresses
-   the subscriber legitimately controls (registered OUI or CID).  Before
-   issuing a certificate that contains a MACAddress or a name constraint
-   based on such a permitted set of addresses, the CA MUST verify that
-   control: for example, by consulting the IEEE registry [IEEERA] or
-   reviewing manufacturer documentation.
+   registered OUI. 36-bit Company IDs (CIDs) share the same first 24
+   bits and enterprises MAY deploy pseudo-OUIs.  CAs MUST include only
+   addresses the subscriber legitimately controls (registered OUI or
+   CID).  Before issuing a certificate that contains a MACAddress or a
+   name constraint based on such a permitted set of addresses, the CA
+   MUST verify that control: for example, by consulting the IEEE
+   registry [IEEERA] or reviewing manufacturer documentation.
 
    The following constraint definition constrains EUI-48 values to only
    those are universal and unicast; locally assigned or multicast values
@@ -626,9 +627,9 @@ Acknowledgments
    We thank the participants on the LAMPS Working Group mailing list for
    their insightful feedback and comments.  In particular, the authors
    extend sincere appreciation to Bob Beck, David von Oheimb, Deb
-   Cooley, John Mattsson, Sean Turner, and Tim Hollebeek for their
-   reviews and suggestions, which greatly improved the quality of this
-   document.
+   Cooley, Francois Rousseau, John Mattsson, Sean Turner, and Tim
+   Hollebeek for their reviews and suggestions, which greatly improved
+   the quality of this document.
 
 Authors' Addresses
 
