@@ -91,7 +91,7 @@ The following sub-sections describe how to encode EUI-48 and EUI-64 values and t
 
 ## Encoding a MACAddress as an alternative name
 
-When the name form is included in a SAN or IAN extension as an OtherName, the syntax consists of exactly six or eight octets. Values are encoded with the most significant octet encoded first ("big-endian" or "left-to-right" encoding). No text representation is permitted in the certificate, as human‑readable forms such as "00‑24‑98‑7B‑19‑02" or "0024.987B.1902" are used only in management interfaces. When a device natively possesses a 48‑bit MAC identifier, the CA MUST encode it using a 6‑octet OCTET STRING as the MACAddress value. When the device’s factory identifier is a 64‑bit EUI‑64 or when no canonical 48‑bit form exists, the CA MUST encode it using an 8‑octet OCTET STRING as the MACAddress value.
+When the name form is included in a SAN or IAN extension as an OtherName, the syntax consists of exactly six or eight octets. Values are encoded with the most significant octet encoded first ("big-endian" or "left-to-right" encoding). No text representation is permitted in the certificate, as human‑readable forms such as "00‑24‑98‑7B‑19‑02" or "0024.987B.1902" are used only in management interfaces. When a device natively possesses a 48‑bit MAC identifier, the Certification Authority (CA) MUST encode it using a 6‑octet OCTET STRING as the MACAddress value. When the device’s factory identifier is a 64‑bit EUI‑64 or when no canonical 48‑bit form exists, the CA MUST encode it using an 8‑octet OCTET STRING as the MACAddress value.
 
 Example: 00-24-98-7B-19-02 encodes as OCTET STRING '0024987B1902'H.
 
@@ -398,7 +398,7 @@ The first octet of a MAC address contains two flag bits. IEEE bit numbering has 
 - Individual(I)/Group(G) bit (bit 0 or mask 0x01) – 0 = unicast, 1 = multicast.  Multicast prefixes are never OUIs.
 - Universal(U)/Local(L) bit (bit 1 or mask 0x02) – 0 = universal (IEEE‑assigned), 1 = local.
 
-These flags let the implementations exclude multicast and local addresses but still cannot prove that a 24-bit value is an IEEE-registered OUI. 36-bit CIDs share the same first 24 bits and enterprises MAY deploy pseudo-OUIs. CAs MUST include only addresses the subscriber legitimately controls (registered OUI or CID).  Before issuing a certificate that contains a MACAddress or a name constraint based on such a permitted set of addresses, the CA MUST verify that control: for example, by consulting the IEEE registry [IEEERA] or reviewing manufacturer documentation.
+These flags let the implementations exclude multicast and local addresses but still cannot prove that a 24-bit value is an IEEE-registered OUI. 36-bit Company IDs (CIDs) share the same first 24 bits and enterprises MAY deploy pseudo-OUIs. CAs MUST include only addresses the subscriber legitimately controls (registered OUI or CID).  Before issuing a certificate that contains a MACAddress or a name constraint based on such a permitted set of addresses, the CA MUST verify that control: for example, by consulting the IEEE registry [IEEERA] or reviewing manufacturer documentation.
 
 The following constraint definition constrains EUI-48 values to only
 those are universal and unicast; locally assigned or multicast values will not match the
@@ -416,4 +416,4 @@ constraint.
 # Acknowledgments
 {:numbered="false"}
 
-We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to Bob Beck, David von Oheimb, Deb Cooley, John Mattsson, Sean Turner, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.
+We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to Bob Beck, David von Oheimb, Deb Cooley, Francois Rousseau, John Mattsson, Sean Turner, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.
