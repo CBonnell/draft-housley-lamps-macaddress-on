@@ -1290,7 +1290,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <h3 id="name-encoding-a-macaddress-const">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-encoding-a-macaddress-const" class="section-name selfRef">Encoding a MACAddress constraint</a>
         </h3>
-<p id="section-3.2-1">When the name form is included in the NCE, the syntax consists of an OCTET STRING that is twice as long as the OCTET STRING representation of the address type being constrained. The OCTET STRING <span class="bcp14">MUST</span> be encoded using Distinguished Encoding Rules (<span>[<a href="#X690" class="cite xref">X690</a>]</span>). Within the OCTET STRING, two elements are encoded:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">When the name form is included in the NCE, the syntax consists of an OCTET STRING that is twice as long as the OCTET STRING representation of the address type being constrained. Within the OCTET STRING, two elements are encoded:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3.2-2">
 <li id="section-3.2-2.1">
             <p id="section-3.2-2.1.1">The first set of N octets (where N is 6 for an EUI-48 constraint or 8 for an EUI-64 constraint) contains the "value bit pattern". This bit pattern encodes the bits that the masked address must contain to be considered a match.<a href="#section-3.2-2.1.1" class="pilcrow">¶</a></p>
@@ -1707,12 +1707,8 @@ constraint.<a href="#section-7.3-4" class="pilcrow">¶</a></p>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="X680">[X680]</dt>
-        <dd>
-<span class="refAuthor">ITU-T</span>, <span class="refTitle">"Information Technology -- Abstract Syntax Notation One (ASN.1): Specification of basic notation"</span>, <span class="seriesInfo">ITU-T Recommendation X.680</span>, <span class="seriesInfo">ISO/IEC 8824-1:2021</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.itu.int/rec/T-REC-X.680">https://www.itu.int/rec/T-REC-X.680</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="X690">[X690]</dt>
       <dd>
-<span class="refAuthor">ITU-T</span>, <span class="refTitle">"Information Technology -- Abstract Syntax Notation One (ASN.1): ASN.1 encoding rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)"</span>, <span class="seriesInfo">ITU-T Recommendation X.690</span>, <span class="seriesInfo">ISO/IEC 8825-1:2021</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.itu.int/rec/T-REC-X.690">https://www.itu.int/rec/T-REC-X.690</a>&gt;</span>. </dd>
+<span class="refAuthor">ITU-T</span>, <span class="refTitle">"Information Technology -- Abstract Syntax Notation One (ASN.1): Specification of basic notation"</span>, <span class="seriesInfo">ITU-T Recommendation X.680</span>, <span class="seriesInfo">ISO/IEC 8824-1:2021</span>, <time datetime="2021-02" class="refDate">February 2021</time>, <span>&lt;<a href="https://www.itu.int/rec/T-REC-X.680">https://www.itu.int/rec/T-REC-X.680</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>

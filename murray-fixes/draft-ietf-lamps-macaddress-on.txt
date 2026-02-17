@@ -169,9 +169,8 @@ Table of Contents
 
    When the name form is included in the NCE, the syntax consists of an
    OCTET STRING that is twice as long as the OCTET STRING representation
-   of the address type being constrained.  The OCTET STRING MUST be
-   encoded using Distinguished Encoding Rules ([X690]).  Within the
-   OCTET STRING, two elements are encoded:
+   of the address type being constrained.  Within the OCTET STRING, two
+   elements are encoded:
 
    1.  The first set of N octets (where N is 6 for an EUI-48 constraint
        or 8 for an EUI-64 constraint) contains the "value bit pattern".
@@ -620,13 +619,6 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
               One (ASN.1): Specification of basic notation", ITU-T
               Recommendation X.680, ISO/IEC 8824-1:2021, February 2021,
               <https://www.itu.int/rec/T-REC-X.680>.
-
-   [X690]     ITU-T, "Information Technology -- Abstract Syntax Notation
-              One (ASN.1): ASN.1 encoding rules: Specification of Basic
-              Encoding Rules (BER), Canonical Encoding Rules (CER) and
-              Distinguished Encoding Rules (DER)", ITU-T
-              Recommendation X.690, ISO/IEC 8825-1:2021, February 2021,
-              <https://www.itu.int/rec/T-REC-X.690>.
 
 8.2.  Informative References
 
