@@ -57,6 +57,29 @@ author:
 normative:
   RFC5280:
   RFC5912:
+  X680:
+    target: https://www.itu.int/rec/T-REC-X.680
+    title: >
+      Information Technology -- Abstract Syntax Notation One (ASN.1):
+      Specification of basic notation
+    date: 2021-02
+    author:
+    -  org: ITU-T
+    seriesinfo:
+      ITU-T Recommendation: X.680
+      ISO/IEC: 8824-1:2021
+  X690:
+    target: https://www.itu.int/rec/T-REC-X.690
+    title: >
+      Information Technology -- Abstract Syntax Notation One (ASN.1):
+      ASN.1 encoding rules: Specification of Basic Encoding Rules (BER),
+      Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)
+    date: 2021-02
+    author:
+    -  org: ITU-T
+    seriesinfo:
+      ITU-T Recommendation: X.690
+      ISO/IEC: 8825-1:2021
 
 informative:
   IEEERA:
@@ -75,7 +98,7 @@ This document defines a new GeneralName.otherName for inclusion in the X.509 Sub
 
 # Introduction
 
-Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in {{RFC5280}}. This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension (NCE) defined in {{RFC5280}}. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
+Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in {{RFC5280}}. This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING ({{X680}}). Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension (NCE) defined in {{RFC5280}}. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
 
 Note that while this construct may be used to carry EUI-48 or EUI-64 addresses in an Issuer Alternative Name (IAN) extension, there are probably few, if any, reasons to do so.
 
@@ -97,7 +120,7 @@ Example: 00-24-98-7B-19-02 encodes as OCTET STRING '0024987B1902'H.
 
 ## Encoding a MACAddress constraint
 
-When the name form is included in the NCE, the syntax consists of an OCTET STRING that is twice as long as the OCTET STRING representation of the address type being constrained. Within the OCTET STRING, two elements are encoded:
+When the name form is included in the NCE, the syntax consists of an OCTET STRING that is twice as long as the OCTET STRING representation of the address type being constrained. The OCTET STRING MUST be encoded using Distinguished Encoding Rules ({{X690}}). Within the OCTET STRING, two elements are encoded:
 
 1. The first set of N octets (where N is 6 for an EUI-48 constraint or 8 for an EUI-64 constraint) contains the "value bit pattern". This bit pattern encodes the bits that the masked address must contain to be considered a match.
 2. The second set of N octets encodes the "mask bit pattern" of the constraint. Each bit that is asserted in the mask bit pattern indicates that the bit in the same position in the address is constrained by the first set of N octets.
@@ -118,7 +141,7 @@ A relying party that matches a presented MAC address to a certificate SHALL perf
 
 Wildcards are not supported.
 
-Self-signed certificates that carry a MACAddress otherName SHOULD include the address of one of the device's physical ports.
+Self-signed certificates that carry a MACAddress otherName MUST include the address of one of the device's physical ports.
 
 ## Name Constraints Extension Path Processing
 
@@ -157,7 +180,7 @@ Implementations are not required to implement this algorithm, but MUST calculate
 
 ### OtherName.MACAddress Path Validation Processing
 
-This section describes the Path Validation Processing specific to OtherName.MACAddress constraints.  N.B., It is possible to build hierarchies of NCEs for OtherName.MACAddress's that prohibit ALL names, even if that was not intended. For example, say that the level 1 NCE contained only a "permitted_subtrees" of only (OtherName.MACAddress) global/unicast EUI-48, and the level 2 NCE contained only a "permitted_subtress" of "any address" (i.e. the initial constraint set).  This would result in an empty permitted_subtrees set as an "any address" constraint is not contained within a "global/unicast" constraint. The worked example is left to the reader.
+This section describes the Path Validation Processing specific to OtherName.MACAddress constraints.  N.B., It is possible to build hierarchies of NCEs for OtherName.MACAddress's that prohibit all names, even if that was not intended. For example, say that the level 1 NCE contained only a "permitted_subtrees" of only (OtherName.MACAddress) global/unicast EUI-48, and the level 2 NCE contained only a "permitted_subtress" of "any address" (i.e. the initial constraint set).  This would result in an empty permitted_subtrees set as an "any address" constraint is not contained within a "global/unicast" constraint. The worked example is left to the reader.
 
 The following is a utility function used to determine whether or not the set of matching addresses for one MACAddress constraint is a subset of the matching addresses for another constraint.
 
@@ -299,7 +322,7 @@ The binding of a MAC address to a certificate is only as strong as the CA's vali
 
 Some systems dynamically assign or share MAC addresses. Such practices can undermine the uniqueness and accountability that this name form aims to provide.
 
-Unlike IP addresses, MAC addresses are not typically routed across layer 3 boundaries. Relying parties in different broadcast domains SHOULD NOT assume uniqueness beyond their local network.
+Unlike IP addresses, MAC addresses are not typically routed across layer 3 boundaries. Relying parties SHOULD NOT assume uniqueness beyond their local network unless the relying party has information that addresses are stable across network boundaries.
 
 The Security Considerations section of {{RFC5280}} applies to this specification as well.
 
@@ -416,4 +439,4 @@ constraint.
 # Acknowledgments
 {:numbered="false"}
 
-We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to Bob Beck, David von Oheimb, Deb Cooley, Francois Rousseau, John Mattsson, Sean Turner, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.
+We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to Bob Beck, David von Oheimb, Deb Cooley, Francois Rousseau, John Mattsson, Murray Kucherawy, Sean Turner, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.
