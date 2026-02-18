@@ -5,14 +5,14 @@
 Limited Additional Mechanisms for PKIX and SMIME              R. Housley
 Internet-Draft                                            Vigil Security
 Intended status: Standards Track                              C. Bonnell
-Expires: 21 August 2026                                         DigiCert
+Expires: 22 August 2026                                         DigiCert
                                                                J. Mandel
                                                                   AKAYLA
                                                                 T. Okubo
                                                       Penguin Securities
                                                               M. StJohns
                                              NthPermutation Security LLC
-                                                        17 February 2026
+                                                        18 February 2026
 
 
        Media Access Control (MAC) Addresses in X.509 Certificates
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 August 2026.
+   This Internet-Draft will expire on 22 August 2026.
 
 Copyright Notice
 
@@ -110,7 +110,7 @@ Table of Contents
    in the Subject Alternative Name (SAN) extension defined in [RFC5280].
    This document defines a new otherName form "MACAddress".  The name
    form carries either a 48-bit IEEE 802 MAC address (EUI-48) or a
-   64-bit extended identifier (EUI-64) in an OCTET STRING.
+   64-bit extended identifier (EUI-64) in an OCTET STRING ([X680]).
    Additionally, the name form also can convey constraints on EUI-48 or
    EUI-64 values when included in the Name Constraints extension (NCE)
    defined in [RFC5280].  The new name form enables certificate-based
@@ -214,7 +214,7 @@ Table of Contents
 
    Wildcards are not supported.
 
-   Self-signed certificates that carry a MACAddress otherName SHOULD
+   Self-signed certificates that carry a MACAddress otherName MUST
    include the address of one of the device's physical ports.
 
 3.4.  Name Constraints Extension Path Processing
@@ -294,7 +294,7 @@ Table of Contents
 
    This section describes the Path Validation Processing specific to
    OtherName.MACAddress constraints.  N.B., It is possible to build
-   hierarchies of NCEs for OtherName.MACAddress's that prohibit ALL
+   hierarchies of NCEs for OtherName.MACAddress's that prohibit all
    names, even if that was not intended.  For example, say that the
    level 1 NCE contained only a "permitted_subtrees" of only
    (OtherName.MACAddress) global/unicast EUI-48, and the level 2 NCE
@@ -466,8 +466,9 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
    name form aims to provide.
 
    Unlike IP addresses, MAC addresses are not typically routed across
-   layer 3 boundaries.  Relying parties in different broadcast domains
-   SHOULD NOT assume uniqueness beyond their local network.
+   layer 3 boundaries.  Relying parties SHOULD NOT assume uniqueness
+   beyond their local network unless the relying party has information
+   that addresses are stable across network boundaries.
 
    The Security Considerations section of [RFC5280] applies to this
    specification as well.
@@ -614,6 +615,11 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
+   [X680]     ITU-T, "Information Technology -- Abstract Syntax Notation
+              One (ASN.1): Specification of basic notation", ITU-T
+              Recommendation X.680, ISO/IEC 8824-1:2021, February 2021,
+              <https://www.itu.int/rec/T-REC-X.680>.
+
 8.2.  Informative References
 
    [IEEERA]   IEEE Standards Association, "Guidelines for Use of
@@ -627,9 +633,9 @@ Acknowledgments
    We thank the participants on the LAMPS Working Group mailing list for
    their insightful feedback and comments.  In particular, the authors
    extend sincere appreciation to Bob Beck, David von Oheimb, Deb
-   Cooley, Francois Rousseau, John Mattsson, Sean Turner, and Tim
-   Hollebeek for their reviews and suggestions, which greatly improved
-   the quality of this document.
+   Cooley, Francois Rousseau, John Mattsson, Murray Kucherawy, Sean
+   Turner, and Tim Hollebeek for their reviews and suggestions, which
+   greatly improved the quality of this document.
 
 Authors' Addresses
 
