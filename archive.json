@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-08T03:13:43.059176+00:00",
+  "timestamp": "2026-02-19T02:40:21.074806+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -1981,24 +1981,26 @@
       "id": "PR_kwDOPNu74s7CBKXx",
       "title": "Nits from Francois",
       "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/18",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-02-06T14:57:36Z",
-      "updatedAt": "2026-02-06T16:39:08Z",
+      "updatedAt": "2026-02-17T13:25:29Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "870b4d651ebd2c9b68ab222ea9b0275b98368eb3",
       "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "headRefName": "francois-fixes",
       "headRefOid": "1762c25ce3cb4eab5b112595b8a8c7151200de33",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-17T13:25:25Z",
+      "mergedAt": "2026-02-17T13:25:25Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "0fd8b5cecb8996b9dcdddd2d7a7a27e2a6c1d5d2"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2012,6 +2014,163 @@
           "body": "Looks good to me",
           "createdAt": "2026-02-06T16:39:07Z",
           "updatedAt": "2026-02-06T16:39:07Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOPNu74s7EXKxL",
+      "title": "Murray fixes",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/19",
+      "state": "MERGED",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-17T13:39:29Z",
+      "updatedAt": "2026-02-18T13:20:28Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "0fd8b5cecb8996b9dcdddd2d7a7a27e2a6c1d5d2",
+      "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "headRefName": "murray-fixes",
+      "headRefOid": "a646c4bc46659e435fb566275778068bc942331d",
+      "closedAt": "2026-02-18T13:20:24Z",
+      "mergedAt": "2026-02-18T13:20:24Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "78111789def7948767a7e123a179298da3798932"
+      },
+      "comments": [
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I am fine with either way.  The extnValue is DER encoded, so it is not incorrect to included it.",
+          "createdAt": "2026-02-17T19:20:27Z",
+          "updatedAt": "2026-02-17T19:20:27Z"
+        },
+        {
+          "author": "mstjohns",
+          "authorAssociation": "COLLABORATOR",
+          "body": "But \"GeneralName\" isn't necessarily DER encoded.  We're specifying this for use in SAN and NCE, but there are other places that GeneralName.otherName.MACAddress might be used where DER isn't required.  I.e., there's probably an unprotected GeneralName somewhere in one of the structures in various IETF documents.",
+          "createdAt": "2026-02-17T19:32:19Z",
+          "updatedAt": "2026-02-17T19:32:19Z"
+        },
+        {
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "body": "@mstjohns @russhousley Is an acceptable path forward to remove the reference to X.690 and the requirement to use DER but retain the reference to X.680?",
+          "createdAt": "2026-02-17T20:08:27Z",
+          "updatedAt": "2026-02-17T20:08:27Z"
+        },
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We need the reference to X.680 for the ASN.1 module.  I'm okay with dropping X.690.",
+          "createdAt": "2026-02-17T20:12:38Z",
+          "updatedAt": "2026-02-17T20:12:38Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPNu74s7jXArP",
+          "commit": {
+            "abbreviatedOid": "213f8eb"
+          },
+          "author": "tomofumiokubo",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Looks good to me!",
+          "createdAt": "2026-02-17T14:58:20Z",
+          "updatedAt": "2026-02-17T14:58:20Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7ja9lE",
+          "commit": {
+            "abbreviatedOid": "213f8eb"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-17T18:04:33Z",
+          "updatedAt": "2026-02-17T18:04:34Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "This isn't actually correct or necessary.  The enclosing object is really the one responsible for determining the encoding of the rest.  In this case, the ITU X.509 Extensions definition has this (our version is compliant, but behind in updates - CONTAINING/ENCODED BY are ):\n\nExtension ::= SEQUENCE {\n    extnId     EXTENSION.&id({ExtensionSet}), critical   BOOLEAN DEFAULT FALSE,\n    extnValue  OCTET STRING\n        (CONTAINING EXTENSION.&ExtnType({ExtensionSet}{@extnId}) ENCODED BY der),\n... }\n\nNote the \"ENCODED BY der\" specifying that the open type included within the OCTET STRING will be encoded as DER.\n\nAn OtherName.MACAddress encoded some place else (e.g. outside of an Extension) might use a different encoding (e.g. XML or JSON)\n\nI'd revert the change.",
+              "createdAt": "2026-02-17T18:04:33Z",
+              "updatedAt": "2026-02-17T18:04:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7jbBy5",
+          "commit": {
+            "abbreviatedOid": "213f8eb"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Mostly OK - but needs one reversion.  Encoding of the OCTET STRING should not be defined as DER where Murray suggested.  The enclosing object - in this case Extension - is already understood to encode the contents of the extnValue  open type as DER and X.509 makes that explicit",
+          "createdAt": "2026-02-17T18:07:19Z",
+          "updatedAt": "2026-02-17T18:07:19Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7jbCaz",
+          "commit": {
+            "abbreviatedOid": "213f8eb"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-17T18:07:44Z",
+          "updatedAt": "2026-02-17T18:07:44Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "I can revert, but then we need to find another place to use the normative reference to X.690. Where would be a better place to include the reference?",
+              "createdAt": "2026-02-17T18:07:44Z",
+              "updatedAt": "2026-02-17T18:07:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7jcCZq",
+          "commit": {
+            "abbreviatedOid": "213f8eb"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-17T19:03:45Z",
+          "updatedAt": "2026-02-17T19:03:45Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "Why?  We don't reference DER anywhere else and most PKIX documents don't talk about the encoding side for components - that's left to X.509 or the high level protocol documents.  I think we can safely leave that reference out.  RFC5280 does contain a DER reference and this document references that one.\r\n\r\nWhen I was creating a replacement for the CSR Attestation document, I used \"ASN.1\" as a reference tag and created a group reference for the ASN.1 680/681/682  documents as Normative.   We could do something like that using the Introduction as the anchor point for introducing the link(s).  E.g. \"This document defines an ASN.1 [rfc5280ref] OTHER-NAME [rfc5912ref] for IEEE 48-bit and 64-bit EUIs\"   But I don't think we need to go there.  \r\n\r\nLet's just leave it out.",
+              "createdAt": "2026-02-17T19:03:45Z",
+              "updatedAt": "2026-02-17T19:03:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7jfoXt",
+          "commit": {
+            "abbreviatedOid": "a646c4b"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-17T22:56:33Z",
+          "updatedAt": "2026-02-17T22:56:33Z",
           "comments": []
         }
       ]
