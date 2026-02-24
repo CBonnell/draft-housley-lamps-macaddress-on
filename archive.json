@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-19T02:40:21.074806+00:00",
+  "timestamp": "2026-02-24T02:38:20.019833+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -2171,6 +2171,72 @@
           "body": "",
           "createdAt": "2026-02-17T22:56:33Z",
           "updatedAt": "2026-02-17T22:56:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOPNu74s7Frzcc",
+      "title": "Add IANA assignments",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/20",
+      "state": "OPEN",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Per https://mailarchive.ietf.org/arch/msg/spasm/lNwFzZyYW_yaj6PHGLessobH45o/",
+      "createdAt": "2026-02-23T15:51:51Z",
+      "updatedAt": "2026-02-23T18:18:55Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "78111789def7948767a7e123a179298da3798932",
+      "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "headRefName": "iana",
+      "headRefOid": "d50779c56045b589516e2f7e9cbdcbd9ec88018b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPNu74s7lAro4",
+          "commit": {
+            "abbreviatedOid": "d50779c"
+          },
+          "author": "mandelj7",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-23T16:33:25Z",
+          "updatedAt": "2026-02-23T16:33:25Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7lAsqU",
+          "commit": {
+            "abbreviatedOid": "d50779c"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-23T16:34:15Z",
+          "updatedAt": "2026-02-23T16:34:15Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7lC9zP",
+          "commit": {
+            "abbreviatedOid": "d50779c"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-23T18:18:55Z",
+          "updatedAt": "2026-02-23T18:18:55Z",
           "comments": []
         }
       ]
