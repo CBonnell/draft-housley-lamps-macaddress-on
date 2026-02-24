@@ -96,7 +96,7 @@ Note that while this construct may be used to carry EUI-48 or EUI-64 addresses i
 
 # MACAddress otherName
 
-In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneraName.otherName field included in a SAN or IAN.  The new name form is identified by the object identifier (OID) id‑on‑MACAddress (TBD1) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING comprising of 6 octets, or an EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.
+In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneraName.otherName field included in a SAN or IAN.  The new name form is identified by the object identifier (OID) id‑on‑MACAddress (`1.3.6.1.5.5.7.8.12`) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING comprising of 6 octets, or an EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.
 
 The following sub-sections describe how to encode EUI-48 and EUI-64 values and their corresponding constraints.
 
@@ -320,20 +320,20 @@ A MAC address can uniquely identify a physical device and by extension, its user
 
 # IANA Considerations
 
-IANA is requested to make the following assignments in the "SMI Security for PKIX Module Identifier" (1.3.6.1.5.5.7.0) registry:
+IANA has made the following assignment in the "SMI Security for PKIX Module Identifier" (1.3.6.1.5.5.7.0) registry:
 
         +=========+====================================+===============+
         | Decimal | Description                        | References    |
         +=========+====================================+===============+
-        | TBD0    | id-mod-mac-address-other-name-2025 | This document |
+        | 126     | id-mod-mac-address-other-name-2025 | This document |
         +---------+------------------------------------+---------------+
 
-IANA is requested to make the following assignment in the "SMI Security for PKIX Other Name Forms" (1.3.6.1.5.5.7.8) registry:
+IANA has made the following assignment in the "SMI Security for PKIX Other Name Forms" (1.3.6.1.5.5.7.8) registry:
 
         +=========+=================================+===============+
         | Decimal | Description                     | References    |
         +=========+=================================+===============+
-        | TBD1    | id-on-MACAddress                | This document |
+        | 12      | id-on-MACAddress                | This document |
         +---------+---------------------------------+---------------+
 
 # ASN.1 Module
@@ -344,7 +344,7 @@ This Appendix contains the ASN.1 Module for the MAC Address; it follows the conv
 MACAddressOtherName-2025
   { iso(1) identified-organization(3) dod(6) internet(1)
     security(5) mechanisms(5) pkix(7) id-mod(0)
-    id-mod-mac-address-other-name-2025(TBD0) }
+    id-mod-mac-address-other-name-2025(126) }
 
 DEFINITIONS IMPLICIT TAGS ::=
 BEGIN
@@ -364,7 +364,7 @@ IMPORTS
 id-on  OBJECT IDENTIFIER ::= { id-pkix 8 }
 
 -- OID for this name form
-id-on-MACAddress OBJECT IDENTIFIER ::= { id-on TBD1 }
+id-on-MACAddress OBJECT IDENTIFIER ::= { id-on 12 }
 
 -- Contents of the otherName field
 MACAddressOtherNames OTHER-NAME ::= { on-MACAddress, ... }
