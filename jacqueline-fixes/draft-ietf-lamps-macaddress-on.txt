@@ -133,7 +133,7 @@ Table of Contents
 
    In this document "otherName", "OtherName" and "GeneralName.otherName"
    all refer to a GeneraName.otherName field included in a SAN or IAN.
-   The new name form is identified by the Object Identifier (OID)
+   The new name form is identified by the OBJECT IDENTIFIER (OID)
    id-on-MACAddress (1.3.6.1.5.5.7.8.12) and declared below using the
    OTHER-NAME class declaration syntax.  The name form has variants to
    convey an EUI-48 as an OCTET STRING comprising of 6 octets, or an
