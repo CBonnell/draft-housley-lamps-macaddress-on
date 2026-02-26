@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-24T02:38:20.019833+00:00",
+  "timestamp": "2026-02-26T02:34:43.899617+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -2180,24 +2180,26 @@
       "id": "PR_kwDOPNu74s7Frzcc",
       "title": "Add IANA assignments",
       "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/20",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "CBonnell",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Per https://mailarchive.ietf.org/arch/msg/spasm/lNwFzZyYW_yaj6PHGLessobH45o/",
       "createdAt": "2026-02-23T15:51:51Z",
-      "updatedAt": "2026-02-23T18:18:55Z",
+      "updatedAt": "2026-02-24T16:23:21Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "78111789def7948767a7e123a179298da3798932",
       "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "headRefName": "iana",
       "headRefOid": "d50779c56045b589516e2f7e9cbdcbd9ec88018b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-24T16:23:17Z",
+      "mergedAt": "2026-02-24T16:23:17Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "8b3285e367babe470c324f7d4fa6296b53eb34b6"
+      },
       "comments": [],
       "reviews": [
         {
