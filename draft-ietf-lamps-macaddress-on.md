@@ -96,7 +96,7 @@ Note that while this construct may be used to carry EUI-48 or EUI-64 addresses i
 
 # MACAddress otherName
 
-In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneraName.otherName field included in a SAN or IAN.  The new name form is identified by the object identifier (OID) id‑on‑MACAddress (`1.3.6.1.5.5.7.8.12`) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING comprising of 6 octets, or an EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.
+In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneraName.otherName field included in a SAN or IAN.  The new name form is identified by the OBJECT IDENTIFIER (OID) id‑on‑MACAddress (`1.3.6.1.5.5.7.8.12`) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING comprising of 6 octets, or an EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.
 
 The following sub-sections describe how to encode EUI-48 and EUI-64 values and their corresponding constraints.
 
@@ -168,7 +168,7 @@ Implementations are not required to implement this algorithm, but MUST calculate
 
 ### OtherName.MACAddress Path Validation Processing
 
-This section describes the Path Validation Processing specific to OtherName.MACAddress constraints.  N.B., It is possible to build hierarchies of NCEs for OtherName.MACAddress's that prohibit all names, even if that was not intended. For example, say that the level 1 NCE contained only a "permitted_subtrees" of only (OtherName.MACAddress) global/unicast EUI-48, and the level 2 NCE contained only a "permitted_subtress" of "any address" (i.e. the initial constraint set).  This would result in an empty permitted_subtrees set as an "any address" constraint is not contained within a "global/unicast" constraint. The worked example is left to the reader.
+This section describes the Path Validation Processing specific to OtherName.MACAddress constraints.  N.B., It is possible to build hierarchies of NCEs for OtherName.MACAddress's that prohibit all names, even if that was not intended. For example, say that the level 1 NCE contained only a "permitted_subtrees" of only (OtherName.MACAddress) global/unicast EUI-48, and the level 2 NCE contained only a "permitted_subtrees" of "any address" (i.e. the initial constraint set).  This would result in an empty permitted_subtrees set as an "any address" constraint is not contained within a "global/unicast" constraint. The worked example is left to the reader.
 
 The following is a utility function used to determine whether or not the set of matching addresses for one MACAddress constraint is a subset of the matching addresses for another constraint.
 
@@ -427,4 +427,4 @@ constraint.
 # Acknowledgments
 {:numbered="false"}
 
-We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to Bob Beck, David von Oheimb, Deb Cooley, Francois Rousseau, John Mattsson, Murray Kucherawy, Sean Turner, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.
+We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to Bob Beck, David von Oheimb, Deb Cooley, Francois Rousseau, Jacqueline McCall, John Mattsson, Murray Kucherawy, Sean Turner, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.
