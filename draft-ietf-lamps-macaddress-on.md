@@ -86,7 +86,7 @@ This document defines a new GeneralName.otherName for inclusion in the X.509 Sub
 
 # Introduction
 
-Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in {{RFC5280}}. This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING ({{X680}}). Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension (NCE) defined in {{RFC5280}}. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.
+Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in {{RFC5280}}. This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING {{X680}}. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension (NCE) defined in {{Section 4.2.1.10 of RFC5280}}. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things (IoT) and automotive networks, in particular.
 
 Note that while this construct may be used to carry EUI-48 or EUI-64 addresses in an Issuer Alternative Name (IAN) extension, there are probably few, if any, reasons to do so.
 
@@ -96,7 +96,7 @@ Note that while this construct may be used to carry EUI-48 or EUI-64 addresses i
 
 # MACAddress otherName
 
-In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneraName.otherName field included in a SAN or IAN.  The new name form is identified by the OBJECT IDENTIFIER (OID) id‑on‑MACAddress (`1.3.6.1.5.5.7.8.12`) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING comprising of 6 octets, or an EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.
+In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneralName.otherName field included in a SAN or IAN.  The new name form is identified by the OBJECT IDENTIFIER (OID) id‑on‑MACAddress (`1.3.6.1.5.5.7.8.12`) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING comprising of 6 octets, or an EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.
 
 The following sub-sections describe how to encode EUI-48 and EUI-64 values and their corresponding constraints.
 
@@ -113,13 +113,13 @@ When the name form is included in the NCE, the syntax consists of an OCTET STRIN
 1. The first set of N octets (where N is 6 for an EUI-48 constraint or 8 for an EUI-64 constraint) contains the "value bit pattern". This bit pattern encodes the bits that the masked address must contain to be considered a match.
 2. The second set of N octets encodes the "mask bit pattern" of the constraint. Each bit that is asserted in the mask bit pattern indicates that the bit in the same position in the address is constrained by the first set of N octets.
 
-For example, a constraint that specifies that the the acceptable names must all be within an Organizationally Unique Identifier (OUI) of '00-00-5e' for an EUI-48 address, would have a value part of '00005E000000'H, a mask part of 'FFFFFFFF000000'H and would be encoded as OCTET STRING '00005E000000FFFFFF000000'H.
+For example, a constraint that specifies that the acceptable names must all be within an Organizationally Unique Identifier (OUI) of '00-00-5e' for an EUI-48 address, would have a value part of '00005E000000'H, a mask part of 'FFFFFFFF000000'H and would be encoded as OCTET STRING '00005E000000FFFFFF000000'H.
 
 The bit patterns encoded in both the value bit pattern and mask bit pattern are encoded with the most significant bit encoded first ("big-endian" or "left-to-right" encoding).
 
 If a bit is not asserted in the mask bit pattern, then the CA MUST NOT assert the corresponding bit in the value bit pattern. This rule ensures that a canonical encoding is used for a given mask bit pattern and value bit pattern.
 
-Per {{RFC5280}}, NCE are valid in and MUST be placed only in CA certificates.
+Per {{Section 4.2.1.10 of RFC5280}}, NCE are valid in and "MUST be used only in CA certificates".
 
 ## Generation and Validation Rules
 
@@ -162,7 +162,7 @@ boolean nameMatchesConstraint (name n, constraint c) {
 }
 ~~~
 
-For example, a constraint of '000000000000 030000000000'H will be matched by any universal/unicast EUI-48 address such as 00-00-5e-00-50-34.  A constraint of '00005E000000 FFFFFF000000'H will be matched by any universal/unicast address with a OUI of 00-00-5E - i.e., it will also match 00-00-5e-00-50-34.  Note that '00-00-5E' is an OUI controlled by IANA.
+For example, a constraint of '000000000000 030000000000'H will be matched by any universal/unicast EUI-48 address such as 00-00-5e-00-50-34.  A constraint of '00005E000000 FFFFFF000000'H will be matched by any universal/unicast address with a OUI of 00-00-5E - i.e., it will also match 00-00-5e-00-50-34.  Note that '00-00-5E' is an OUI controlled by IANA ({{Section 1.3 of ?RFC9542}}).
 
 Implementations are not required to implement this algorithm, but MUST calculate an identical result to this algorithm for a given set of inputs.
 
