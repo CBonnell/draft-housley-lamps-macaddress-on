@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-26T02:34:43.899617+00:00",
+  "timestamp": "2026-03-01T02:48:27.977523+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -2242,6 +2242,140 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOPNu74s7GjT3Z",
+      "title": "Jacqueline fixes",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/21",
+      "state": "MERGED",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-26T13:51:19Z",
+      "updatedAt": "2026-02-26T17:14:42Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "8b3285e367babe470c324f7d4fa6296b53eb34b6",
+      "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "headRefName": "jacqueline-fixes",
+      "headRefOid": "9a728c9f4cea5cfc0ebc7711e9d80baf09b8abf8",
+      "closedAt": "2026-02-26T17:14:38Z",
+      "mergedAt": "2026-02-26T17:14:38Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "00f6da9103ca77e2687071f0f7964bc77919831b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPNu74s7mJWq0",
+          "commit": {
+            "abbreviatedOid": "8f54eca"
+          },
+          "author": "mandelj7",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-26T14:05:53Z",
+          "updatedAt": "2026-02-26T14:05:53Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7mLFGj",
+          "commit": {
+            "abbreviatedOid": "8f54eca"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-26T15:16:40Z",
+          "updatedAt": "2026-02-26T15:16:40Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7mL95T",
+          "commit": {
+            "abbreviatedOid": "8f54eca"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-26T15:53:55Z",
+          "updatedAt": "2026-02-26T15:54:56Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Should be OBJECT IDENTIFIER if any caps are necessary.  ",
+              "createdAt": "2026-02-26T15:53:55Z",
+              "updatedAt": "2026-02-26T15:54:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7mNu72",
+          "commit": {
+            "abbreviatedOid": "8f54eca"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-26T17:07:27Z",
+          "updatedAt": "2026-02-26T17:07:27Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\nIn this document \"otherName\", \"OtherName\" and \"GeneralName.otherName\" all refer to a GeneraName.otherName field included in a SAN or IAN.  The new name form is identified by the OBJECT IDENTIFIER (OID) id\u2011on\u2011MACAddress (`1.3.6.1.5.5.7.8.12`) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING comprising of 6 octets, or an EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.\n```",
+              "createdAt": "2026-02-26T17:07:27Z",
+              "updatedAt": "2026-02-26T17:07:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPNu74s7mN7bH",
+          "commit": {
+            "abbreviatedOid": "9a728c9"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-26T17:13:36Z",
+          "updatedAt": "2026-02-26T17:13:36Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOPNu74s7G1k3m",
+      "title": "minor edits from Med's IESG Review",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/22",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-27T14:19:06Z",
+      "updatedAt": "2026-02-27T14:19:06Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "00f6da9103ca77e2687071f0f7964bc77919831b",
+      "headRepository": "boucadair/draft-housley-lamps-macaddress-on",
+      "headRefName": "patch-1",
+      "headRefOid": "4affb7bfe44554da2e16e6d85bae56c23e9f5080",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
