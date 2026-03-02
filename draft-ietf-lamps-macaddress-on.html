@@ -1052,11 +1052,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Media Access Control (MAC) Addresses in </td>
-<td class="right">February 2026</td>
+<td class="right">March 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Housley, et al.</td>
-<td class="center">Expires 30 August 2026</td>
+<td class="center">Expires 3 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-macaddress-on-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-26" class="published">26 February 2026</time>
+<time datetime="2026-03-02" class="published">2 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-30">30 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-03">3 September 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1140,7 +1140,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 30 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 3 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1254,7 +1254,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING (<span>[<a href="#X680" class="cite xref">X680</a>]</span>). Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension (NCE) defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things and automotive networks.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING <span>[<a href="#X680" class="cite xref">X680</a>]</span>. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension (NCE) defined in <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.10" class="relref">Section 4.2.1.10</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things (IoT) and automotive networks, in particular.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">Note that while this construct may be used to carry EUI-48 or EUI-64 addresses in an Issuer Alternative Name (IAN) extension, there are probably few, if any, reasons to do so.<a href="#section-1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1274,7 +1274,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-macaddress-othername">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-macaddress-othername" class="section-name selfRef">MACAddress otherName</a>
       </h2>
-<p id="section-3-1">In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneraName.otherName field included in a SAN or IAN.  The new name form is identified by the OBJECT IDENTIFIER (OID) id‑on‑MACAddress (<code>1.3.6.1.5.5.7.8.12</code>) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING comprising of 6 octets, or an EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneralName.otherName field included in a SAN or IAN.  The new name form is identified by the OBJECT IDENTIFIER (OID) id‑on‑MACAddress (<code>1.3.6.1.5.5.7.8.12</code>) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING comprising of 6 octets, or an EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">The following sub-sections describe how to encode EUI-48 and EUI-64 values and their corresponding constraints.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="encoding-a-macaddress-as-an-alternative-name">
 <section id="section-3.1">
@@ -1299,10 +1299,10 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <p id="section-3.2-2.2.1">The second set of N octets encodes the "mask bit pattern" of the constraint. Each bit that is asserted in the mask bit pattern indicates that the bit in the same position in the address is constrained by the first set of N octets.<a href="#section-3.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-3.2-3">For example, a constraint that specifies that the the acceptable names must all be within an Organizationally Unique Identifier (OUI) of '00-00-5e' for an EUI-48 address, would have a value part of '00005E000000'H, a mask part of 'FFFFFFFF000000'H and would be encoded as OCTET STRING '00005E000000FFFFFF000000'H.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">For example, a constraint that specifies that the acceptable names must all be within an Organizationally Unique Identifier (OUI) of '00-00-5e' for an EUI-48 address, would have a value part of '00005E000000'H, a mask part of 'FFFFFFFF000000'H and would be encoded as OCTET STRING '00005E000000FFFFFF000000'H.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">The bit patterns encoded in both the value bit pattern and mask bit pattern are encoded with the most significant bit encoded first ("big-endian" or "left-to-right" encoding).<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <p id="section-3.2-5">If a bit is not asserted in the mask bit pattern, then the CA <span class="bcp14">MUST NOT</span> assert the corresponding bit in the value bit pattern. This rule ensures that a canonical encoding is used for a given mask bit pattern and value bit pattern.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
-<p id="section-3.2-6">Per <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, NCE are valid in and <span class="bcp14">MUST</span> be placed only in CA certificates.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
+<p id="section-3.2-6">Per <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.10" class="relref">Section 4.2.1.10</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, NCE are valid in and "<span class="bcp14">MUST</span> be used only in CA certificates".<a href="#section-3.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="generation-and-validation-rules">
@@ -1364,7 +1364,7 @@ boolean nameMatchesConstraint (name n, constraint c) {
 }
 </pre><a href="#section-3.4.1-4" class="pilcrow">¶</a>
 </div>
-<p id="section-3.4.1-5">For example, a constraint of '000000000000 030000000000'H will be matched by any universal/unicast EUI-48 address such as 00-00-5e-00-50-34.  A constraint of '00005E000000 FFFFFF000000'H will be matched by any universal/unicast address with a OUI of 00-00-5E - i.e., it will also match 00-00-5e-00-50-34.  Note that '00-00-5E' is an OUI controlled by IANA.<a href="#section-3.4.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-5">For example, a constraint of '000000000000 030000000000'H will be matched by any universal/unicast EUI-48 address such as 00-00-5e-00-50-34.  A constraint of '00005E000000 FFFFFF000000'H will be matched by any universal/unicast address with a OUI of 00-00-5E - i.e., it will also match 00-00-5e-00-50-34.  Note that '00-00-5E' is an OUI controlled by IANA (<span><a href="https://rfc-editor.org/rfc/rfc9542#section-1.3" class="relref">Section 1.3</a> of [<a href="#RFC9542" class="cite xref">RFC9542</a>]</span>).<a href="#section-3.4.1-5" class="pilcrow">¶</a></p>
 <p id="section-3.4.1-6">Implementations are not required to implement this algorithm, but <span class="bcp14">MUST</span> calculate an identical result to this algorithm for a given set of inputs.<a href="#section-3.4.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1720,8 +1720,12 @@ constraint.<a href="#section-7.3-4" class="pilcrow">¶</a></p>
         </h3>
 <dl class="references">
 <dt id="IEEERA">[IEEERA]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">IEEE Standards Association</span>, <span class="refTitle">"Guidelines for Use of Extended Unique Identifier (EUI), Organizationally Unique Identifier (OUI), and Company ID (CID)"</span>, <span>&lt;<a href="https://standards.ieee.org/wp-content/uploads/import/documents/tutorials/eui.pdf">https://standards.ieee.org/wp-content/uploads/import/documents/tutorials/eui.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9542">[RFC9542]</dt>
+      <dd>
+<span class="refAuthor">Eastlake 3rd, D.</span>, <span class="refAuthor">Abley, J.</span>, and <span class="refAuthor">Y. Li</span>, <span class="refTitle">"IANA Considerations and IETF Protocol and Documentation Usage for IEEE 802 Parameters"</span>, <span class="seriesInfo">BCP 141</span>, <span class="seriesInfo">RFC 9542</span>, <span class="seriesInfo">DOI 10.17487/RFC9542</span>, <time datetime="2024-04" class="refDate">April 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9542">https://www.rfc-editor.org/rfc/rfc9542</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
