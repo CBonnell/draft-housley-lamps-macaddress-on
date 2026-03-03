@@ -460,7 +460,7 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
    The binding of a MAC address to a certificate is only as strong as
    the CA's validation process.  CAs MUST verify that the subscriber
    legitimately controls or owns the asserted MAC address.  The
-   verification processes MUST account for the possibility that MAC
+   validation process MUST account for the possibility that MAC
    addresses can be spoofed.
 
    Some systems dynamically assign or share MAC addresses.  Such
