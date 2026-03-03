@@ -306,7 +306,7 @@ excluded_subtrees{} (i) = tempExcludedSubtrees;
 
 # Security Considerations
 
-The binding of a MAC address to a certificate is only as strong as the CA's validation process. CAs MUST verify that the subscriber legitimately controls or owns the asserted MAC address. The verification processes MUST account for the possibility that MAC addresses can be spoofed.
+The binding of a MAC address to a certificate is only as strong as the CA's validation process. CAs MUST verify that the subscriber legitimately controls or owns the asserted MAC address. The validation process MUST account for the possibility that MAC addresses can be spoofed.
 
 Some systems dynamically assign or share MAC addresses. Such practices can undermine the uniqueness and accountability that this name form aims to provide.
 
