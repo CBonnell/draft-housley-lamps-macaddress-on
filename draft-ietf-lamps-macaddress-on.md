@@ -96,13 +96,13 @@ Note that while this construct may be used to carry EUI-48 or EUI-64 addresses i
 
 # MACAddress otherName
 
-In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneralName.otherName field included in a SAN or IAN.  The new name form is identified by the OBJECT IDENTIFIER (OID) id‑on‑MACAddress (`1.3.6.1.5.5.7.8.12`) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING comprising of 6 octets, or an EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.
+In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneralName.otherName field included in a SAN or IAN.  The new name form is identified by the OBJECT IDENTIFIER (OID) id‑on‑MACAddress (`1.3.6.1.5.5.7.8.12`) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING consisting of 6 octets, or an EUI-64 as an OCTET STRING consisting of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.
 
 The following sub-sections describe how to encode EUI-48 and EUI-64 values and their corresponding constraints.
 
 ## Encoding a MACAddress as an alternative name
 
-When the name form is included in a SAN or IAN extension as an OtherName, the syntax consists of exactly six or eight octets. Values are encoded with the most significant octet encoded first ("big-endian" or "left-to-right" encoding). No text representation is permitted in the certificate, as human‑readable forms such as "00‑24‑98‑7B‑19‑02" or "0024.987B.1902" are used only in management interfaces. When a device natively possesses a 48‑bit MAC identifier, the Certification Authority (CA) MUST encode it using a 6‑octet OCTET STRING as the MACAddress value. When the device’s factory identifier is a 64‑bit EUI‑64 or when no canonical 48‑bit form exists, the CA MUST encode it using an 8‑octet OCTET STRING as the MACAddress value.
+When the name form is included in a SAN or IAN extension as an OtherName, the syntax consists of exactly six or eight octets. Values are encoded with the most significant octet encoded first ("big-endian" or "left-to-right" encoding). No text representation is permitted in the certificate, as human‑readable forms such as "00‑24‑98‑7B‑19‑02" or "0024.987B.1902" are used only in management interfaces. When a device possesses a 48‑bit MAC identifier, the Certification Authority (CA) MUST encode it using a 6‑octet OCTET STRING as the MACAddress value. When the device’s factory identifier is a 64‑bit EUI‑64 or when no canonical 48‑bit form exists, the CA MUST encode it using an 8‑octet OCTET STRING as the MACAddress value.
 
 Example: 00-24-98-7B-19-02 encodes as OCTET STRING '0024987B1902'H.
 
@@ -162,7 +162,7 @@ boolean nameMatchesConstraint (name n, constraint c) {
 }
 ~~~
 
-For example, a constraint of '000000000000 030000000000'H will be matched by any universal/unicast EUI-48 address such as 00-00-5e-00-50-34.  A constraint of '00005E000000 FFFFFF000000'H will be matched by any universal/unicast address with a OUI of 00-00-5E - i.e., it will also match 00-00-5e-00-50-34.  Note that '00-00-5E' is an OUI controlled by IANA ({{Section 1.3 of ?RFC9542}}).
+For example, a constraint of '000000000000 030000000000'H will be matched by any universal/unicast EUI-48 address such as 00-00-5e-00-50-34.  A constraint of '00005E000000 FFFFFF000000'H will be matched by any universal/unicast address with an OUI of 00-00-5E - i.e., it will also match 00-00-5e-00-50-34.  Note that '00-00-5E' is an OUI controlled by IANA ({{Section 1.3 of ?RFC9542}}).
 
 Implementations are not required to implement this algorithm, but MUST calculate an identical result to this algorithm for a given set of inputs.
 
@@ -247,7 +247,7 @@ constraint tempRequestedSubtrees {} =
 // pst -> one of the current permitted subtrees
 foreach ( constraint rst in tempRequestedSubtrees) {
     foreach ( constraint pst in prevSubtrees) {
-          if (childIsSubsetofParent (rst,
+          if (childIsSubsetOfParent (rst,
                                    pst) {
                 tempPermittedSubtrees += requestedSubtree;
                 break;
@@ -291,7 +291,7 @@ foreach (constraint rExcl in tempRequestedSubtrees) {
       // constraints that 'covers' the requested subtree,
       // I do not need to add the requested subtree
       // to the set of excluded subtrees.
-      if (childIsSubsetParent (rExcl, est)) {
+      if (childIsSubsetOfParent (rExcl, est)) {
         matches = true;
         break;
       }
@@ -306,7 +306,7 @@ excluded_subtrees{} (i) = tempExcludedSubtrees;
 
 # Security Considerations
 
-The binding of a MAC address to a certificate is only as strong as the CA's validation process. CAs MUST verify that the subscriber legitimately controls or owns the asserted MAC address.
+The binding of a MAC address to a certificate is only as strong as the CA's validation process. CAs MUST verify that the subscriber legitimately controls or owns the asserted MAC address. The verification processes MUST account for the possibility that MAC addresses can be spoofed.
 
 Some systems dynamically assign or share MAC addresses. Such practices can undermine the uniqueness and accountability that this name form aims to provide.
 
@@ -338,7 +338,7 @@ IANA has made the following assignment in the "SMI Security for PKIX Other Name 
 
 # ASN.1 Module
 
-This Appendix contains the ASN.1 Module for the MAC Address; it follows the conventions established by {{RFC5912}}.
+This section contains the ASN.1 Module for the MAC Address; it follows the conventions established by {{RFC5912}}.
 
 ~~~
 MACAddressOtherName-2025
@@ -427,4 +427,4 @@ constraint.
 # Acknowledgments
 {:numbered="false"}
 
-We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to Bob Beck, David von Oheimb, Deb Cooley, Francois Rousseau, Jacqueline McCall, John Mattsson, Mohamed Boucadair, Murray Kucherawy, Sean Turner, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.
+We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to Bob Beck, David von Oheimb, Deb Cooley, Francois Rousseau, Jacqueline McCall, John Mattsson, Mahesh Jethanandani, Mohamed Boucadair, Murray Kucherawy, Sean Turner, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.
