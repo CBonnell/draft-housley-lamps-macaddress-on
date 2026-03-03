@@ -1056,7 +1056,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Housley, et al.</td>
-<td class="center">Expires 3 September 2026</td>
+<td class="center">Expires 4 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-macaddress-on-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-03-02" class="published">2 March 2026</time>
+<time datetime="2026-03-03" class="published">3 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-09-03">3 September 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-04">4 September 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1140,7 +1140,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1274,14 +1274,14 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-macaddress-othername">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-macaddress-othername" class="section-name selfRef">MACAddress otherName</a>
       </h2>
-<p id="section-3-1">In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneralName.otherName field included in a SAN or IAN.  The new name form is identified by the OBJECT IDENTIFIER (OID) id‑on‑MACAddress (<code>1.3.6.1.5.5.7.8.12</code>) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING comprising of 6 octets, or an EUI-64 as an OCTET STRING comprising of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneralName.otherName field included in a SAN or IAN.  The new name form is identified by the OBJECT IDENTIFIER (OID) id‑on‑MACAddress (<code>1.3.6.1.5.5.7.8.12</code>) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING consisting of 6 octets, or an EUI-64 as an OCTET STRING consisting of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">The following sub-sections describe how to encode EUI-48 and EUI-64 values and their corresponding constraints.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="encoding-a-macaddress-as-an-alternative-name">
 <section id="section-3.1">
         <h3 id="name-encoding-a-macaddress-as-an">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-encoding-a-macaddress-as-an" class="section-name selfRef">Encoding a MACAddress as an alternative name</a>
         </h3>
-<p id="section-3.1-1">When the name form is included in a SAN or IAN extension as an OtherName, the syntax consists of exactly six or eight octets. Values are encoded with the most significant octet encoded first ("big-endian" or "left-to-right" encoding). No text representation is permitted in the certificate, as human‑readable forms such as "00‑24‑98‑7B‑19‑02" or "0024.987B.1902" are used only in management interfaces. When a device natively possesses a 48‑bit MAC identifier, the Certification Authority (CA) <span class="bcp14">MUST</span> encode it using a 6‑octet OCTET STRING as the MACAddress value. When the device’s factory identifier is a 64‑bit EUI‑64 or when no canonical 48‑bit form exists, the CA <span class="bcp14">MUST</span> encode it using an 8‑octet OCTET STRING as the MACAddress value.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">When the name form is included in a SAN or IAN extension as an OtherName, the syntax consists of exactly six or eight octets. Values are encoded with the most significant octet encoded first ("big-endian" or "left-to-right" encoding). No text representation is permitted in the certificate, as human‑readable forms such as "00‑24‑98‑7B‑19‑02" or "0024.987B.1902" are used only in management interfaces. When a device possesses a 48‑bit MAC identifier, the Certification Authority (CA) <span class="bcp14">MUST</span> encode it using a 6‑octet OCTET STRING as the MACAddress value. When the device’s factory identifier is a 64‑bit EUI‑64 or when no canonical 48‑bit form exists, the CA <span class="bcp14">MUST</span> encode it using an 8‑octet OCTET STRING as the MACAddress value.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">Example: 00-24-98-7B-19-02 encodes as OCTET STRING '0024987B1902'H.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1364,7 +1364,7 @@ boolean nameMatchesConstraint (name n, constraint c) {
 }
 </pre><a href="#section-3.4.1-4" class="pilcrow">¶</a>
 </div>
-<p id="section-3.4.1-5">For example, a constraint of '000000000000 030000000000'H will be matched by any universal/unicast EUI-48 address such as 00-00-5e-00-50-34.  A constraint of '00005E000000 FFFFFF000000'H will be matched by any universal/unicast address with a OUI of 00-00-5E - i.e., it will also match 00-00-5e-00-50-34.  Note that '00-00-5E' is an OUI controlled by IANA (<span><a href="https://rfc-editor.org/rfc/rfc9542#section-1.3" class="relref">Section 1.3</a> of [<a href="#RFC9542" class="cite xref">RFC9542</a>]</span>).<a href="#section-3.4.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-5">For example, a constraint of '000000000000 030000000000'H will be matched by any universal/unicast EUI-48 address such as 00-00-5e-00-50-34.  A constraint of '00005E000000 FFFFFF000000'H will be matched by any universal/unicast address with an OUI of 00-00-5E - i.e., it will also match 00-00-5e-00-50-34.  Note that '00-00-5E' is an OUI controlled by IANA (<span><a href="https://rfc-editor.org/rfc/rfc9542#section-1.3" class="relref">Section 1.3</a> of [<a href="#RFC9542" class="cite xref">RFC9542</a>]</span>).<a href="#section-3.4.1-5" class="pilcrow">¶</a></p>
 <p id="section-3.4.1-6">Implementations are not required to implement this algorithm, but <span class="bcp14">MUST</span> calculate an identical result to this algorithm for a given set of inputs.<a href="#section-3.4.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1453,7 +1453,7 @@ constraint tempRequestedSubtrees {} =
 // pst -&gt; one of the current permitted subtrees
 foreach ( constraint rst in tempRequestedSubtrees) {
     foreach ( constraint pst in prevSubtrees) {
-          if (childIsSubsetofParent (rst,
+          if (childIsSubsetOfParent (rst,
                                    pst) {
                 tempPermittedSubtrees += requestedSubtree;
                 break;
@@ -1500,7 +1500,7 @@ foreach (constraint rExcl in tempRequestedSubtrees) {
       // constraints that 'covers' the requested subtree,
       // I do not need to add the requested subtree
       // to the set of excluded subtrees.
-      if (childIsSubsetParent (rExcl, est)) {
+      if (childIsSubsetOfParent (rExcl, est)) {
         matches = true;
         break;
       }
@@ -1526,7 +1526,7 @@ excluded_subtrees{} (i) = tempExcludedSubtrees;
       <h2 id="name-security-considerations">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-4-1">The binding of a MAC address to a certificate is only as strong as the CA's validation process. CAs <span class="bcp14">MUST</span> verify that the subscriber legitimately controls or owns the asserted MAC address.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-1">The binding of a MAC address to a certificate is only as strong as the CA's validation process. CAs <span class="bcp14">MUST</span> verify that the subscriber legitimately controls or owns the asserted MAC address. The validation process <span class="bcp14">MUST</span> account for the possibility that MAC addresses can be spoofed.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">Some systems dynamically assign or share MAC addresses. Such practices can undermine the uniqueness and accountability that this name form aims to provide.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <p id="section-4-3">Unlike IP addresses, MAC addresses are not typically routed across layer 3 boundaries. Relying parties <span class="bcp14">SHOULD NOT</span> assume uniqueness beyond their local network unless the relying party has information that addresses are stable across network boundaries.<a href="#section-4-3" class="pilcrow">¶</a></p>
 <p id="section-4-4">The Security Considerations section of <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> applies to this specification as well.<a href="#section-4-4" class="pilcrow">¶</a></p>
@@ -1572,7 +1572,7 @@ excluded_subtrees{} (i) = tempExcludedSubtrees;
       <h2 id="name-asn1-module">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-asn1-module" class="section-name selfRef">ASN.1 Module</a>
       </h2>
-<p id="section-6-1">This Appendix contains the ASN.1 Module for the MAC Address; it follows the conventions established by <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">This section contains the ASN.1 Module for the MAC Address; it follows the conventions established by <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6-2">
 <pre>
 MACAddressOtherName-2025
@@ -1737,7 +1737,7 @@ constraint.<a href="#section-7.3-4" class="pilcrow">¶</a></p>
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to Bob Beck, David von Oheimb, Deb Cooley, Francois Rousseau, Jacqueline McCall, John Mattsson, Mohamed Boucadair, Murray Kucherawy, Sean Turner, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">We thank the participants on the LAMPS Working Group mailing list for their insightful feedback and comments. In particular, the authors extend sincere appreciation to Bob Beck, David von Oheimb, Deb Cooley, Francois Rousseau, Jacqueline McCall, John Mattsson, Mahesh Jethanandani, Mohamed Boucadair, Murray Kucherawy, Sean Turner, and Tim Hollebeek for their reviews and suggestions, which greatly improved the quality of this document.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
