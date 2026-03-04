@@ -121,7 +121,7 @@ If a bit is not asserted in the mask bit pattern, then the CA MUST NOT assert th
 
 Per {{Section 4.2.1.10 of RFC5280}}, NCE are valid in and "MUST be used only in CA certificates".
 
-## Generation and Validation Rules
+## Generation and Validation Rules {#sec-gen}
 
 The CA MUST ensure that MACAddress otherName values included in certificates that it issues are owned by (or is expected to be owned by) the subject device for the certificate's lifetime. The same MAC address MUST NOT be included in certificates issued to different devices, unless different devices share the same layer‑2 interface.
 
@@ -303,6 +303,13 @@ foreach (constraint rExcl in tempRequestedSubtrees) {
 // } end foreach certificate in the path
 excluded_subtrees{} (i) = tempExcludedSubtrees;
 ~~~
+
+# Operational Considerations
+
+Guards such as those discussed in {{sec-gen}} are better handled in deployemnts where the CA is operated
+by the same organization operating the infrastructure to which certificates are issued. Such a CA
+may be provisioned (or determine by some discovery means) the local network topology prior to issuing certificates.
+For example, a CA under that deployment may determine that multiple virtual machines use the same physical interface on a given host.
 
 # Security Considerations
 
