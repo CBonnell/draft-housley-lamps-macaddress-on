@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-03T02:39:07.452706+00:00",
+  "timestamp": "2026-03-05T02:34:20.554952+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -2431,6 +2431,100 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDOPNu74s7HqF83",
+      "title": "Feedback from Mahesh",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/23",
+      "state": "MERGED",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-03T16:38:57Z",
+      "updatedAt": "2026-03-03T17:14:54Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "6e0f7793f5484a41b2d8c762bc0973341af781c1",
+      "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "headRefName": "mahesh-fixes",
+      "headRefOid": "6e310b70d7a893e01c0860d64e34e40724ad0709",
+      "closedAt": "2026-03-03T17:14:48Z",
+      "mergedAt": "2026-03-03T17:14:48Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "5e9b95af4ab6e6b2052db82a4446c0413ca28b28"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPNu74s7nfhCR",
+          "commit": {
+            "abbreviatedOid": "6e310b7"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-03T16:43:03Z",
+          "updatedAt": "2026-03-03T16:43:03Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7nfy64",
+          "commit": {
+            "abbreviatedOid": "6e310b7"
+          },
+          "author": "mstjohns",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-03T16:56:14Z",
+          "updatedAt": "2026-03-03T16:56:14Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7nf2gv",
+          "commit": {
+            "abbreviatedOid": "6e310b7"
+          },
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-03T16:58:11Z",
+          "updatedAt": "2026-03-03T16:58:11Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOPNu74s7HzcmG",
+      "title": "access to layer 2 information",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/24",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-04T07:30:41Z",
+      "updatedAt": "2026-03-04T07:30:41Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "5e9b95af4ab6e6b2052db82a4446c0413ca28b28",
+      "headRepository": "boucadair/draft-housley-lamps-macaddress-on",
+      "headRefName": "patch-2",
+      "headRefOid": "98ffc17ee2414205743866c7c1b3279a3e780ab4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
