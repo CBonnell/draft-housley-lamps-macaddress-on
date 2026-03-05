@@ -306,7 +306,7 @@ excluded_subtrees{} (i) = tempExcludedSubtrees;
 
 # Operational Considerations
 
-Guards such as those discussed in {{sec-gen}} are better handled in deployemnts where the CA is operated
+Constraints such as those discussed in {{sec-gen}} are better handled in deployemnts where the CA is operated
 by the same organization operating the infrastructure to which certificates are issued. Such a CA
 may be provisioned (or determine by some discovery means) the local network topology prior to issuing certificates.
 For example, a CA under that deployment may determine that multiple virtual machines use the same physical interface on a given host.
