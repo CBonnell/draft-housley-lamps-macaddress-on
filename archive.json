@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-05T02:34:20.554952+00:00",
+  "timestamp": "2026-03-08T02:38:22.452518+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -2512,19 +2512,75 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-03-04T07:30:41Z",
-      "updatedAt": "2026-03-04T07:30:41Z",
+      "updatedAt": "2026-03-05T15:15:46Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "5e9b95af4ab6e6b2052db82a4446c0413ca28b28",
       "headRepository": "boucadair/draft-housley-lamps-macaddress-on",
       "headRefName": "patch-2",
-      "headRefOid": "98ffc17ee2414205743866c7c1b3279a3e780ab4",
+      "headRefOid": "2cef5f9e9d3a425d071da07c54ce0feedf4e8c66",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
-      "reviews": []
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I don't think the text is prescriptive. \r\n\r\nAs a reader, I do see a value in having an awnser to typical operational context where some requirements in the text can be me. \r\n\r\nThanks. ",
+          "createdAt": "2026-03-05T13:57:19Z",
+          "updatedAt": "2026-03-05T13:57:19Z"
+        },
+        {
+          "author": "russhousley",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I really do not like the word \"Guards\" in the proposed text.  Do you mean \"Constraints\"?",
+          "createdAt": "2026-03-05T15:12:26Z",
+          "updatedAt": "2026-03-05T15:12:26Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> I really do not like the word \"Guards\" in the proposed text. Do you mean \"Constraints\"?\r\n\r\nYes, updated the text accordingly.",
+          "createdAt": "2026-03-05T15:15:46Z",
+          "updatedAt": "2026-03-05T15:15:46Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPNu74s7oQpI5",
+          "commit": {
+            "abbreviatedOid": "98ffc17"
+          },
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "I'm not sure the document should be so prescriptive about validation. Generally, the validation of certificate elements is out of scope of PKIX documents. I'm not vehemently opposed to the text, but I don't believe it's very helpful for the reader.\r\n\r\nI'm interested to hear what the other authors have to say.",
+          "createdAt": "2026-03-05T13:49:37Z",
+          "updatedAt": "2026-03-05T13:50:23Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOPNu74s7oTVmP",
+          "commit": {
+            "abbreviatedOid": "98ffc17"
+          },
+          "author": "boucadair",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-05T15:14:16Z",
+          "updatedAt": "2026-03-05T15:14:17Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\nConstraints such as those discussed in {{sec-gen}} are better handled in deployemnts where the CA is operated\n```",
+              "createdAt": "2026-03-05T15:14:16Z",
+              "updatedAt": "2026-03-05T15:14:17Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
