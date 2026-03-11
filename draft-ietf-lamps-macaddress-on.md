@@ -153,7 +153,7 @@ To determine if a name matches a given constraint, the certificate-consuming app
 
 The algorithm can be alternatively expressed as:
 
-~~~
+~~~pseudo
 // Returns true if 'name n' matches 'constraint c'
 boolean nameMatchesConstraint (name n, constraint c) {
    return ((2 * n.length) == c.length &&
@@ -174,7 +174,7 @@ The following is a utility function used to determine whether or not the set of 
 
 Examples - given the following (using the IANA assigned DOI) - 'child' is a constraint wholly contained within 'parent':
 
-~~~
+~~~psuedo
 constraint parent = '000000000000 000000000000'H
 constraint child =  '00005E000000 FCFFFF000000'H
 ~~~
@@ -188,7 +188,7 @@ Note that the child mask allows for any combination of the local/universal and u
 
 If 'constraint child2 = '00005E005000 FFFFFFFFFFF00'H and 'child' are compared, 'child2' would be a subset of 'child'.  'child2' uses the same OUI as 'child', but further restricts the matching addresses to universal/unicast by turning on the '0300000000'H mask bits and also restricts the range of valid addresses from 00-00-5E-00-50-00 to 00-00-5E-00-50-FF - i.e., to the 'example' range for the 00-00-5E OUI.
 
-~~~
+~~~pseudo
 // Both 'child' and 'parent' are OtherName.MACAddress
 // constraints.
 // Returns true if all addresses that match child, also match
@@ -216,7 +216,7 @@ boolean childIsSubsetOfParent (constraint c, constraint p)
 
 Per sections 6.1.1 (h) and (i) of {{RFC5280}}, we need to specify NCE OtherName.MACAddress set values for both the initial-permitted-subtrees and for initial-excluded-subtrees.  For initial-permitted-subtree, the first constraint is "accept all EUI-48 MACAddresses", and the second constraint is "accept all EUI-64 MACAddresses":
 
-~~~
+~~~pseudo
 initial-permitted-subtrees{} += { 000000000000000000000000H,
                                   00000000000000000000000000000000H }
 initial-excluded-subtrees{} += { };
@@ -228,7 +228,7 @@ See Section 6.1.4 (g) (1) of {{RFC5280}}.  As we walk down the tree from the roo
 
 The intersection of the set of OtherName.MACAddress current permitted_subtrees with each certificate in the path is as follows:
 
-~~~
+~~~pseudo
 
 // This logic can be used for both MACAddress and iPAddress OtherName types
 // Initialize -
@@ -267,7 +267,7 @@ See Section 6.1.4 (g) (2) of {{RFC5280}}.  Unlike permitted_subtrees which is th
 
 The union of the set of OtherName.MACAddress current excluded_subtrees with each certificate in the path is as follows:
 
-~~~
+~~~pseudo
 // Initialize
 excluded_subtrees{} (0) = initial-excluded-subtrees;
 
@@ -340,7 +340,7 @@ IANA has made the following assignment in the "SMI Security for PKIX Other Name 
 
 This section contains the ASN.1 Module for the MAC Address; it follows the conventions established by {{RFC5912}}.
 
-~~~
+~~~asn1
 MACAddressOtherName-2025
   { iso(1) identified-organization(3) dod(6) internet(1)
     security(5) mechanisms(5) pkix(7) id-mod(0)
@@ -385,7 +385,7 @@ The following is a human-readable summary of the Subject Alternative
 Name extension from a certificate containing a single MACAddress
 otherName with value 00-24-98-7B-19-02:
 
-~~~
+~~~asn1
   SEQUENCE {
     otherName [0] {
       OBJECT IDENTIFIER id-on-MACAddress
@@ -398,7 +398,7 @@ otherName with value 00-24-98-7B-19-02:
 
 An EUI-64 example (AC-DE-48-00-11-22-33-44):
 
-~~~
+~~~asn1
   [0] OCTET STRING 'ACDE480011223344'H
 ~~~
 
@@ -415,7 +415,7 @@ The following constraint definition constrains EUI-48 values to only
 those are universal and unicast; locally assigned or multicast values will not match the
 constraint.
 
-~~~
+~~~asn1
 
   [0] OCTET STRING '000000000000 030000000000'H
 
