@@ -1056,7 +1056,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Housley, et al.</td>
-<td class="center">Expires 4 September 2026</td>
+<td class="center">Expires 12 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-macaddress-on-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-03-03" class="published">3 March 2026</time>
+<time datetime="2026-03-11" class="published">11 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-09-04">4 September 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-12">12 September 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1140,7 +1140,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 4 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1354,7 +1354,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </li>
           </ol>
 <p id="section-3.4.1-3">The algorithm can be alternatively expressed as:<a href="#section-3.4.1-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.4.1-4">
+<div class="lang-pseudo sourcecode" id="section-3.4.1-4">
 <pre>
 // Returns true if 'name n' matches 'constraint c'
 boolean nameMatchesConstraint (name n, constraint c) {
@@ -1376,7 +1376,7 @@ boolean nameMatchesConstraint (name n, constraint c) {
 <p id="section-3.4.2-1">This section describes the Path Validation Processing specific to OtherName.MACAddress constraints.  N.B., It is possible to build hierarchies of NCEs for OtherName.MACAddress's that prohibit all names, even if that was not intended. For example, say that the level 1 NCE contained only a "permitted_subtrees" of only (OtherName.MACAddress) global/unicast EUI-48, and the level 2 NCE contained only a "permitted_subtrees" of "any address" (i.e. the initial constraint set).  This would result in an empty permitted_subtrees set as an "any address" constraint is not contained within a "global/unicast" constraint. The worked example is left to the reader.<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-2">The following is a utility function used to determine whether or not the set of matching addresses for one MACAddress constraint is a subset of the matching addresses for another constraint.<a href="#section-3.4.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-3">Examples - given the following (using the IANA assigned DOI) - 'child' is a constraint wholly contained within 'parent':<a href="#section-3.4.2-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.4.2-4">
+<div class="lang-psuedo sourcecode" id="section-3.4.2-4">
 <pre>
 constraint parent = '000000000000 000000000000'H
 constraint child =  '00005E000000 FCFFFF000000'H
@@ -1388,7 +1388,7 @@ constraint child =  '00005E000000 FCFFFF000000'H
 3) The bits in the child.value under the parent.mask are set to the same values as the bits in the parent.value under the parent mask.<a href="#section-3.4.2-5" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-6">Note that the child mask allows for any combination of the local/universal and unicast/multicast address bits within the OUI of 00-00-0e.<a href="#section-3.4.2-6" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-7">If 'constraint child2 = '00005E005000 FFFFFFFFFFF00'H and 'child' are compared, 'child2' would be a subset of 'child'.  'child2' uses the same OUI as 'child', but further restricts the matching addresses to universal/unicast by turning on the '0300000000'H mask bits and also restricts the range of valid addresses from 00-00-5E-00-50-00 to 00-00-5E-00-50-FF - i.e., to the 'example' range for the 00-00-5E OUI.<a href="#section-3.4.2-7" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.4.2-8">
+<div class="lang-pseudo sourcecode" id="section-3.4.2-8">
 <pre>
 // Both 'child' and 'parent' are OtherName.MACAddress
 // constraints.
@@ -1418,7 +1418,7 @@ boolean childIsSubsetOfParent (constraint c, constraint p)
 <a href="#section-3.4.2.1" class="section-number selfRef">3.4.2.1. </a><a href="#name-initialization" class="section-name selfRef">Initialization</a>
             </h5>
 <p id="section-3.4.2.1-1">Per sections 6.1.1 (h) and (i) of <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, we need to specify NCE OtherName.MACAddress set values for both the initial-permitted-subtrees and for initial-excluded-subtrees.  For initial-permitted-subtree, the first constraint is "accept all EUI-48 MACAddresses", and the second constraint is "accept all EUI-64 MACAddresses":<a href="#section-3.4.2.1-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.4.2.1-2">
+<div class="lang-pseudo sourcecode" id="section-3.4.2.1-2">
 <pre>
 initial-permitted-subtrees{} += { 000000000000000000000000H,
                                   00000000000000000000000000000000H }
@@ -1434,7 +1434,7 @@ initial-excluded-subtrees{} += { };
             </h5>
 <p id="section-3.4.2.2-1">See Section 6.1.4 (g) (1) of <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.  As we walk down the tree from the root, the set of permitted_subtrees can only stay the same or shrink. At each level, we clear the set of permitted_subtrees and for each NCE OtherName.MACAddress.permitted_subtree constraint in the certificate we look to see if there is a permitted_subtree constraint at the previous level that equals or encloses this new constraint.  If so, we add this new constraint to the current level's set of permitted_subtrees.  We repeat this going down the tree for the remaining CA certificates.<a href="#section-3.4.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.2.2-2">The intersection of the set of OtherName.MACAddress current permitted_subtrees with each certificate in the path is as follows:<a href="#section-3.4.2.2-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.4.2.2-3">
+<div class="lang-pseudo sourcecode" id="section-3.4.2.2-3">
 <pre>
 // This logic can be used for both MACAddress and iPAddress OtherName types
 // Initialize -
@@ -1475,7 +1475,7 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
             </h5>
 <p id="section-3.4.2.3-1">See Section 6.1.4 (g) (2) of <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.  Unlike permitted_subtrees which is the intersection of the NCEs  at each level, excluded_subtrees are the union of all constraints.  Starting with an excluded_trees empty set, with each level add to that set any constraints from the CA certificates that are not already in the set, or that are not covered by a constraint already in the set.<a href="#section-3.4.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.2.3-2">The union of the set of OtherName.MACAddress current excluded_subtrees with each certificate in the path is as follows:<a href="#section-3.4.2.3-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-3.4.2.3-3">
+<div class="lang-pseudo sourcecode" id="section-3.4.2.3-3">
 <pre>
 // Initialize
 excluded_subtrees{} (0) = initial-excluded-subtrees;
@@ -1573,7 +1573,7 @@ excluded_subtrees{} (i) = tempExcludedSubtrees;
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-asn1-module" class="section-name selfRef">ASN.1 Module</a>
       </h2>
 <p id="section-6-1">This section contains the ASN.1 Module for the MAC Address; it follows the conventions established by <span>[<a href="#RFC5912" class="cite xref">RFC5912</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6-2">
+<div class="lang-asn1 sourcecode" id="section-6-2">
 <pre>
 MACAddressOtherName-2025
   { iso(1) identified-organization(3) dod(6) internet(1)
@@ -1626,7 +1626,7 @@ END
 <p id="section-7.1-1">The following is a human-readable summary of the Subject Alternative
 Name extension from a certificate containing a single MACAddress
 otherName with value 00-24-98-7B-19-02:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-7.1-2">
+<div class="lang-asn1 sourcecode" id="section-7.1-2">
 <pre>
   SEQUENCE {
     otherName [0] {
@@ -1644,7 +1644,7 @@ otherName with value 00-24-98-7B-19-02:<a href="#section-7.1-1" class="pilcrow">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-eui-64-identifier" class="section-name selfRef">EUI-64 identifier</a>
         </h3>
 <p id="section-7.2-1">An EUI-64 example (AC-DE-48-00-11-22-33-44):<a href="#section-7.2-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-7.2-2">
+<div class="lang-asn1 sourcecode" id="section-7.2-2">
 <pre>
   [0] OCTET STRING 'ACDE480011223344'H
 </pre><a href="#section-7.2-2" class="pilcrow">¶</a>
@@ -1669,7 +1669,7 @@ otherName with value 00-24-98-7B-19-02:<a href="#section-7.1-1" class="pilcrow">
 <p id="section-7.3-4">The following constraint definition constrains EUI-48 values to only
 those are universal and unicast; locally assigned or multicast values will not match the
 constraint.<a href="#section-7.3-4" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-7.3-5">
+<div class="lang-asn1 sourcecode" id="section-7.3-5">
 <pre>
   [0] OCTET STRING '000000000000 030000000000'H
 

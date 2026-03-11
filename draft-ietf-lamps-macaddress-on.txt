@@ -5,14 +5,14 @@
 Limited Additional Mechanisms for PKIX and SMIME              R. Housley
 Internet-Draft                                            Vigil Security
 Intended status: Standards Track                              C. Bonnell
-Expires: 4 September 2026                                       DigiCert
+Expires: 12 September 2026                                      DigiCert
                                                                J. Mandel
                                                                   AKAYLA
                                                                 T. Okubo
                                                       Penguin Securities
                                                               M. StJohns
                                              NthPermutation Security LLC
-                                                            3 March 2026
+                                                           11 March 2026
 
 
        Media Access Control (MAC) Addresses in X.509 Certificates
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2026.
+   This Internet-Draft will expire on 12 September 2026.
 
 Copyright Notice
 
@@ -332,26 +332,26 @@ Table of Contents
    00-00-5E-00-50-FF - i.e., to the 'example' range for the 00-00-5E
    OUI.
 
-// Both 'child' and 'parent' are OtherName.MACAddress
-// constraints.
-// Returns true if all addresses that match child, also match
-// parent, false otherwise
-// Used to calculate INTERSECTION sets for
-// OtherName.MACAddress constraints.
-boolean childIsSubsetOfParent (constraint c, constraint p)
-  return (
-     // if the lengths are the same
-     c.length == p.length &&
-     // and if there are no bits set in the parent's mask that
-     //    are not also set in the child's mask
-     // e.g. we can add mask bits to the current set, we can not remove them
-     (c.mask & p.mask) == p.mask &&
-     // and if the child's value has at least all the bits set that
-     //   were set (and live) in the parent's value
-     // e.g. we can't change the values of the live bits from the superior constraint
-     (c.value & p.mask) == (p.value & p.mask)
-    );
-}
+   // Both 'child' and 'parent' are OtherName.MACAddress
+   // constraints.
+   // Returns true if all addresses that match child, also match
+   // parent, false otherwise
+   // Used to calculate INTERSECTION sets for
+   // OtherName.MACAddress constraints.
+   boolean childIsSubsetOfParent (constraint c, constraint p)
+     return (
+        // if the lengths are the same
+        c.length == p.length &&
+        // and if there are no bits set in the parent's mask that
+        //    are not also set in the child's mask
+        // e.g. we can add mask bits to the current set, we can not remove them
+        (c.mask & p.mask) == p.mask &&
+        // and if the child's value has at least all the bits set that
+        //   were set (and live) in the parent's value
+        // e.g. we can't change the values of the live bits from the superior constraint
+        (c.value & p.mask) == (p.value & p.mask)
+       );
+   }
 
 3.4.2.1.  Initialization
 
@@ -380,33 +380,33 @@ boolean childIsSubsetOfParent (constraint c, constraint p)
    The intersection of the set of OtherName.MACAddress current
    permitted_subtrees with each certificate in the path is as follows:
 
-// This logic can be used for both MACAddress and iPAddress OtherName types
-// Initialize -
-permitted_subtrees{} (0) = initial-permitted-subtrees;
+   // This logic can be used for both MACAddress and iPAddress OtherName types
+   // Initialize -
+   permitted_subtrees{} (0) = initial-permitted-subtrees;
 
-// Foreach certificate i = (1..n) in the path {
-set constraint prevSubtrees{}  =
-   { the set of OtherName.MACAddress.permitted_subtrees
-     from the permitted_subtree{} (i-1) variable};
-constraint tempPermittedSubtrees {} = {};
-constraint tempRequestedSubtrees {} =
-   { the set of OtherName.MACAddress.permitted_subtrees from
-     the Name Constraints extension in the current certificate };
+   // Foreach certificate i = (1..n) in the path {
+   set constraint prevSubtrees{}  =
+      { the set of OtherName.MACAddress.permitted_subtrees
+        from the permitted_subtree{} (i-1) variable};
+   constraint tempPermittedSubtrees {} = {};
+   constraint tempRequestedSubtrees {} =
+      { the set of OtherName.MACAddress.permitted_subtrees from
+        the Name Constraints extension in the current certificate };
 
-// rst => one of the requested subtrees (from the cert)
-// pst -> one of the current permitted subtrees
-foreach ( constraint rst in tempRequestedSubtrees) {
-    foreach ( constraint pst in prevSubtrees) {
-          if (childIsSubsetOfParent (rst,
-                                   pst) {
-                tempPermittedSubtrees += requestedSubtree;
-                break;
-          }
-     }
- }
+   // rst => one of the requested subtrees (from the cert)
+   // pst -> one of the current permitted subtrees
+   foreach ( constraint rst in tempRequestedSubtrees) {
+       foreach ( constraint pst in prevSubtrees) {
+             if (childIsSubsetOfParent (rst,
+                                      pst) {
+                   tempPermittedSubtrees += requestedSubtree;
+                   break;
+             }
+        }
+    }
 
-permitted_subtrees{} (i) = tempPermittedSubtree;
-// } end for each CA cert on path
+   permitted_subtrees{} (i) = tempPermittedSubtree;
+   // } end for each CA cert on path
 
 3.4.2.3.  Union Operation
 
