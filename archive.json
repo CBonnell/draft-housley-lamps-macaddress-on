@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-08T02:38:22.452518+00:00",
+  "timestamp": "2026-03-12T02:36:09.960067+00:00",
   "repo": "CBonnell/draft-housley-lamps-macaddress-on",
   "labels": [
     {
@@ -2505,21 +2505,21 @@
       "id": "PR_kwDOPNu74s7HzcmG",
       "title": "access to layer 2 information",
       "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/24",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "boucadair",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-03-04T07:30:41Z",
-      "updatedAt": "2026-03-05T15:15:46Z",
+      "updatedAt": "2026-03-11T14:28:02Z",
       "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
       "baseRefName": "main",
       "baseRefOid": "5e9b95af4ab6e6b2052db82a4446c0413ca28b28",
       "headRepository": "boucadair/draft-housley-lamps-macaddress-on",
       "headRefName": "patch-2",
       "headRefOid": "2cef5f9e9d3a425d071da07c54ce0feedf4e8c66",
-      "closedAt": null,
+      "closedAt": "2026-03-11T14:28:01Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
@@ -2544,6 +2544,13 @@
           "body": "> I really do not like the word \"Guards\" in the proposed text. Do you mean \"Constraints\"?\r\n\r\nYes, updated the text accordingly.",
           "createdAt": "2026-03-05T15:15:46Z",
           "updatedAt": "2026-03-05T15:15:46Z"
+        },
+        {
+          "author": "CBonnell",
+          "authorAssociation": "OWNER",
+          "body": "Hi @boucadair, thank you for the suggestion. The authors discussed and believe the treatment of this specific scenario does not need to be added to the document.",
+          "createdAt": "2026-03-11T14:28:01Z",
+          "updatedAt": "2026-03-11T14:28:01Z"
         }
       ],
       "reviews": [
@@ -2581,6 +2588,34 @@
           ]
         }
       ]
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDOPNu74s7JuQbU",
+      "title": "From MSJ - Add lang identifier",
+      "url": "https://github.com/CBonnell/draft-housley-lamps-macaddress-on/pull/25",
+      "state": "MERGED",
+      "author": "CBonnell",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-11T14:14:18Z",
+      "updatedAt": "2026-03-11T14:15:22Z",
+      "baseRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "baseRefName": "main",
+      "baseRefOid": "5e9b95af4ab6e6b2052db82a4446c0413ca28b28",
+      "headRepository": "CBonnell/draft-housley-lamps-macaddress-on",
+      "headRefName": "CBonnell-patch-1",
+      "headRefOid": "301e726acc5e36e1dd0456ab3fd7c17bd47e4447",
+      "closedAt": "2026-03-11T14:15:17Z",
+      "mergedAt": "2026-03-11T14:15:17Z",
+      "mergedBy": "CBonnell",
+      "mergeCommit": {
+        "oid": "00e63d6271c8c2328723c8f13c73aa5a0be6ffef"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
