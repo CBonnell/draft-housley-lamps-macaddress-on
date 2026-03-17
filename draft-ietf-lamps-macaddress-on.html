@@ -11,27 +11,27 @@
 <meta content="Tomofumi Okubo" name="author">
 <meta content="Michael StJohns" name="author">
 <meta content="
-       This document defines a new GeneralName.otherName for inclusion in the X.509 Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to bind a layer‑2 interface identifier to a public key certificate. Additionally, this document defines how constraints on this name form can be encoded and processed in the X.509 Name Constraints extension (NCE). 
+       This document defines a new  GeneralName.otherName  for inclusion in the X.509 Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to bind a layer‑2 interface identifier to a public key certificate. Additionally, this document defines how constraints on this name form can be encoded and processed in the X.509 Name Constraints extension (NCE). 
     " name="description">
-<meta content="xml2rfc 3.31.0" name="generator">
+<meta content="xml2rfc 3.32.0" name="generator">
 <meta content="MACsec" name="keyword">
 <meta content="802.1AE" name="keyword">
 <meta content="X.509" name="keyword">
 <meta content="SubjectAltName" name="keyword">
 <meta content="draft-ietf-lamps-macaddress-on-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.31.0
+  xml2rfc 3.32.0
     Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.5.1
+    platformdirs 4.9.4
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
-    wcwidth 0.3.0
+    wcwidth 0.6.0
 -->
 <link href="draft-ietf-lamps-macaddress-on.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1056,7 +1056,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Housley, et al.</td>
-<td class="center">Expires 12 September 2026</td>
+<td class="center">Expires 18 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-lamps-macaddress-on-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-03-11" class="published">11 March 2026</time>
+<time datetime="2026-03-17" class="published">17 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-09-12">12 September 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-18">18 September 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1103,7 +1103,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Media Access Control (MAC) Addresses in X.509 Certificates</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document defines a new GeneralName.otherName for inclusion in the X.509 Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to bind a layer‑2 interface identifier to a public key certificate. Additionally, this document defines how constraints on this name form can be encoded and processed in the X.509 Name Constraints extension (NCE).<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document defines a new <code>GeneralName.otherName</code> for inclusion in the X.509 Subject Alternative Name (SAN) and Issuer Alternative Name (IAN) extensions to carry an IEEE Media Access Control (MAC) address. The new name form makes it possible to bind a layer‑2 interface identifier to a public key certificate. Additionally, this document defines how constraints on this name form can be encoded and processed in the X.509 Name Constraints extension (NCE).<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1140,7 +1140,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 12 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 18 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1254,7 +1254,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This document defines a new otherName form "MACAddress". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an OCTET STRING <span>[<a href="#X680" class="cite xref">X680</a>]</span>. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension (NCE) defined in <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.10" class="relref">Section 4.2.1.10</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things (IoT) and automotive networks, in particular.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">Deployments that use X.509 certificates to identify a device by a Media Access Control (MAC) address need a standard way to encode it in the Subject Alternative Name (SAN) extension defined in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. This document defines a new <code>otherName</code> form "<code>MACAddress</code>". The name form carries either a 48‑bit IEEE 802 MAC address (EUI‑48) or a 64‑bit extended identifier (EUI‑64) in an <code>OCTET STRING</code> <span>[<a href="#X680" class="cite xref">X680</a>]</span>. Additionally, the name form also can convey constraints on EUI-48 or EUI-64 values when included in the Name Constraints extension (NCE) defined in <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.10" class="relref">Section 4.2.1.10</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>. The new name form enables certificate‑based authentication at layer 2 and facilitates secure provisioning in Internet‑of‑Things (IoT) and automotive networks, in particular.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">Note that while this construct may be used to carry EUI-48 or EUI-64 addresses in an Issuer Alternative Name (IAN) extension, there are probably few, if any, reasons to do so.<a href="#section-1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1274,15 +1274,15 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-macaddress-othername">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-macaddress-othername" class="section-name selfRef">MACAddress otherName</a>
       </h2>
-<p id="section-3-1">In this document "otherName", "OtherName" and "GeneralName.otherName" all refer to a GeneralName.otherName field included in a SAN or IAN.  The new name form is identified by the OBJECT IDENTIFIER (OID) id‑on‑MACAddress (<code>1.3.6.1.5.5.7.8.12</code>) and declared below using the OTHER-NAME class declaration syntax. The name form has variants to convey an EUI-48 as an OCTET STRING consisting of 6 octets, or an EUI-64 as an OCTET STRING consisting of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as OCTET STRINGs whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">In this document "<code>otherName</code>", "<code>OtherName</code>" and "<code>GeneralName.otherName</code>" all refer to a <code>GeneralName.otherName</code> field included in a SAN or IAN.  The new name form is identified by the <code>OBJECT IDENTIFIER</code> (OID) <code>id‑on‑MACAddress</code> (<code>1.3.6.1.5.5.7.8.12</code>) and declared below using the <code>OTHER-NAME</code> class declaration syntax. The name form has variants to convey an EUI-48 as an <code>OCTET STRING</code> consisting of 6 octets, or an EUI-64 as an <code>OCTET STRING</code> consisting of 8 octets. Constraints on EUI-48 and EUI-64 values are conveyed as <code>OCTET STRING</code>s whose lengths are twice the octet length of the identifiers. The first set of N octets (where N is the length of the address octets) define the bit pattern of the constraint that the address must match, and the second set of N octets defines the bit mask that defines the set of significant bits in the bit pattern.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">The following sub-sections describe how to encode EUI-48 and EUI-64 values and their corresponding constraints.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="encoding-a-macaddress-as-an-alternative-name">
 <section id="section-3.1">
         <h3 id="name-encoding-a-macaddress-as-an">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-encoding-a-macaddress-as-an" class="section-name selfRef">Encoding a MACAddress as an alternative name</a>
         </h3>
-<p id="section-3.1-1">When the name form is included in a SAN or IAN extension as an OtherName, the syntax consists of exactly six or eight octets. Values are encoded with the most significant octet encoded first ("big-endian" or "left-to-right" encoding). No text representation is permitted in the certificate, as human‑readable forms such as "00‑24‑98‑7B‑19‑02" or "0024.987B.1902" are used only in management interfaces. When a device possesses a 48‑bit MAC identifier, the Certification Authority (CA) <span class="bcp14">MUST</span> encode it using a 6‑octet OCTET STRING as the MACAddress value. When the device’s factory identifier is a 64‑bit EUI‑64 or when no canonical 48‑bit form exists, the CA <span class="bcp14">MUST</span> encode it using an 8‑octet OCTET STRING as the MACAddress value.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">Example: 00-24-98-7B-19-02 encodes as OCTET STRING '0024987B1902'H.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">When the name form is included in a SAN or IAN extension as an <code>OtherName</code>, the syntax consists of exactly six or eight octets. Values are encoded with the most significant octet encoded first ("big-endian" or "left-to-right" encoding). No text representation is permitted in the certificate, as human‑readable forms such as "<code>00‑24‑98‑7B‑19‑02</code>" or "<code>0024.987B.1902</code>" are used only in management interfaces. When a device possesses a 48‑bit MAC identifier, the Certification Authority (CA) <span class="bcp14">MUST</span> encode it using a 6‑octet <code>OCTET STRING</code> as the MACAddress value. When the device’s factory identifier is a 64‑bit EUI‑64 or when no canonical 48‑bit form exists, the CA <span class="bcp14">MUST</span> encode it using an 8‑octet <code>OCTET STRING</code> as the MACAddress value.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">Example: <code>00-24-98-7B-19-02</code> encodes as <code>OCTET STRING '0024987B1902'H</code>.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="encoding-a-macaddress-constraint">
@@ -1290,7 +1290,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <h3 id="name-encoding-a-macaddress-const">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-encoding-a-macaddress-const" class="section-name selfRef">Encoding a MACAddress constraint</a>
         </h3>
-<p id="section-3.2-1">When the name form is included in the NCE, the syntax consists of an OCTET STRING that is twice as long as the OCTET STRING representation of the address type being constrained. Within the OCTET STRING, two elements are encoded:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">When the name form is included in the NCE, the syntax consists of an <code>OCTET STRING</code> that is twice as long as the <code>OCTET STRING</code> representation of the address type being constrained. Within the <code>OCTET STRING</code>, two elements are encoded:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3.2-2">
 <li id="section-3.2-2.1">
             <p id="section-3.2-2.1.1">The first set of N octets (where N is 6 for an EUI-48 constraint or 8 for an EUI-64 constraint) contains the "value bit pattern". This bit pattern encodes the bits that the masked address must contain to be considered a match.<a href="#section-3.2-2.1.1" class="pilcrow">¶</a></p>
@@ -1299,7 +1299,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
             <p id="section-3.2-2.2.1">The second set of N octets encodes the "mask bit pattern" of the constraint. Each bit that is asserted in the mask bit pattern indicates that the bit in the same position in the address is constrained by the first set of N octets.<a href="#section-3.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-3.2-3">For example, a constraint that specifies that the acceptable names must all be within an Organizationally Unique Identifier (OUI) of '00-00-5e' for an EUI-48 address, would have a value part of '00005E000000'H, a mask part of 'FFFFFFFF000000'H and would be encoded as OCTET STRING '00005E000000FFFFFF000000'H.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">For example, a constraint that specifies that the acceptable names must all be within an Organizationally Unique Identifier (OUI) of "<code>00-00-5e</code>" for an EUI-48 address, would have a value part of <code>'00005E000000'H</code>, a mask part of <code>'FFFFFFFF000000'H</code> and would be encoded as <code>OCTET STRING '00005E000000FFFFFF000000'H</code>.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">The bit patterns encoded in both the value bit pattern and mask bit pattern are encoded with the most significant bit encoded first ("big-endian" or "left-to-right" encoding).<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <p id="section-3.2-5">If a bit is not asserted in the mask bit pattern, then the CA <span class="bcp14">MUST NOT</span> assert the corresponding bit in the value bit pattern. This rule ensures that a canonical encoding is used for a given mask bit pattern and value bit pattern.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
 <p id="section-3.2-6">Per <span><a href="https://rfc-editor.org/rfc/rfc5280#section-4.2.1.10" class="relref">Section 4.2.1.10</a> of [<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, NCE are valid in and "<span class="bcp14">MUST</span> be used only in CA certificates".<a href="#section-3.2-6" class="pilcrow">¶</a></p>
@@ -1310,10 +1310,10 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <h3 id="name-generation-and-validation-r">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-generation-and-validation-r" class="section-name selfRef">Generation and Validation Rules</a>
         </h3>
-<p id="section-3.3-1">The CA <span class="bcp14">MUST</span> ensure that MACAddress otherName values included in certificates that it issues are owned by (or is expected to be owned by) the subject device for the certificate's lifetime. The same MAC address <span class="bcp14">MUST NOT</span> be included in certificates issued to different devices, unless different devices share the same layer‑2 interface.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">A relying party that matches a presented MAC address to a certificate <span class="bcp14">SHALL</span> perform a byte-for-byte comparison of the OCTET STRING contents.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.3-1">The CA <span class="bcp14">MUST</span> ensure that <code>MACAddress</code> <code>otherName</code> values included in certificates that it issues are owned by (or is expected to be owned by) the subject device for the certificate's lifetime. The same MAC address <span class="bcp14">MUST NOT</span> be included in certificates issued to different devices, unless different devices share the same layer‑2 interface.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">A relying party that matches a presented MAC address to a certificate <span class="bcp14">SHALL</span> perform a byte-for-byte comparison of the <code>OCTET STRING</code> contents.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.3-3">Wildcards are not supported.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
-<p id="section-3.3-4">Self-signed certificates that carry a MACAddress otherName <span class="bcp14">MUST</span> include the address of one of the device's physical ports.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
+<p id="section-3.3-4">Self-signed certificates that carry a <code>MACAddress</code> <code>otherName</code> <span class="bcp14">MUST</span> include the address of one of the device's physical ports.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="name-constraints-extension-path-processing">
@@ -1321,9 +1321,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         <h3 id="name-name-constraints-extension-">
 <a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-name-constraints-extension-" class="section-name selfRef">Name Constraints Extension Path Processing</a>
         </h3>
-<p id="section-3.4-1">The MACAddress otherName follows the general rules for otherName constraints in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, Section 4.2.1.10. An NCE <span class="bcp14">MAY</span> impose permittedSubtrees and excludedSubtrees on OtherNames of type id‑on‑MACAddress.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-1">The <code>MACAddress</code> <code>otherName</code> follows the general rules for <code>otherName</code> constraints in <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, Section 4.2.1.10. An NCE <span class="bcp14">MAY</span> impose <code>permittedSubtrees</code> and <code>excludedSubtrees</code> on <code>OtherNames</code> of type <code>id‑on‑MACAddress</code>.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.4-2">In the pseudo-code below, 'mask' is shorthand for the bit string formed from the mask portion of a constraint (e.g., the second set of N octets in the constraint, where N is 6 for an EUI-48 constraint or 8 for an EUI-64 constraint). Similarly, 'value' refers to the bit string formed from the first set of N octets in the constraint.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
-<p id="section-3.4-3">The declaration 'constraint' used below indicates an OtherName.MACAddress constraint value/mask pair - with fields 'mask', 'value' and 'length'.  '.length' as a field returns the byte length of the complete encoded constraint - either 12 or 16 depending on the type of constraint.  The declaration 'name' used below represents an OtherName.MACAddress name with fields 'value' and 'length'. Length is either 6 or 8 representing the encoded name's length.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
+<p id="section-3.4-3">The declaration 'constraint' used below indicates an <code>OtherName.MACAddress</code> constraint value/mask pair - with fields 'mask', 'value' and 'length'.  '.length' as a field returns the byte length of the complete encoded constraint - either 12 or 16 depending on the type of constraint.  The declaration 'name' used below represents an <code>OtherName.MACAddress</code> name with fields 'value' and 'length'. Length is either 6 or 8 representing the encoded name's length.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
 <div id="matching-rule">
 <section id="section-3.4.1">
           <h4 id="name-matching-rule">
@@ -1364,7 +1364,7 @@ boolean nameMatchesConstraint (name n, constraint c) {
 }
 </pre><a href="#section-3.4.1-4" class="pilcrow">¶</a>
 </div>
-<p id="section-3.4.1-5">For example, a constraint of '000000000000 030000000000'H will be matched by any universal/unicast EUI-48 address such as 00-00-5e-00-50-34.  A constraint of '00005E000000 FFFFFF000000'H will be matched by any universal/unicast address with an OUI of 00-00-5E - i.e., it will also match 00-00-5e-00-50-34.  Note that '00-00-5E' is an OUI controlled by IANA (<span><a href="https://rfc-editor.org/rfc/rfc9542#section-1.3" class="relref">Section 1.3</a> of [<a href="#RFC9542" class="cite xref">RFC9542</a>]</span>).<a href="#section-3.4.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-5">For example, a constraint of <code>'000000000000 030000000000'H</code> will be matched by any universal/unicast EUI-48 address such as <code>00-00-5e-00-50-34</code>.  A constraint of <code>'00005E000000 FFFFFF000000'H</code> will be matched by any universal/unicast address with an OUI of <code>00-00-5E</code> - i.e., it will also match <code>00-00-5e-00-50-34</code>.  Note that <code>'00-00-5E'</code> is an OUI controlled by IANA (<span><a href="https://rfc-editor.org/rfc/rfc9542#section-1.3" class="relref">Section 1.3</a> of [<a href="#RFC9542" class="cite xref">RFC9542</a>]</span>).<a href="#section-3.4.1-5" class="pilcrow">¶</a></p>
 <p id="section-3.4.1-6">Implementations are not required to implement this algorithm, but <span class="bcp14">MUST</span> calculate an identical result to this algorithm for a given set of inputs.<a href="#section-3.4.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1373,7 +1373,7 @@ boolean nameMatchesConstraint (name n, constraint c) {
           <h4 id="name-othernamemacaddress-path-va">
 <a href="#section-3.4.2" class="section-number selfRef">3.4.2. </a><a href="#name-othernamemacaddress-path-va" class="section-name selfRef">OtherName.MACAddress Path Validation Processing</a>
           </h4>
-<p id="section-3.4.2-1">This section describes the Path Validation Processing specific to OtherName.MACAddress constraints.  N.B., It is possible to build hierarchies of NCEs for OtherName.MACAddress's that prohibit all names, even if that was not intended. For example, say that the level 1 NCE contained only a "permitted_subtrees" of only (OtherName.MACAddress) global/unicast EUI-48, and the level 2 NCE contained only a "permitted_subtrees" of "any address" (i.e. the initial constraint set).  This would result in an empty permitted_subtrees set as an "any address" constraint is not contained within a "global/unicast" constraint. The worked example is left to the reader.<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.4.2-1">This section describes the Path Validation Processing specific to <code>OtherName.MACAddress</code> constraints.  N.B., It is possible to build hierarchies of NCEs for <code>OtherName.MACAddress</code>'s that prohibit all names, even if that was not intended. For example, say that the level 1 NCE contained only a "<code>permitted_subtrees</code>" of only (<code>OtherName.MACAddress</code>) global/unicast EUI-48, and the level 2 NCE contained only a "<code>permitted_subtrees</code>" of "any address" (i.e. the initial constraint set).  This would result in an empty permitted_subtrees set as an "any address" constraint is not contained within a "global/unicast" constraint. The worked example is left to the reader.<a href="#section-3.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-2">The following is a utility function used to determine whether or not the set of matching addresses for one MACAddress constraint is a subset of the matching addresses for another constraint.<a href="#section-3.4.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.4.2-3">Examples - given the following (using the IANA assigned DOI) - 'child' is a constraint wholly contained within 'parent':<a href="#section-3.4.2-3" class="pilcrow">¶</a></p>
 <div class="lang-psuedo sourcecode" id="section-3.4.2-4">
@@ -1386,8 +1386,8 @@ constraint child =  '00005E000000 FCFFFF000000'H
 1) They are the same length (both EUI-48 constraints) and
 2) The child.mask ANDed with the parent.mask equals the parent mask and
 3) The bits in the child.value under the parent.mask are set to the same values as the bits in the parent.value under the parent mask.<a href="#section-3.4.2-5" class="pilcrow">¶</a></p>
-<p id="section-3.4.2-6">Note that the child mask allows for any combination of the local/universal and unicast/multicast address bits within the OUI of 00-00-0e.<a href="#section-3.4.2-6" class="pilcrow">¶</a></p>
-<p id="section-3.4.2-7">If 'constraint child2 = '00005E005000 FFFFFFFFFFF00'H and 'child' are compared, 'child2' would be a subset of 'child'.  'child2' uses the same OUI as 'child', but further restricts the matching addresses to universal/unicast by turning on the '0300000000'H mask bits and also restricts the range of valid addresses from 00-00-5E-00-50-00 to 00-00-5E-00-50-FF - i.e., to the 'example' range for the 00-00-5E OUI.<a href="#section-3.4.2-7" class="pilcrow">¶</a></p>
+<p id="section-3.4.2-6">Note that the child mask allows for any combination of the local/universal and unicast/multicast address bits within the OUI of <code>00-00-0e</code>.<a href="#section-3.4.2-6" class="pilcrow">¶</a></p>
+<p id="section-3.4.2-7">If <code>'constraint child2 = '00005E005000 FFFFFFFFFFF00'H</code> and 'child' are compared, 'child2' would be a subset of 'child'.  'child2' uses the same OUI as 'child', but further restricts the matching addresses to universal/unicast by turning on the <code>'030000000000'H</code> mask bits and also restricts the range of valid addresses from <code>00-00-5E-00-50-00</code> to <code>00-00-5E-00-50-FF</code> - i.e., to the 'example' range for the <code>00-00-5E</code> OUI.<a href="#section-3.4.2-7" class="pilcrow">¶</a></p>
 <div class="lang-pseudo sourcecode" id="section-3.4.2-8">
 <pre>
 // Both 'child' and 'parent' are OtherName.MACAddress
@@ -1417,7 +1417,7 @@ boolean childIsSubsetOfParent (constraint c, constraint p)
             <h5 id="name-initialization">
 <a href="#section-3.4.2.1" class="section-number selfRef">3.4.2.1. </a><a href="#name-initialization" class="section-name selfRef">Initialization</a>
             </h5>
-<p id="section-3.4.2.1-1">Per sections 6.1.1 (h) and (i) of <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, we need to specify NCE OtherName.MACAddress set values for both the initial-permitted-subtrees and for initial-excluded-subtrees.  For initial-permitted-subtree, the first constraint is "accept all EUI-48 MACAddresses", and the second constraint is "accept all EUI-64 MACAddresses":<a href="#section-3.4.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.4.2.1-1">Per sections 6.1.1 (h) and (i) of <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, we need to specify NCE <code>OtherName.MACAddress</code> set values for both the initial-permitted-subtrees and for initial-excluded-subtrees.  For initial-permitted-subtree, the first constraint is "accept all EUI-48 MACAddresses", and the second constraint is "accept all EUI-64 MACAddresses":<a href="#section-3.4.2.1-1" class="pilcrow">¶</a></p>
 <div class="lang-pseudo sourcecode" id="section-3.4.2.1-2">
 <pre>
 initial-permitted-subtrees{} += { 000000000000000000000000H,
@@ -1432,8 +1432,8 @@ initial-excluded-subtrees{} += { };
             <h5 id="name-intersection-operation">
 <a href="#section-3.4.2.2" class="section-number selfRef">3.4.2.2. </a><a href="#name-intersection-operation" class="section-name selfRef">Intersection Operation</a>
             </h5>
-<p id="section-3.4.2.2-1">See Section 6.1.4 (g) (1) of <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.  As we walk down the tree from the root, the set of permitted_subtrees can only stay the same or shrink. At each level, we clear the set of permitted_subtrees and for each NCE OtherName.MACAddress.permitted_subtree constraint in the certificate we look to see if there is a permitted_subtree constraint at the previous level that equals or encloses this new constraint.  If so, we add this new constraint to the current level's set of permitted_subtrees.  We repeat this going down the tree for the remaining CA certificates.<a href="#section-3.4.2.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.4.2.2-2">The intersection of the set of OtherName.MACAddress current permitted_subtrees with each certificate in the path is as follows:<a href="#section-3.4.2.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.4.2.2-1">See Section 6.1.4 (g) (1) of <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.  As we walk down the tree from the root, the set of permitted_subtrees can only stay the same or shrink. At each level, we clear the set of permitted_subtrees and for each NCE <code>OtherName.MACAddress.permitted_subtree</code> constraint in the certificate we look to see if there is a <code>permitted_subtree</code> constraint at the previous level that equals or encloses this new constraint.  If so, we add this new constraint to the current level's set of permitted_subtrees.  We repeat this going down the tree for the remaining CA certificates.<a href="#section-3.4.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.4.2.2-2">The intersection of the set of <code>OtherName.MACAddress</code> current <code>permitted_subtrees</code> with each certificate in the path is as follows:<a href="#section-3.4.2.2-2" class="pilcrow">¶</a></p>
 <div class="lang-pseudo sourcecode" id="section-3.4.2.2-3">
 <pre>
 // This logic can be used for both MACAddress and iPAddress OtherName types
@@ -1473,8 +1473,8 @@ permitted_subtrees{} (i) = tempPermittedSubtree;
             <h5 id="name-union-operation">
 <a href="#section-3.4.2.3" class="section-number selfRef">3.4.2.3. </a><a href="#name-union-operation" class="section-name selfRef">Union Operation</a>
             </h5>
-<p id="section-3.4.2.3-1">See Section 6.1.4 (g) (2) of <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.  Unlike permitted_subtrees which is the intersection of the NCEs  at each level, excluded_subtrees are the union of all constraints.  Starting with an excluded_trees empty set, with each level add to that set any constraints from the CA certificates that are not already in the set, or that are not covered by a constraint already in the set.<a href="#section-3.4.2.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.4.2.3-2">The union of the set of OtherName.MACAddress current excluded_subtrees with each certificate in the path is as follows:<a href="#section-3.4.2.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.4.2.3-1">See Section 6.1.4 (g) (2) of <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.  Unlike <code>permitted_subtrees</code> which is the intersection of the NCEs  at each level, <code>excluded_subtrees</code> are the union of all constraints.  Starting with an<code> excluded_subtrees</code> empty set, with each level add to that set any constraints from the CA certificates that are not already in the set, or that are not covered by a constraint already in the set.<a href="#section-3.4.2.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.4.2.3-2">The union of the set of <code>OtherName.MACAddress</code> current <code>excluded_subtrees</code> with each certificate in the path is as follows:<a href="#section-3.4.2.3-2" class="pilcrow">¶</a></p>
 <div class="lang-pseudo sourcecode" id="section-3.4.2.3-3">
 <pre>
 // Initialize
@@ -1545,7 +1545,7 @@ excluded_subtrees{} (i) = tempExcludedSubtrees;
       <h2 id="name-iana-considerations">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-5-1">IANA has made the following assignment in the "SMI Security for PKIX Module Identifier" (1.3.6.1.5.5.7.0) registry:<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">IANA has made the following assignment in the "SMI Security for PKIX Module Identifier" (<code>1.3.6.1.5.5.7.0</code>) registry:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-2">
 <pre>
     +=========+====================================+===============+
@@ -1555,7 +1555,7 @@ excluded_subtrees{} (i) = tempExcludedSubtrees;
     +---------+------------------------------------+---------------+
 </pre><a href="#section-5-2" class="pilcrow">¶</a>
 </div>
-<p id="section-5-3">IANA has made the following assignment in the "SMI Security for PKIX Other Name Forms" (1.3.6.1.5.5.7.8) registry:<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-3">IANA has made the following assignment in the "SMI Security for PKIX Other Name Forms" (<code>1.3.6.1.5.5.7.8</code>) registry:<a href="#section-5-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-5-4">
 <pre>
     +=========+=================================+===============+
@@ -1643,7 +1643,7 @@ otherName with value 00-24-98-7B-19-02:<a href="#section-7.1-1" class="pilcrow">
         <h3 id="name-eui-64-identifier">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-eui-64-identifier" class="section-name selfRef">EUI-64 identifier</a>
         </h3>
-<p id="section-7.2-1">An EUI-64 example (AC-DE-48-00-11-22-33-44):<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">An EUI-64 example (<code>AC-DE-48-00-11-22-33-44</code>):<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 <div class="lang-asn1 sourcecode" id="section-7.2-2">
 <pre>
   [0] OCTET STRING 'ACDE480011223344'H

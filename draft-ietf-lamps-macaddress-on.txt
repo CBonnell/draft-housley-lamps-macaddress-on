@@ -5,14 +5,14 @@
 Limited Additional Mechanisms for PKIX and SMIME              R. Housley
 Internet-Draft                                            Vigil Security
 Intended status: Standards Track                              C. Bonnell
-Expires: 12 September 2026                                      DigiCert
+Expires: 18 September 2026                                      DigiCert
                                                                J. Mandel
                                                                   AKAYLA
                                                                 T. Okubo
                                                       Penguin Securities
                                                               M. StJohns
                                              NthPermutation Security LLC
-                                                           11 March 2026
+                                                           17 March 2026
 
 
        Media Access Control (MAC) Addresses in X.509 Certificates
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 September 2026.
+   This Internet-Draft will expire on 18 September 2026.
 
 Copyright Notice
 
@@ -184,7 +184,7 @@ Table of Contents
 
    For example, a constraint that specifies that the acceptable names
    must all be within an Organizationally Unique Identifier (OUI) of
-   '00-00-5e' for an EUI-48 address, would have a value part of
+   "00-00-5e" for an EUI-48 address, would have a value part of
    '00005E000000'H, a mask part of 'FFFFFFFF000000'H and would be
    encoded as OCTET STRING '00005E000000FFFFFF000000'H.
 
@@ -327,8 +327,8 @@ Table of Contents
    If 'constraint child2 = '00005E005000 FFFFFFFFFFF00'H and 'child' are
    compared, 'child2' would be a subset of 'child'.  'child2' uses the
    same OUI as 'child', but further restricts the matching addresses to
-   universal/unicast by turning on the '0300000000'H mask bits and also
-   restricts the range of valid addresses from 00-00-5E-00-50-00 to
+   universal/unicast by turning on the '030000000000'H mask bits and
+   also restricts the range of valid addresses from 00-00-5E-00-50-00 to
    00-00-5E-00-50-FF - i.e., to the 'example' range for the 00-00-5E
    OUI.
 
@@ -412,8 +412,8 @@ Table of Contents
 
    See Section 6.1.4 (g) (2) of [RFC5280].  Unlike permitted_subtrees
    which is the intersection of the NCEs at each level,
-   excluded_subtrees are the union of all constraints.  Starting with an
-   excluded_trees empty set, with each level add to that set any
+   excluded_subtrees are the union of all constraints.  Starting with
+   anexcluded_subtrees empty set, with each level add to that set any
    constraints from the CA certificates that are not already in the set,
    or that are not covered by a constraint already in the set.
 
